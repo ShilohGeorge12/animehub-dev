@@ -5,7 +5,7 @@ import App from './App.tsx';
 import './index.css';
 import '/Poppins-Regular.ttf';
 import { ContextProvider } from './context/index.tsx';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
