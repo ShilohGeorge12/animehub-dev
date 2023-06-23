@@ -13,9 +13,11 @@ const port = `${process.env.PORT}`;
 app.use(json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5051',
+    origin: ['http://localhost:5051', 'https://animehub-dev.netlify.app'],
     credentials: true,
 }));
+app.get('/', (req, res) => res.redirect('/api/'));
+app.get('/api/', (req, res) => res.send('welcome to animehub-dev api'));
 app.use('/api', usersRouter);
 app.use('/api', animeRouter);
 app.use('/api', authRouter);

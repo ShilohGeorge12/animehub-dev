@@ -1,14 +1,11 @@
 import { Router } from 'express';
 import { tryCatch } from '../../middlewares/Error/index.js';
-import { UserModel } from '../../model/user/index.js';
 import { AnimeModel } from '../../model/anime/index.js';
 import fs from 'fs';
 import upload from '../../middlewares/Image/index.js';
 import { validateAnimes } from '../../validator/index.js';
 import { ifError } from '../../validator/helpers.js';
-import { Search } from '../../utils/search/index.js';
 import { Auth } from '../../middlewares/Auth/index.js';
-import { isQueryBy } from '../../types/index.js';
 export const animeRouter = Router();
 
 animeRouter.get(
