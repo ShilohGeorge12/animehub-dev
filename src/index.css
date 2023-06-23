@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('/Poppins-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Track */
+::-webkit-scrollbar {
+	background: transparent;
+	width: 0.4rem;
+	height: 0.25rem;
+	border-radius: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	border-radius: 5px; /* Rounded corners */
+	background: rgb(233, 6, 184);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(233, 6, 184);
+}
+
+.login-bg {
+	background: rgba(0, 0, 0, 0.92);
+}
+
+:-webkit-autofill {
+	-webkit-background-color: transparent !important;
+	background-color: transparent !important;
+	-webkit-text-fill-color: white !important;
+	color: white !important;
+	background: transparent !important;
+}
+
+::selection {
+	@apply bg-pink-600 text-white rounded-xl;
+}
+
+::-moz-selection {
+	@apply bg-pink-600 text-white rounded-xl;
+}
