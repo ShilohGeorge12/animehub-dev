@@ -1,12 +1,10 @@
 import { FaHome, FaUser, FaUnlock, FaLock } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
-import { RiMovieFill } from 'react-icons/ri';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useContextApi } from '../../context';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UrlPath } from '../../types';
 import Button from '../../container/button';
-import { MouseEvent } from 'react';
 interface INavProps {}
 
 function Nav(props: INavProps) {

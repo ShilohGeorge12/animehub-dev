@@ -4,7 +4,7 @@ import MetaData from '../../container/meta';
 import { useContextApi } from '../../context';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { BiErrorCircle } from 'react-icons/bi';
-import { useState, MouseEvent, ChangeEvent, Fragment } from 'react';
+import { useState, MouseEvent, ChangeEvent } from 'react';
 import { toast } from 'react-toastify';
 import { isUser } from '../../types';
 import { useFetch } from '../../hooks/fetch';
