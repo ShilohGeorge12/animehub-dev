@@ -69,25 +69,25 @@ function App() {
 			});
 		}
 	};
-	// useEffect(() => {
-	// 	autoLogin().catch((err) => {
-	// 		if (isError(err))
-	// 			toast(err.message, {
-	// 				type: 'default',
-	// 				autoClose: 6000,
-	// 				position: 'bottom-right',
-	// 				className: `justify-center bg-red-600 rounded-xl`,
-	// 				bodyClassName: 'text-sm text-white ',
-	// 				closeButton: false,
-	// 				pauseOnHover: true,
-	// 				icon: (
-	// 					<span className='px-1 py-2 rounded-md text-white text-xl'>
-	// 						<AiFillDelete />
-	// 					</span>
-	// 				),
-	// 			});
-	// 	});
-	// }, []);
+	useEffect(() => {
+		autoLogin().catch((err) => {
+			if (isError(err))
+				toast(err.message, {
+					type: 'default',
+					autoClose: 6000,
+					position: 'bottom-right',
+					className: `justify-center bg-red-600 rounded-xl`,
+					bodyClassName: 'text-sm text-white ',
+					closeButton: false,
+					pauseOnHover: true,
+					icon: (
+						<span className='px-1 py-2 rounded-md text-white text-xl'>
+							<AiFillDelete />
+						</span>
+					),
+				});
+		});
+	}, []);
 	const Image = () => {
 		if (loggedIn) {
 			return userTheme === 'dark' ? { backgroundImage: `url(${Itachi})` } : {};
