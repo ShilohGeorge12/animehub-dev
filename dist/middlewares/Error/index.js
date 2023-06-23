@@ -20,11 +20,11 @@ export function Errorhandler(err, req, res, next) {
         return res.status(400).json({ error: err.message });
     }
     if (err.name === 'ValidationError') {
+        console.log(err.name);
         return res.status(400).json({ error: err.message });
     }
     return res.status(500).json({ error: err.message });
 }
-;
 export function tryCatch(Handler) {
     return async (req, res, next) => {
         try {
@@ -35,4 +35,3 @@ export function tryCatch(Handler) {
         }
     };
 }
-;
