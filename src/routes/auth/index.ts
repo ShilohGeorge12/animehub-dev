@@ -1,0 +1,60 @@
+import { Router } from 'express';
+import { tryCatch } from '../../middlewares/Error/index.js';
+import { UserModel } from '../../model/user/index.js';
+import { validateAuth } from '../../validator/index.js';
+import { ifError } from '../../validator/helpers.js';
+import bcrypt from 'bcrypt';
+import Jwt from 'jsonwebtoken';
+import { config } from 'dotenv';
+import upload from '../../middlewares/Image/index.js';
+config();
+
+export const authRouter = Router();
+
+authRouter.post(
+	'/login',
+	upload.single('image'),
+	tryCatch(async (req, res) => {
+		const { error, value } = validateAuth(req.body);
+		const authValidation = ifError(error);
+		if (authValidation) {
+			res.status(400).json({ error: authValidation });
+			return;
+		}
+
+		if (!value) return;
+		const { username, email, password } = value;
+		const user = await UserModel.findOne({ username, email }).select('-__v').populate('animes', '-__v');
+
+		if (!user) {
+			res.status(404).json({ error: 'User Not Found!' });
+			return;
+		}
+		const result = await bcrypt.compare(password, user.password);
+
+		if (!result) {
+			res.status(400).json({ error: 'password is Incorrect!' });
+			return;
+		}
+		const sercret = `${process.env.SECRET}`;
+		const signedJwt = Jwt.sign({ token: 'jwt token' }, sercret, { expiresIn: 18000 });
+		console.log('login');
+		res.header('x-api-key', signedJwt).header('access-control-expose-headers', 'x-api-key').status(200).json(user);
+	})
+);
+
+authRouter.get(
+	'/logout',
+	tryCatch(async (req, res) => {
+		res.status(200).json({ status: 'logout' });
+	})
+);
+
+const test = async () => {
+	const user = await UserModel.findOne({ email: 'shilohgeorge2019@gmail.com' }).select('password');
+	if (!user) return;
+	const testPasword = await bcrypt.compare('shiloh@animehub', user.password);
+	console.log(testPasword);
+};
+
+// test().catch(err => console.log(err))
