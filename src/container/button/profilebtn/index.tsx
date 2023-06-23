@@ -4,12 +4,13 @@ import { MouseEvent } from 'react';
 interface IProfileProps {
 	onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 	Value: IconType | string;
+	name: string;
 	size: 'lg' | 'md' | 'sm';
 	isDisabled: () => boolean;
 }
 
 export function ProfileBtn(props: IProfileProps) {
-	const { Value, onClick, size, isDisabled } = props;
+	const { Value, onClick, size, isDisabled, name } = props;
 	let padding: string;
 
 	switch (size) {
@@ -26,6 +27,7 @@ export function ProfileBtn(props: IProfileProps) {
 
 	return (
 		<button
+			name={name}
 			onClick={onClick}
 			disabled={isDisabled()}
 			className={`${padding} bg-pink-500 text-white rounded-xl font-semibold transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl`}>

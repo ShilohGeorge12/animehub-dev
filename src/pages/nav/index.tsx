@@ -39,6 +39,7 @@ function Nav(props: INavProps) {
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1`}>Home</p>
 				<Button
+					name={'home'}
 					more={`${isPath('/')}`}
 					onClick={() => naviTo('/')}
 					Value={FaHome}
@@ -48,6 +49,7 @@ function Nav(props: INavProps) {
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1`}>Profile</p>
 				<Button
+					name={'profile'}
 					more={`${isPath('/profile')}`}
 					onClick={() => naviTo('profile')}
 					Value={FaUser}
@@ -57,6 +59,7 @@ function Nav(props: INavProps) {
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1/4`}>Cart</p>
 				<Button
+					name={'cart'}
 					more={`${isPath('/cart')}`}
 					onClick={() => naviTo('cart')}
 					Value={AiOutlineShoppingCart}
@@ -66,6 +69,7 @@ function Nav(props: INavProps) {
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} -left-[2px]`}>Search</p>
 				<Button
+					name={'search'}
 					more={`${isPath('/search')}`}
 					onClick={() => naviTo('search')}
 					Value={BiSearch}
@@ -75,8 +79,10 @@ function Nav(props: INavProps) {
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} ${loggedIn ? '-left-[2px]' : 'left-1'}`}>{loggedIn ? 'LogOut' : 'LogIn'}</p>
 				<button
-					className={classes.loginBtnClasses}
 					type={'button'}
+					aria-label='log In-Or-Out'
+					name='log In-Or-Out'
+					className={classes.loginBtnClasses}
 					onClick={onClick}>
 					{loggedIn ? <FaUnlock /> : <FaLock />}
 				</button>

@@ -11,10 +11,7 @@ import { Rating } from '../../container/rating';
 import { motion } from 'framer-motion';
 import MetaData from '../../container/meta';
 
-interface IProfileProps {}
-
-function Profile(props: IProfileProps) {
-	const {} = props;
+function Profile() {
 	const naviTo = useNavigate();
 	const {
 		state: { user, loggedIn },
@@ -86,6 +83,7 @@ function Profile(props: IProfileProps) {
 						<div className='w-2/4 md:w-full mx-auto mt-1'>
 							<Button
 								type={'profile'}
+								name={'upgrade to Premium Account!'}
 								size='sm'
 								Value={'upgrade to Premium Account!'}
 								onClick={onUpgradeAcc}
@@ -97,6 +95,7 @@ function Profile(props: IProfileProps) {
 						<Button
 							type={'profile'}
 							size={'lg'}
+							name={'Edit Profile'}
 							Value={'Edit Profile'}
 							onClick={onEditProfil}
 						/>

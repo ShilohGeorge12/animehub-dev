@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import MetaData from '../../../container/meta';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, MouseEvent, useEffect, useState } from 'react';
 import { GiAlliedStar } from 'react-icons/gi';
 import { GoInfo } from 'react-icons/go';
 import { AiFillDelete } from 'react-icons/ai';
@@ -12,6 +12,7 @@ import { ImSpinner9 } from 'react-icons/im';
 import { Rating } from '../../../container/rating';
 import { useContextApi } from '../../../context';
 import { toast } from 'react-toastify';
+import Button from '../../../container/button';
 
 function ViewAnime() {
 	const { id } = useParams();
@@ -287,20 +288,20 @@ function ViewAnime() {
 							)}
 						</div>
 						{hasAnime && (
-							<button
-								type='button'
-								className='w-fit bg-pink-500 text-white p-3 rounded-xl transition duration-300 hover:scale-110 hover:shadow-lg font-semibold '
-								onClick={onDelete}>
-								Remove {anime.title} From Your Collection
-							</button>
+							<Button
+								type='ViewAnime'
+								name='delete Anime'
+								onClick={onDelete}
+								Value={`Remove ${anime.title} From Your Collection`}
+							/>
 						)}
 						{!hasAnime && (
-							<button
-								type='button'
-								className='w-fit bg-pink-500 text-white p-3 rounded-xl transition duration-300 hover:scale-110 hover:shadow-lg font-semibold '
-								onClick={onAdd}>
-								Add {anime.title} To Your Collection
-							</button>
+							<Button
+								name='Add Anime'
+								type='ViewAnime'
+								onClick={onAdd}
+								Value={`Add ${anime.title} To Your Collection`}
+							/>
 						)}
 					</div>
 				</div>

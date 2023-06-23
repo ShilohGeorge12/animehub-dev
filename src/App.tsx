@@ -6,10 +6,10 @@ import { isError, isUser } from './types';
 import { AllRoutes } from './AllRoutes';
 import Nav from './pages/nav';
 import Header from './pages/header';
-import Itachi from './assets/bg-dark/itachi-1024.jpg';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { AiFillDelete } from 'react-icons/ai';
+import Itachi from './assets/bg-dark/itachi-1024.jpg';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 	const {
@@ -20,21 +20,6 @@ function App() {
 		},
 		dispatch,
 	} = useContextApi();
-
-	// toast('', {
-	// 	type: 'default',
-	// 	autoClose: 6000,
-	// 	position: 'bottom-right',
-	// 	className: `justify-center bg-red-600 rounded-xl`,
-	// 	bodyClassName: 'text-sm text-white ',
-	// 	closeButton: false,
-	// 	pauseOnHover: true,
-	// 	icon: (
-	// 		<span className='px-1 py-2 rounded-md text-white text-xl'>
-	// 			<AiFillDelete />
-	// 		</span>
-	// 	),
-	// });
 
 	const autoLogin = async () => {
 		const loginDetails = {

@@ -9,8 +9,8 @@ interface ImetaProps {
 
 function MetaData(props: ImetaProps) {
 	const { title, description, path, theme } = props;
-
-
+	const UrlPath = `http://localhost:5051${path}`;
+	// const UrlPath = `https://animehub-dev.netlify.app${path}`;
 	return (
 		<Helmet>
 			<title>{title}</title>
@@ -27,11 +27,38 @@ function MetaData(props: ImetaProps) {
 				content='en-us'
 			/>
 			<meta
-				name="color-scheme"
-				content={ theme ?? "light dark"}
+				name='color-scheme'
+				content={theme ?? 'light dark'}
 			/>
-			<link rel='canonical' href={`http://localhost:5051${path}`} />
+			<meta
+				name='theme-color'
+				content={theme ?? 'light dark'}
+			/>
+			<meta
+				property={'og:title'}
+				content={title}
+			/>
+			<meta
+				property='og:description'
+				content={description}
+			/>
+			<meta
+				property='og:url'
+				content={UrlPath}
+			/>
+			<meta
+				name='twitter:title'
+				content={title}
+			/>
+			<meta
+				name='twitter:description'
+				content={description}
+			/>
+			<link
+				rel='canonical'
+				href={UrlPath}
+			/>
 		</Helmet>
 	);
-};
+}
 export default MetaData;

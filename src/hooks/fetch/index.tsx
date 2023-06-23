@@ -4,8 +4,7 @@ type Method = 'POST' | 'GET' | 'PUT' | 'DELETE' | 'PATCH';
 type fetchType = (endPoint: string, method: Method, cacheControl: RequestCache, data?: FormData, Cookie?: true) => Promise<responseType>;
 
 export const useFetch: fetchType = async (endPoint, method, cache, data, Cookie) => {
-	// const url = `http://localhost:5050/api/${endPoint}`;
-	const url = `https://animehub-api.onrender.com/api/${endPoint}`;
+	const url = import.meta.env.VITE_MODE === 'development' ? `http://localhost:5050/api/${endPoint}` : `https://animehub-api.onrender.com/api/${endPoint}`;
 	let options: RequestInit = {
 		credentials: 'include',
 		method,

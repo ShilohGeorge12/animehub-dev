@@ -28,15 +28,17 @@ function Header() {
 					src={'/tv-64.png'}
 					title='animehub-image'
 					alt='animehub-image'
-					loading='lazy'
+					loading='eager'
 					className='w-10 md:w-11 object-cover'
 				/>
-				<h3 className='text-3xl font-bold text-transparent animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 bg-clip-text '>animehub</h3>
+				<h1 className='text-3xl font-bold text-transparent animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 bg-clip-text '>animehub</h1>
 			</div>
 			<div className=''></div>
 			<div className='flex items-center justify-end gap-4'>
 				<button
 					type='button'
+					name='theme'
+					aria-label='theme'
 					className={`p-1 md:p-2 bg-pink-500 text-white text-2xl rounded-xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 dark:hover:bg-white dark:hover:text-pink-500`}
 					onClick={updateTheme}>
 					<IsTheme />

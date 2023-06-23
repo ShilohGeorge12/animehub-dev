@@ -1,27 +1,33 @@
 {
-  "name": "AnimeHub",
-  "description": "This is AnimeHub where you can get all animes of different genres and categories.",
-  "short_name": "AnimeHub",
-  "start_url": "/",
-  "display": "standalone",
-  "theme_color": "#FDB32A",
-  "background_color": "#FFFFFF",
-  "icons": [
-    {
-      "src": "/tv-256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "/tv-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "protocol_handlers": [
-    {
-      "protocol": "web+animehub",
-      "url": "http://localhost:5051/%s"
-    }
-  ]
+	"name": "AnimeHub",
+	"description": "This is AnimeHub where you can get all animes of different genres and categories.",
+	"short_name": "animehub.dev",
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "rgb(203 213 225)",
+	"background_color": "rgb(203 213 225)",
+	"icons": [
+		{
+			"src": "/tv-256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "/tv-512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "/tv-512.svg",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any maskable"
+		}
+	],
+	"protocol_handlers": [
+		{
+			"protocol": "web+animehub",
+			"url": "http://localhost:5051/%s"
+		}
+	]
 }

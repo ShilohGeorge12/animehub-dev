@@ -22,11 +22,12 @@ function Anime({ animes, isSuccess }: IAnimeProps) {
 							{isSuccess ? (
 								<div
 									key={anime._id}
-									className='group transition duration-1000 ease-in-out w-36 h-52 bg-pink-400 dark:bg-transparent border border-slate-300 dark:border-gray-800 hover:border-none hover:bg-transparent rounded-lg flex flex-col items-center justify-center gap-2'
+									className='group transition duration-1000 ease-in-out w-36 h-52 bg-pink-500 dark:bg-transparent border border-slate-300 dark:border-gray-800 hover:border-none hover:bg-transparent rounded-lg flex flex-col items-center justify-center gap-2'
 									onClick={() => naviTo(`/anime/${anime._id}`)}>
 									<img
 										src={profileImage}
 										title={anime.title}
+										alt={anime.title}
 										className={`w-4/5 rounded-lg mx-auto transition duration-700 ease-in-out group-hover:scale-125`}
 										loading='lazy'
 									/>

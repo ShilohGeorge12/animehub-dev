@@ -70,7 +70,7 @@ function Home(props: IHomeProps) {
 				path={'/'}
 				theme={loggedIn ? userTheme : theme}
 			/>
-			<h3 className='text-2xl text-pink-600 dark:text-white font-bold text-center'>All Animes</h3>
+			<p className='text-2xl text-pink-600 dark:text-white font-bold text-center'>All Animes</p>
 			{!loggedIn && (
 				<div className='flex h-[80%] items-center justify-center'>
 					<img
