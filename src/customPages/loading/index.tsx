@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export function AnimeImageLoading() {
-	return <div className='w-[144px] h-[208px] transition duration-500 ease-in-out bg-slate-300 dark:bg-gray-600 rounded-lg animate-pulse' />;
+	return <div className='w-[144px] h-[208px] transition duration-500 ease-in-out bg-slate-400 dark:bg-gray-600 rounded-lg animate-pulse' />;
 }
 
 export function AnimeComponentLoading() {

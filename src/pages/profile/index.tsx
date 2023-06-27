@@ -1,13 +1,13 @@
 import { useContextApi } from '../../context';
-// import userProfile from '../../assets/images/user2.png';
+import userProfile from '../../assets/images/others/user2.png';
 import { FaMoon, FaBell } from 'react-icons/fa';
 import { BiSun } from 'react-icons/bi';
 import Button from '../../components/button';
 import { MouseEvent } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-// import { AnimeList } from '../../container/animeList';
-// import { Rating } from '../../container/rating';
+import { AnimeList } from '../../components/animeList';
+import { Rating } from '../../components/rating';
 import { motion } from 'framer-motion';
 import MetaData from '../../components/metaData';
 
@@ -39,7 +39,7 @@ function Profile() {
 
 	return (
 		<motion.section
-			className='flex-1 grid grid-cols-1 md:grid-cols-4'
+			className='w-full h-full grid grid-cols-1 md:grid-cols-4'
 			initial={{ opacity: 0, translateX: '-100vw', translateZ: -100 }}
 			animate={{ opacity: 1, translateX: '0vw', translateZ: 0 }}
 			exit={{ opacity: 0, translateX: '100vw' }}
@@ -52,7 +52,7 @@ function Profile() {
 			<div className='flex flex-col items-center gap-4'>
 				<div className='w-full flex items-center justify-center'>
 					<img
-						src={loggedIn ? profileImage : 'userProfile'}
+						src={loggedIn ? profileImage : userProfile}
 						title={username}
 						loading='lazy'
 						className='w-1/3 md:w-2/4 mx-auto rounded-md'
@@ -106,13 +106,15 @@ function Profile() {
 				<div className='w-[98%] border-2 border-pink-500 p-2 rounded-lg relative flex flex-col gap-3'>
 					<p className='absolute -top-3 left-1 dark:bg-black text-white px-1'>Animes ({animes.length})</p>
 					<ul className='list-none no-underline flex flex-col justify-center p-1 gap-1'>
-						<li className=''>{/* <Rating rating={average} /> */}</li>
+						<li className=''>
+							<Rating rating={average} />
+						</li>
 						<li className='flex items-center gap-4'>
 							<p className='flex justify-self-start'>Avg Rating: </p>
 							<p className='flex justify-self-end'>{average}</p>
 						</li>
 					</ul>
-					{/* <AnimeList animes={animes} /> */}
+					<AnimeList animes={animes} />
 				</div>
 			</div>
 		</motion.section>

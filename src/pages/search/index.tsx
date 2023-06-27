@@ -3,14 +3,11 @@ import { ChangeEvent, useState } from 'react';
 import { FaSearch, FaCheckCircle, FaSpinner } from 'react-icons/fa';
 import { useFetch } from '../../hooks/fetch';
 import { AnimeType, isSearchResult } from '../../types';
-// import Anime from '../../container/anime';
+import Anime from '../../components/anime';
 import { toast } from 'react-toastify';
 import MetaData from '../../components/metaData';
 
-interface ISearchProps {}
-
-function Search(props: ISearchProps) {
-	const {} = props;
+function Search() {
 	const [query, setQuery] = useState<string>('');
 	const [isSuccess, setIsSuccess] = useState<boolean>(true);
 	const [results, setResults] = useState<AnimeType[]>([]);
@@ -37,7 +34,6 @@ function Search(props: ISearchProps) {
 			return;
 		}
 	};
-	console.log(results);
 
 	return (
 		<motion.section
@@ -51,12 +47,12 @@ function Search(props: ISearchProps) {
 				description='Search For Your Favourite Animes Here! in AnimeHub.dev!'
 				path='/search'
 			/>
-			<form className={`w-4/5 md:w-2/4 flex flex-col items-center relative mx-auto h-fit`}>
+			<form className={`w-4/5 md:w-2/4 flex flex-col items-center relative mx-auto h-fit text-white`}>
 				<input
 					type='text'
 					value={query}
 					onChange={OnSearch}
-					className={`w-full py-2 px-7 rounded-xl dark:text-white bg-transparent border-2 border-pink-500 outline-0 tracking-wider`}
+					className={`w-full py-2 px-7 rounded-xl border-2 bg-black bg-opacity-70 border-black dark:bg-transparent border-opacity-25 dark:border-pink-500 outline-0 tracking-wider`}
 				/>
 				<span className='absolute text-pink-500 font-bold text-sm top-[14px] left-2'>
 					<FaSearch />
@@ -73,11 +69,10 @@ function Search(props: ISearchProps) {
 				)}
 			</form>
 			<div className='w-full flex flex-col gap-2 items-center justify-center'>
-				{import.meta.env.VITE_MODE}
-				{/* <Anime
+				<Anime
 					animes={results}
 					isSuccess={isSuccess}
-				/> */}
+				/>
 			</div>
 		</motion.section>
 	);
