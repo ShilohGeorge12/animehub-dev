@@ -15,7 +15,7 @@ export const genCookie: genCookieType = (req, res, next) => {
 export const Auth: AuthType = (req, res, next) => {
 	const sercret = `${process.env.SECRET}`;
 	const cookies: string = req.cookies['key'];
-	console.log(cookies);
+	console.log('cookie -> ', cookies);
 	if (cookies) {
 		Jwt.verify(cookies, sercret);
 		next();
