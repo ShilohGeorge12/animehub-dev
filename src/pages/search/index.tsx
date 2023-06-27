@@ -37,6 +37,7 @@ function Search(props: ISearchProps) {
 			return;
 		}
 	};
+	console.log(results);
 
 	return (
 		<motion.section
@@ -72,6 +73,7 @@ function Search(props: ISearchProps) {
 				)}
 			</form>
 			<div className='w-full flex flex-col gap-2 items-center justify-center'>
+				{import.meta.env.VITE_MODE}
 				{/* <Anime
 					animes={results}
 					isSuccess={isSuccess}
