@@ -33,11 +33,6 @@ function App() {
 		const data = new FormData();
 		Object.entries(loginDetails).forEach(([key, val]) => data.append(key, val));
 		const response = await useFetch('login', 'POST', 'no-store', data, true);
-		if (isUser(response)) {
-			dispatch({ type: 'user', payload: { user: response } });
-			dispatch({ type: 'logIn', payload: { logIn: true } });
-			return;
-		}
 		if ('error' in response) {
 			const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
 			toast(errorMessage, {
@@ -54,11 +49,17 @@ function App() {
 					</span>
 				),
 			});
+			return;
+		}
+		if (isUser(response)) {
+			dispatch({ type: 'user', payload: { user: response } });
+			dispatch({ type: 'logIn', payload: { logIn: true } });
+			return;
 		}
 	};
 	useEffect(() => {
 		autoLogin().catch((err) => {
-			if (isError(err))
+			if (isError(err)) {
 				toast(err.message, {
 					type: 'default',
 					autoClose: 6000,
@@ -73,6 +74,7 @@ function App() {
 						</span>
 					),
 				});
+			}
 		});
 	}, []);
 

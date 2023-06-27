@@ -27,7 +27,7 @@
 	"protocol_handlers": [
 		{
 			"protocol": "web+animehub",
-			"url": "http://localhost:5051/%s"
+			"url": "https://animehub-dev.netlify.app/%s"
 		}
 	]
 }
