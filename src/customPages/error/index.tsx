@@ -31,6 +31,9 @@ class ErrorPage extends React.Component<ErrorType, State> {
 					<img
 						src='/error.png'
 						className='w-1/4 transform transition hover:translate-y-3 hover:-translate-x-5 hover:scale-110'
+						loading='eager'
+						title='error 404'
+						alt='error 404'
 						width={''}
 						height={''}
 					/>

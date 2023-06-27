@@ -1,7 +1,7 @@
 import { useContextApi } from '../../context';
 import { FaMoon } from 'react-icons/fa';
 import { BiSun } from 'react-icons/bi';
-import userProfile from '../../assets/images/user2.png';
+import userProfile from '../../assets/images/others/user2.png';
 
 function Header() {
 	const {
@@ -50,7 +50,7 @@ function Header() {
 					className='w-10 md:w-12 rounded-2xl object-center'
 					loading='lazy'
 				/>
-				{loggedIn && <p className={`hidden md:flex capitalize text-sm text-gray-600 dark:text-white justify-self-end`}>{username}</p>}
+				{loggedIn && <p className={`hidden md:flex capitalize text-sm text-white justify-self-end`}>{username}</p>}
 			</div>
 		</header>
 	);

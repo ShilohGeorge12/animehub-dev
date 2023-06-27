@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import sadHime from '../../assets/images/sad-hime.webp';
+import sadHime from '../../assets/images/others/sad-hime.webp';
 import { useLocation, useNavigate } from 'react-router-dom';
-import MetaData from '../../container/meta';
+import MetaData from '../../components/metaData';
 
 function NotFound() {
 	const naviTo = useNavigate();
@@ -20,6 +20,7 @@ function NotFound() {
 			/>
 			<img
 				src={sadHime}
+				loading='eager'
 				alt='sadhime'
 				title='sadhime'
 				className={`w-4/5 md:w-auto`}

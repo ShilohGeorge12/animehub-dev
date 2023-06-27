@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import MetaData from '../../../container/meta';
+import MetaData from '../../../components/metaData';
 import { useLocation } from 'react-router-dom';
 
 function UpgradeToPremuim() {

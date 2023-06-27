@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import loginHime from '../../assets/images/log-in-hime.webp';
-import MetaData from '../../container/meta';
+import loginHime from '../../assets/images/others/log-in-hime.webp';
+import MetaData from '../../components/metaData';
 import { useContextApi } from '../../context';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { BiErrorCircle } from 'react-icons/bi';
@@ -21,10 +21,7 @@ function Login(props: ILoginProps) {
 	};
 	const [viewPasword, setViewPasword] = useState<boolean>(false);
 	const [details, setDetails] = useState<typeof initState>(initState);
-	const {
-		state: { theme },
-		dispatch,
-	} = useContextApi();
+	const { dispatch } = useContextApi();
 	const { pathname } = useLocation();
 	const naviTo = useNavigate();
 
@@ -64,7 +61,7 @@ function Login(props: ILoginProps) {
 	};
 
 	return (
-		<section className='flex-1 flex flex-col items-center gap-6 lg:gap-0'>
+		<section className='w-full h-full flex flex-col items-center gap-6 lg:gap-0'>
 			<MetaData
 				title={'Login'}
 				description={'Login To animehub.dev'}
@@ -75,12 +72,12 @@ function Login(props: ILoginProps) {
 				<img
 					src={loginHime}
 					alt='loginHime'
+					loading='eager'
+					title='login To Animehub-dev'
 					className='hidden md:flex h-52 md:h-72 lg:h-80 z-10'
 				/>
 				<form
-					className={`flex flex-col items-center gap-6 md:absolute md:top-6 lg:top-7 md:right-0 md:w-[84.4%] lg:w-[85.9%] bg-slate-400 ${
-						theme === 'dark' ? 'login-bg' : ''
-					} px-2 py-6 rounded-2xl`}
+					className={`flex flex-col items-center gap-6 md:absolute md:top-6 lg:top-7 md:right-0 md:w-[84.4%] lg:w-[85.9%] bg-black bg-opacity-80 px-2 py-6 rounded-2xl`}
 					autoComplete='off'
 					aria-autocomplete='none'>
 					<input

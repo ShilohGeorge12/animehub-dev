@@ -9,8 +9,7 @@ interface ImetaProps {
 
 function MetaData(props: ImetaProps) {
 	const { title, description, path, theme } = props;
-	const UrlPath = `http://localhost:5051${path}`;
-	// const UrlPath = `https://animehub-dev.netlify.app${path}`;
+	const UrlPath = import.meta.env.VITE_MODE === 'development' ? `http://localhost:5051${path}` : `https://animehub-dev.netlify.app${path}`;
 	return (
 		<Helmet>
 			<title>{title}</title>

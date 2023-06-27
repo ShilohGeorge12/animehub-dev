@@ -3,9 +3,9 @@ import { ChangeEvent, useState } from 'react';
 import { FaSearch, FaCheckCircle, FaSpinner } from 'react-icons/fa';
 import { useFetch } from '../../hooks/fetch';
 import { AnimeType, isSearchResult } from '../../types';
-import Anime from '../../container/anime';
+// import Anime from '../../container/anime';
 import { toast } from 'react-toastify';
-import MetaData from '../../container/meta';
+import MetaData from '../../components/metaData';
 
 interface ISearchProps {}
 
@@ -72,10 +72,10 @@ function Search(props: ISearchProps) {
 				)}
 			</form>
 			<div className='w-full flex flex-col gap-2 items-center justify-center'>
-				<Anime
+				{/* <Anime
 					animes={results}
 					isSuccess={isSuccess}
-				/>
+				/> */}
 			</div>
 		</motion.section>
 	);

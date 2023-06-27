@@ -1,15 +1,14 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Auth from './custom/auth';
+import ErrorPage from './customPages/error';
+import Auth from './customPages/auth';
+import NotFound from './customPages/NotFound';
 import Home from './pages/home';
+import ViewAnime from './pages/home/viewAnime';
 import Profile from './pages/profile';
-import Search from './pages/search';
-import Cart from './pages/cart';
-import Login from './pages/login';
 import EditProfile from './pages/profile/editProfile';
-import ViewAnime from './pages/home/ViewAnime';
+import Search from './pages/search';
 import UpgradeToPremuim from './pages/profile/upgradeToPremuim';
-import ErrorPage from './custom/error';
-import NotFound from './custom/NotFound';
+import Login from './pages/login';
 
 export const AllRoutes = () => {
 	const location = useLocation();
@@ -26,10 +25,6 @@ export const AllRoutes = () => {
 				<Route
 					path='/anime/:id'
 					element={<ErrorPage page={<ViewAnime />} />}
-				/>
-				<Route
-					path='cart'
-					element={<ErrorPage page={<Cart />} />}
 				/>
 				<Route
 					path='profile'

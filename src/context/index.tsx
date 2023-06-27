@@ -1,7 +1,8 @@
 import { useContext, useReducer, createContext, ReactNode } from 'react';
 import { State, ReducerType, stateAction } from '../types';
 import { useFetch } from '../hooks/fetch';
-// import { useFetch } from '../hooks/fetch';
+import { toast } from 'react-toastify';
+import { AiFillInfoCircle } from 'react-icons/ai';
 
 const initState: State = {
 	theme: 'light',
@@ -84,9 +85,22 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 		const User = { theme };
 		const userData = new FormData();
 		Object.entries(User).forEach(([key, val]) => userData.append(key, val));
-		const response = await useFetch(`/users/${state.user._id}/theme`, 'PATCH', 'no-store', userData);
+		const response = await useFetch(`users/${state.user._id}/theme`, 'PATCH', 'no-store', userData);
 		if ('error' in response) {
-			console.warn(response.error);
+			toast(response.error, {
+				type: 'default',
+				autoClose: 6000,
+				position: 'bottom-right',
+				className: `justify-center bg-red-600 rounded-xl`,
+				bodyClassName: 'text-sm text-white ',
+				closeButton: false,
+				pauseOnHover: true,
+				icon: (
+					<span className='px-1 py-2 rounded-md text-white text-xl'>
+						<AiFillInfoCircle />
+					</span>
+				),
+			});
 			return;
 		}
 	};
