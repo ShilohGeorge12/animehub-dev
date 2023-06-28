@@ -49,7 +49,7 @@ function Login(props: ILoginProps) {
 
 		const data = new FormData();
 		Object.entries(details).forEach(([key, val]) => data.append(key, val));
-		const response = await useFetch('login', 'POST', 'no-store', data, true);
+		const response = await useFetch('login', 'POST', 'no-store', data);
 		if (isUser(response)) {
 			dispatch({ type: 'user', payload: { user: response } });
 			dispatch({ type: 'logIn', payload: { logIn: true } });
