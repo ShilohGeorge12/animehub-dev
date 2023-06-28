@@ -13,7 +13,7 @@ export function Errorhandler(err: Error, req: Request, res: Response, next: Next
 	});
 
 	if (err.name === 'TokenExpiredError') {
-		return res.status(401).json({ error: 'You Are Not Allowed!' });
+		return res.status(401).json(errorResponse);
 	}
 
 	if (err.name === 'MongoServerError') {
@@ -30,7 +30,6 @@ export function Errorhandler(err: Error, req: Request, res: Response, next: Next
 	}
 
 	if (err.name === 'ValidationError') {
-		console.log(err.name);
 		return res.status(400).json({ error: err.message });
 	}
 

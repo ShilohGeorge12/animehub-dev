@@ -7,7 +7,7 @@ export function Errorhandler(err, req, res, next) {
         stack: err.stack,
     });
     if (err.name === 'TokenExpiredError') {
-        return res.status(401).json({ error: 'You Are Not Allowed!' });
+        return res.status(401).json(errorResponse);
     }
     if (err.name === 'MongoServerError') {
         const message = err.message.split('{')[1].replace('}', '');
@@ -20,7 +20,6 @@ export function Errorhandler(err, req, res, next) {
         return res.status(400).json({ error: err.message });
     }
     if (err.name === 'ValidationError') {
-        console.log(err.name);
         return res.status(400).json({ error: err.message });
     }
     return res.status(500).json({ error: err.message });

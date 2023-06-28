@@ -39,22 +39,31 @@ authRouter.post(
 		const sercret = `${process.env.SECRET}`;
 		const signedJwt = Jwt.sign({ token: 'jwt token' }, sercret, { expiresIn: 18000 });
 		console.log('login');
-		res.header('x-api-key', signedJwt).header('access-control-expose-headers', 'x-api-key').status(200).json(user);
+		// res.header('x-api-key', signedJwt).header('access-control-expose-headers', 'x-api-key').status(200).json(user);
+		res
+			.cookie('key', signedJwt, {
+				secure: true,
+				sameSite: 'none',
+				maxAge: 18000,
+				path: '/',
+			})
+			.status(200)
+			.json(user);
 	})
 );
 
 authRouter.get(
 	'/logout',
 	tryCatch(async (req, res) => {
-		res.status(200).json({ status: 'logout' });
+		// res.status(200).json({ status: 'logout' });
+		res
+			.clearCookie('key', {
+				secure: true,
+				sameSite: 'none',
+				maxAge: 18000,
+				path: '/',
+			})
+			.status(200)
+			.json({ status: 'logout' });
 	})
 );
-
-const test = async () => {
-	const user = await UserModel.findOne({ email: 'shilohgeorge2019@gmail.com' }).select('password');
-	if (!user) return;
-	const testPasword = await bcrypt.compare('shiloh@animehub', user.password);
-	console.log(testPasword);
-};
-
-// test().catch(err => console.log(err))
