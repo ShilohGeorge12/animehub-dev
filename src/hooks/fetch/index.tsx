@@ -1,10 +1,11 @@
 import { responseType } from '../../types';
 
 type Method = 'POST' | 'GET' | 'PUT' | 'DELETE' | 'PATCH';
-type fetchType = (endPoint: string, method: Method, cacheControl: RequestCache, data?: FormData, Cookie?: true) => Promise<responseType>;
+type fetchType = (endPoint: string, method: Method, cacheControl: RequestCache, data?: FormData) => Promise<responseType>;
 
-export const useFetch: fetchType = async (endPoint, method, cache, data, Cookie) => {
+export const useFetch: fetchType = async (endPoint, method, cache, data) => {
 	const url = import.meta.env.VITE_MODE === 'development' ? `http://localhost:5050/api/${endPoint}` : `https://animehub-api.onrender.com/api/${endPoint}`;
+
 	let options: RequestInit = {
 		credentials: 'include',
 		method,
@@ -14,9 +15,6 @@ export const useFetch: fetchType = async (endPoint, method, cache, data, Cookie)
 		options.body = data;
 	}
 	const request = await fetch(url, options);
-	if (Cookie) {
-		document.cookie = `key=${request.headers.get('x-api-key')};max-age=18000;path='/';`;
-	}
 
 	const response = await request.json();
 	return response;

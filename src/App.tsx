@@ -9,10 +9,10 @@ import Nav from './pages/nav';
 import Header from './pages/header';
 import { useContextApi } from './context';
 import { useEffect } from 'react';
-import { AiFillDelete } from 'react-icons/ai';
 import { isError, isUser } from './types';
 import { toast } from 'react-toastify';
 import { useFetch } from './hooks/fetch';
+import { BiInfoCircle } from 'react-icons/bi';
 
 function App() {
 	const {
@@ -32,7 +32,7 @@ function App() {
 		};
 		const data = new FormData();
 		Object.entries(loginDetails).forEach(([key, val]) => data.append(key, val));
-		const response = await useFetch('login', 'POST', 'no-store', data, true);
+		const response = await useFetch('login', 'POST', 'no-store', data);
 		if ('error' in response) {
 			const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
 			toast(errorMessage, {
@@ -45,7 +45,7 @@ function App() {
 				pauseOnHover: true,
 				icon: (
 					<span className='px-1 py-2 rounded-md text-white text-xl'>
-						<AiFillDelete />
+						<BiInfoCircle />
 					</span>
 				),
 			});
@@ -70,7 +70,7 @@ function App() {
 					pauseOnHover: true,
 					icon: (
 						<span className='px-1 py-2 rounded-md text-white text-xl'>
-							<AiFillDelete />
+							<BiInfoCircle />
 						</span>
 					),
 				});

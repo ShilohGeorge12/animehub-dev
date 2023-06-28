@@ -21,7 +21,7 @@ function Search() {
 			setTimeout(() => setIsSuccess(true), 1000);
 			return;
 		}
-		const response = await useFetch(`/search?value=${value}`, 'GET', 'default');
+		const response = await useFetch(`search?value=${value}`, 'GET', 'default');
 		if ('error' in response) {
 			setResults([]);
 			toast.info(response.error, { position: 'top-center' });

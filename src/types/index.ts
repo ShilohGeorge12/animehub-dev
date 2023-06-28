@@ -57,12 +57,13 @@ interface searchResult {
 export type responseType = UserType | AnimeType | AnimeType[] | paginatedAnimes | searchResult | { error: string | string[] };
 
 // Type Guards
-export const isUserAnime = (_arg: (string | AnimeType)[]): _arg is AnimeType[] => true || false;
-export const isAnime = (_arg: responseType): _arg is AnimeType => true || false;
-export const isAnimes = (_arg: responseType): _arg is paginatedAnimes => true || false;
-export const isUser = (_arg: responseType): _arg is UserType => true || false;
-export const isError = (_arg: unknown): _arg is Error => true || false;
-export const isSearchResult = (_arg: responseType): _arg is searchResult => true || false;
+export const isUserAnime = (_arg: (string | AnimeType)[]): _arg is AnimeType[] => (_arg as AnimeType[]).length !== undefined;
+export const isAnime = (_arg: responseType): _arg is AnimeType => (_arg as AnimeType).description !== undefined;
+export const isAnimes = (_arg: responseType): _arg is paginatedAnimes => (_arg as paginatedAnimes).animes !== undefined;
+export const isUser = (_arg: responseType): _arg is UserType => (_arg as UserType).username !== undefined;
+export const isError = (_arg: unknown): _arg is Error => (_arg as Error).stack !== undefined;
+export const isSearchResult = (_arg: responseType): _arg is searchResult => (_arg as searchResult).results !== undefined;
+
 // Context Types
 export type stateAction =
 	| { type: 'theme'; payload: { theme: Theme } }

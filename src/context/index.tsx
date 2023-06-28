@@ -41,7 +41,7 @@ const reducer: ReducerType = (state, action) => {
 		case 'logIn':
 			return { ...state, loggedIn: action.payload.logIn };
 		case 'logOut':
-			document.cookie = '';
+			// document.cookie = '';
 			return { ...state, loggedIn: action.payload.logOut };
 		default:
 			return state;

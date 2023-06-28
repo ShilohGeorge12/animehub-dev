@@ -1,10 +1,12 @@
 import { FaHome, FaUser, FaUnlock, FaLock } from 'react-icons/fa';
-import { BiSearch } from 'react-icons/bi';
+import { BiInfoCircle, BiSearch } from 'react-icons/bi';
 // import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useContextApi } from '../../context';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UrlPath } from '../../types';
 import Button from '../../components/button';
+import { useFetch } from '../../hooks/fetch';
+import { toast } from 'react-toastify';
 
 function Nav() {
 	const naviTo = useNavigate();
@@ -25,11 +27,31 @@ function Nav() {
 		}
 		return '';
 	}; // check for other scenerios
-	const onClick = () => {
+	const onClick = async () => {
 		if (!loggedIn) {
 			naviTo('/login');
 			return;
 		}
+		const response = await useFetch('logOut', 'GET', 'no-store');
+		if ('error' in response) {
+			const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
+			toast(errorMessage, {
+				type: 'default',
+				autoClose: 6000,
+				position: 'bottom-right',
+				className: `justify-center bg-red-600 rounded-xl`,
+				bodyClassName: 'text-sm text-white ',
+				closeButton: false,
+				pauseOnHover: true,
+				icon: (
+					<span className='px-1 py-2 rounded-md text-white text-xl'>
+						<BiInfoCircle />
+					</span>
+				),
+			});
+			return;
+		}
+
 		dispatch({ type: 'logOut', payload: { logOut: false } });
 	};
 	return (
