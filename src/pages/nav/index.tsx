@@ -1,6 +1,5 @@
 import { FaHome, FaUser, FaUnlock, FaLock } from 'react-icons/fa';
 import { BiInfoCircle, BiSearch } from 'react-icons/bi';
-// import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useContextApi } from '../../context';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UrlPath } from '../../types';

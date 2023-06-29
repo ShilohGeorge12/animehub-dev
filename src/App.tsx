@@ -10,9 +10,8 @@ import Header from './pages/header';
 import { useContextApi } from './context';
 import { useEffect } from 'react';
 import { isError, isUser } from './types';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useFetch } from './hooks/fetch';
-import { BiInfoCircle } from 'react-icons/bi';
 
 function App() {
 	const {
@@ -35,20 +34,7 @@ function App() {
 		const response = await useFetch('login', 'POST', 'no-store', data);
 		if ('error' in response) {
 			const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
-			toast(errorMessage, {
-				type: 'default',
-				autoClose: 6000,
-				position: 'bottom-right',
-				className: `justify-center bg-red-600 rounded-xl`,
-				bodyClassName: 'text-sm text-white ',
-				closeButton: false,
-				pauseOnHover: true,
-				icon: (
-					<span className='px-1 py-2 rounded-md text-white text-xl'>
-						<BiInfoCircle />
-					</span>
-				),
-			});
+			toast(errorMessage);
 			return;
 		}
 		if (isUser(response)) {
@@ -60,20 +46,7 @@ function App() {
 	useEffect(() => {
 		autoLogin().catch((err) => {
 			if (isError(err)) {
-				toast(err.message, {
-					type: 'default',
-					autoClose: 6000,
-					position: 'bottom-right',
-					className: `justify-center bg-red-600 rounded-xl`,
-					bodyClassName: 'text-sm text-white ',
-					closeButton: false,
-					pauseOnHover: true,
-					icon: (
-						<span className='px-1 py-2 rounded-md text-white text-xl'>
-							<BiInfoCircle />
-						</span>
-					),
-				});
+				toast(err.message);
 			}
 		});
 	}, []);
@@ -94,6 +67,20 @@ function App() {
 
 	return (
 		<section className={`w-screen h-screen ${loggedIn ? userTheme : theme} overflow-hidden `}>
+			<ToastContainer
+				position='top-right'
+				toastClassName={'rounded-2xl'}
+				autoClose={5000}
+				hideProgressBar
+				newestOnTop={false}
+				closeOnClick
+				closeButton={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='colored'
+			/>
 			<img
 				src={imageSrc()}
 				srcSet={imageSrcSet()}

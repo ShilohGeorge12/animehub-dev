@@ -54,7 +54,7 @@ interface searchResult {
 	totalAnimes: number;
 }
 
-export type responseType = UserType | AnimeType | AnimeType[] | paginatedAnimes | searchResult | { error: string | string[] };
+export type responseType = UserType | AnimeType | AnimeType[] | paginatedAnimes | searchResult | { status: string } | { error: string | string[] };
 
 // Type Guards
 export const isUserAnime = (_arg: (string | AnimeType)[]): _arg is AnimeType[] => (_arg as AnimeType[]).length !== undefined;

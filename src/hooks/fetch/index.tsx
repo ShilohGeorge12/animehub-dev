@@ -15,7 +15,16 @@ export const useFetch: fetchType = async (endPoint, method, cache, data) => {
 		options.body = data;
 	}
 	const request = await fetch(url, options);
-
+	if (!request.ok) {
+		switch (request.status) {
+			case 401:
+				console.log(request.ok);
+				return { error: request.statusText };
+			case 400:
+				console.log(request.ok);
+				return { error: request.statusText };
+		}
+	}
 	const response = await request.json();
 	return response;
 };

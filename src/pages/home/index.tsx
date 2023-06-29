@@ -8,7 +8,6 @@ import { AnimeType, isAnimes, isError } from '../../types';
 import usePagination from '../../hooks/pagination';
 import { useFetch } from '../../hooks/fetch';
 import { toast } from 'react-toastify';
-import { BiErrorCircle } from 'react-icons/bi';
 
 function Home() {
 	const {
@@ -45,21 +44,7 @@ function Home() {
 					}
 				})
 				.catch((err) => {
-					if (isError(err))
-						toast(err.message, {
-							type: 'default',
-							autoClose: 6000,
-							position: 'bottom-right',
-							className: `justify-center bg-red-600 rounded-xl`,
-							bodyClassName: 'text-sm text-white ',
-							closeButton: false,
-							pauseOnHover: true,
-							icon: (
-								<span className='px-1 py-2 rounded-md text-white text-xl'>
-									<BiErrorCircle />
-								</span>
-							),
-						});
+					if (isError(err)) toast(err.message);
 					setIsSuccess(true);
 				});
 		}

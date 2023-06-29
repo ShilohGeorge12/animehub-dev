@@ -2,13 +2,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import loginHime from '../../assets/images/others/log-in-hime.webp';
 import MetaData from '../../components/metaData';
 import { useContextApi } from '../../context';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import { BiErrorCircle } from 'react-icons/bi';
 import { useState, MouseEvent, ChangeEvent } from 'react';
 import { toast } from 'react-toastify';
 import { isUser } from '../../types';
 import { useFetch } from '../../hooks/fetch';
-import { useNotification } from '../../hooks/toast';
 
 interface ILoginProps {}
 
@@ -21,6 +20,7 @@ function Login(props: ILoginProps) {
 	};
 	const [viewPasword, setViewPasword] = useState<boolean>(false);
 	const [details, setDetails] = useState<typeof initState>(initState);
+	const [isSuccess, setIsSuccess] = useState<boolean>(true);
 	const { dispatch } = useContextApi();
 	const { pathname } = useLocation();
 	const naviTo = useNavigate();
@@ -39,13 +39,10 @@ function Login(props: ILoginProps) {
 	const onSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		if (details.email === '' || details.password === '' || details.username === '') {
-			useNotification('No field should be empty!', {
-				position: 'top-center',
-				bg: 'red',
-				icon: BiErrorCircle,
-			});
+			toast.error('No field should be empty!');
 			return;
 		}
+		setIsSuccess(false);
 
 		const data = new FormData();
 		Object.entries(details).forEach(([key, val]) => data.append(key, val));
@@ -54,10 +51,14 @@ function Login(props: ILoginProps) {
 			dispatch({ type: 'user', payload: { user: response } });
 			dispatch({ type: 'logIn', payload: { logIn: true } });
 			setDetails(initState);
+			setIsSuccess(true);
 			naviTo('/');
 			return;
 		}
-		if ('error' in response) toast.error(response.error, { position: 'top-center', pauseOnHover: true });
+		if ('error' in response) {
+			toast.error(response.error);
+			setIsSuccess(true);
+		}
 	};
 
 	return (
@@ -67,7 +68,7 @@ function Login(props: ILoginProps) {
 				description={'Login To animehub.dev'}
 				path={pathname}
 			/>
-			<p className='text-2xl text-gray-700 dark:text-white font-semibold text-center'>Log In</p>
+			<p className='text-4xl text-white font-semibold text-center uppercase'>Log In</p>
 			<div className='w-full md:w-[70%] lg:w-[60%] flex relative'>
 				<img
 					src={loginHime}
@@ -122,9 +123,17 @@ function Login(props: ILoginProps) {
 					</div>
 
 					<button
-						className='p-2 bg-pink-500 rounded-xl text-xl font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl'
+						disabled={isSuccess ? false : true}
+						className={`flex ${
+							!isSuccess ? 'items-center gap-2' : ''
+						} p-2 bg-pink-500 rounded-xl text-xl font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}
 						onClick={onSubmit}>
 						Submit
+						{!isSuccess && (
+							<span className='animate-rotate'>
+								<FaSpinner />
+							</span>
+						)}
 					</button>
 				</form>
 			</div>

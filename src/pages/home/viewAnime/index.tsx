@@ -2,94 +2,119 @@ import { motion } from 'framer-motion';
 import MetaData from '../../../components/metaData';
 import { useContextApi } from '../../../context';
 import { useLocation, useParams } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-// import { Fragment, MouseEvent, useEffect, useState } from 'react';
-// import { GiAlliedStar } from 'react-icons/gi';
-// import { GoInfo } from 'react-icons/go';
-// import { AiFillDelete } from 'react-icons/ai';
-// import { useFetch } from '../../../hooks/fetch';
-// import { AnimeType, isAnime, isError, isUser } from '../../../types';
-import { AnimeType } from '../../../types';
-// import { BiErrorCircle } from 'react-icons/bi';
-// import { ImSpinner9 } from 'react-icons/im';
-// import { Rating } from '../../../container/rating';
-// import { toast } from 'react-toastify';
-// import Button from '../../../container/button';
+import { useNavigate } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
+import { GiAlliedStar } from 'react-icons/gi';
+import { useFetch } from '../../../hooks/fetch';
+import { AnimeType, isAnime, isError, isUser } from '../../../types';
+import { ImSpinner9 } from 'react-icons/im';
+import { toast } from 'react-toastify';
+import { Rating } from '../../../components/rating';
+import Button from '../../../components/button';
 
 function ViewAnime() {
 	const { id } = useParams();
 	const { pathname } = useLocation();
-	// const naviTo = useNavigate();
+	const naviTo = useNavigate();
 	const {
 		state: {
-			// user: { _id, animes },
+			user: { _id, animes },
 		},
-		// dispatch,
+		dispatch,
 	} = useContextApi();
-	const [anime, _setAnime] = useState<AnimeType | null>(null);
-	const [isSuccess, _setIsSuccess] = useState<boolean>(true);
-	// const [screenSize, setScreenSize] = useState<number>(1024);
-	// const [hasAnime, setHasAnime] = useState<boolean>(false);
+	const [anime, setAnime] = useState<AnimeType | null>(null);
+	const [isSuccess, setIsSuccess] = useState<boolean>(true);
+	const [screenSize, setScreenSize] = useState<number>(1024);
+	const [hasAnime, setHasAnime] = useState<boolean>(false);
 
-	// const autoClose = 2500;
-	// useEffect(() => {
-	// 	const hasAnimeWithId = animes.find((anime) => anime._id === id) ?? false;
-	// 	hasAnimeWithId ? setHasAnime(true) : setHasAnime(false);
+	useEffect(() => {
+		const hasAnimeWithId = animes.find((anime) => anime._id === id) ?? false;
+		hasAnimeWithId ? setHasAnime(true) : setHasAnime(false);
 
-	// 	window.addEventListener('resize', () => setScreenSize(window.innerWidth));
-	// 	setIsSuccess(false);
-	// 	useFetch(`/animes/${id}`, 'GET', 'default')
-	// 		.then((response) => {
-	// 			if (isAnime(response)) {
-	// 				setAnime(response);
-	// 				setTimeout(() => setIsSuccess(true), 1000);
-	// 				return;
-	// 			}
-	// 			if ('error' in response) {
-	// 				toast(JSON.stringify(response.error), {
-	// 					type: 'default',
-	// 					autoClose,
-	// 					position: 'bottom-right',
-	// 					className: `justify-center bg-red-600 rounded-xl`,
-	// 					bodyClassName: 'text-sm text-white ',
-	// 					closeButton: false,
-	// 					pauseOnHover: true,
-	// 					icon: (
-	// 						<span className='px-1 py-2 rounded-md text-white text-xl'>
-	// 							<BiErrorCircle />
-	// 						</span>
-	// 					),
-	// 				});
-	// 				setIsSuccess(true);
-	// 			}
-	// 		})
-	// 		.catch((err) => {
-	// 			if (!isError(err)) return;
-	// 			toast(err.message, {
-	// 				type: 'default',
-	// 				autoClose,
-	// 				position: 'bottom-right',
-	// 				className: `justify-center bg-red-600 rounded-xl`,
-	// 				bodyClassName: 'text-sm text-white ',
-	// 				closeButton: false,
-	// 				pauseOnHover: true,
-	// 				icon: (
-	// 					<span className='px-1 py-2 rounded-md text-white text-xl'>
-	// 						<BiErrorCircle />
-	// 					</span>
-	// 				),
-	// 			});
-	// 		});
-	// 	return () => {
-	// 		window.removeEventListener('resize', () => setScreenSize(window.innerWidth));
-	// 	};
-	// }, []);
+		window.addEventListener('resize', () => setScreenSize(window.innerWidth));
+		setIsSuccess(false);
+		useFetch(`/animes/${id}`, 'GET', 'default')
+			.then((response) => {
+				if (isAnime(response)) {
+					setAnime(response);
+					setTimeout(() => setIsSuccess(true), 1000);
+					return;
+				}
+				if ('error' in response) {
+					toast.error(JSON.stringify(response.error));
+					setIsSuccess(true);
+				}
+			})
+			.catch((err) => {
+				if (!isError(err)) return;
+				toast.error(err.message);
+			});
+		return () => {
+			window.removeEventListener('resize', () => setScreenSize(window.innerWidth));
+		};
+	}, []);
+
+	useEffect(() => {
+		const hasAnimeWithId = animes.find((anime) => anime._id === id) ?? false;
+		hasAnimeWithId ? setHasAnime(true) : setHasAnime(false);
+	}, [animes]);
+
+	useEffect(() => {
+		window.addEventListener('resize', () => setScreenSize(window.innerWidth));
+		return () => {
+			window.removeEventListener('resize', () => setScreenSize(window.innerWidth));
+		};
+	}, [window.innerWidth]);
 
 	const Title = isSuccess && anime ? anime.title : 'anime';
 	const Description = isSuccess && anime ? anime.description : 'anime description';
-	// const listItemClass = 'text-pink-500 font-bold';
-	console.log(id);
+	const listItemClass = 'text-pink-500 font-bold';
+
+	const ParseDecription = () => {
+		if (isSuccess && anime) {
+			return anime.description
+				.replace(/\\u2014/g, ' ')
+				.replace(/\\"/g, '"')
+				.split('\\n')
+				.map((line, index) => (
+					<Fragment key={index}>
+						{line}
+						<br />
+					</Fragment>
+				));
+		}
+		return [<></>];
+	};
+
+	const onDelete = async () => {
+		if (!anime) return;
+		const deleteAnime = await useFetch(`users/${_id}/${id}`, 'DELETE', 'no-store');
+		if ('error' in deleteAnime) {
+			const msg = typeof deleteAnime.error === 'string' ? deleteAnime.error : JSON.stringify(deleteAnime.error);
+			toast.error(msg);
+			return;
+		}
+		if (isUser(deleteAnime)) {
+			dispatch({ type: 'user', payload: { user: deleteAnime } });
+			toast.success(`Removed ${anime.title} from your collection`);
+		}
+	};
+
+	const onAdd = async () => {
+		if (!anime) return;
+		const response = await useFetch(`users/${_id}/${id}`, 'GET', 'no-store');
+		if ('error' in response) {
+			const msg = typeof response.error === 'string' ? response.error : JSON.stringify(response.error);
+			toast.error(msg);
+			setTimeout(() => naviTo('/profile/upgrade-to-premuim'), 3000);
+			return;
+		}
+		const User = await useFetch(`users/${_id}`, 'GET', 'no-store');
+		if (isUser(User)) {
+			dispatch({ type: 'user', payload: { user: User } });
+			toast.success(`Added ${anime.title} To your collection`);
+		}
+	};
 
 	return (
 		<motion.section
@@ -103,7 +128,7 @@ function ViewAnime() {
 				description={Description}
 				path={pathname}
 			/>
-			{/* {!isSuccess && (
+			{!isSuccess && (
 				<div className='w-full h-full flex items-center justify-center'>
 					<span className='text-5xl text-pink-500 dark:text-white transition duration-500 animate-rotate'>
 						<ImSpinner9 />
@@ -199,7 +224,7 @@ function ViewAnime() {
 						)}
 					</div>
 				</div>
-			)} */}
+			)}
 		</motion.section>
 	);
 }
