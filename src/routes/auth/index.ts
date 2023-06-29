@@ -44,8 +44,7 @@ authRouter.post(
 			.cookie('key', signedJwt, {
 				secure: true,
 				sameSite: 'none',
-				maxAge: 18000,
-				path: '/',
+				// maxAge: 18000,
 			})
 			.status(200)
 			.json(user);
@@ -60,8 +59,7 @@ authRouter.get(
 			.clearCookie('key', {
 				secure: true,
 				sameSite: 'none',
-				maxAge: 18000,
-				path: '/',
+				// maxAge: 18000,
 			})
 			.status(200)
 			.json({ status: 'logout' });

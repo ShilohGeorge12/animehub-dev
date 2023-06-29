@@ -37,8 +37,7 @@ authRouter.post('/login', upload.single('image'), tryCatch(async (req, res) => {
         .cookie('key', signedJwt, {
         secure: true,
         sameSite: 'none',
-        maxAge: 18000,
-        path: '/',
+        // maxAge: 18000,
     })
         .status(200)
         .json(user);
@@ -49,8 +48,7 @@ authRouter.get('/logout', tryCatch(async (req, res) => {
         .clearCookie('key', {
         secure: true,
         sameSite: 'none',
-        maxAge: 18000,
-        path: '/',
+        // maxAge: 18000,
     })
         .status(200)
         .json({ status: 'logout' });
