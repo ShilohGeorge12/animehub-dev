@@ -31,7 +31,7 @@ function ViewAnime() {
 		const hasAnimeWithId = animes.find((anime) => anime._id === id) ?? false;
 		hasAnimeWithId ? setHasAnime(true) : setHasAnime(false);
 
-		window.addEventListener('resize', () => setScreenSize(window.innerWidth));
+		setScreenSize(window.innerWidth);
 		setIsSuccess(false);
 		useFetch(`/animes/${id}`, 'GET', 'default')
 			.then((response) => {
@@ -49,9 +49,6 @@ function ViewAnime() {
 				if (!isError(err)) return;
 				toast.error(err.message);
 			});
-		return () => {
-			window.removeEventListener('resize', () => setScreenSize(window.innerWidth));
-		};
 	}, []);
 
 	useEffect(() => {

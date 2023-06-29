@@ -73,6 +73,7 @@ function Search() {
 					animes={results}
 					isSuccess={isSuccess}
 				/>
+				{query != '' && results.length === 0 && <p className='text-3xl'>"{query}" Not Found!</p>}
 			</div>
 		</motion.section>
 	);

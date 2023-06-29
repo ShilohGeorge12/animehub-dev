@@ -34,7 +34,7 @@ function App() {
 		const response = await useFetch('login', 'POST', 'no-store', data);
 		if ('error' in response) {
 			const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
-			toast(errorMessage);
+			toast.error(errorMessage);
 			return;
 		}
 		if (isUser(response)) {
@@ -46,7 +46,7 @@ function App() {
 	useEffect(() => {
 		autoLogin().catch((err) => {
 			if (isError(err)) {
-				toast(err.message);
+				toast.error(err.message);
 			}
 		});
 	}, []);

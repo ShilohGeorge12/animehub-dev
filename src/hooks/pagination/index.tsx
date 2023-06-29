@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PaginationType, isAnimes } from '../../types';
 import { useFetch } from '../fetch';
+import { toast } from 'react-toastify';
 
 const usePagination: PaginationType = (options) => {
 	const { animes, setAnimes, limitPerPage, totalAnimes, setLimitPerPage, setTotalAnimes, setIsSuccess } = options;
@@ -10,14 +11,14 @@ const usePagination: PaginationType = (options) => {
 		setIsSuccess(false);
 		useFetch(`animes?page=${page - 1}&perpage=${limitPerPage}`, 'GET', 'force-cache')
 			.then((res) => {
-				if ('error' in res) console.warn(res.error);
+				if ('error' in res) toast.error(res.error);
 				if (isAnimes(res)) {
 					setAnimes(res.animes);
 					setTotalAnimes(res.totalAnimes);
 					setIsSuccess(true);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err: Error) => toast.error(err.message));
 		setPage(page);
 	};
 
@@ -58,11 +59,7 @@ const usePagination: PaginationType = (options) => {
 	}, [window.innerWidth]);
 
 	useEffect(() => {
-		window.addEventListener('load', widthChecks);
-		return () => {
-			widthChecks();
-			window.removeEventListener('resize', widthChecks);
-		};
+		widthChecks();
 	}, []);
 
 	const PaginatedNav = () => {

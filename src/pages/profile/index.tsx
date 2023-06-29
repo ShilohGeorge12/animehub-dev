@@ -1,10 +1,8 @@
 import { useContextApi } from '../../context';
 import userProfile from '../../assets/images/others/user2.png';
-import { FaMoon, FaBell } from 'react-icons/fa';
+import { FaMoon } from 'react-icons/fa';
 import { BiSun } from 'react-icons/bi';
 import Button from '../../components/button';
-import { MouseEvent } from 'react';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { AnimeList } from '../../components/animeList';
 import { Rating } from '../../components/rating';
@@ -20,13 +18,6 @@ function Profile() {
 	const { image, username, animes, email, role, theme, createdAt, gender } = user;
 	const profileImage = URL.createObjectURL(new Blob([new Uint8Array(image.data.data)], { type: image.contentType }));
 	const Joined = new Date(createdAt).toDateString();
-
-	const onUpgradeAcc = () => {
-		toast.info('upgrade Account To Premium To Get All features', { position: 'bottom-right', autoClose: 3000, icon: FaBell });
-	};
-	const onEditProfil = (_e: MouseEvent<HTMLButtonElement>) => {
-		naviTo('/profile/editprofile');
-	};
 
 	const calculateAverageRating = (ratings: number[]): number => {
 		const sum = ratings.reduce((acc, rating) => acc + rating, 0);
@@ -86,7 +77,7 @@ function Profile() {
 								name={'upgrade to Premium Account!'}
 								size='sm'
 								Value={'upgrade to Premium Account!'}
-								onClick={onUpgradeAcc}
+								onClick={() => naviTo('/profile/upgrade-to-premuim')}
 							/>
 						</div>
 					)}
@@ -97,7 +88,7 @@ function Profile() {
 							size={'lg'}
 							name={'Edit Profile'}
 							Value={'Edit Profile'}
-							onClick={onEditProfil}
+							onClick={() => naviTo('/profile/editprofile')}
 						/>
 					</div>
 				</div>
