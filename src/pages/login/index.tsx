@@ -3,7 +3,6 @@ import loginHime from '../../assets/images/others/log-in-hime.webp';
 import MetaData from '../../components/metaData';
 import { useContextApi } from '../../context';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
-import { BiErrorCircle } from 'react-icons/bi';
 import { useState, MouseEvent, ChangeEvent } from 'react';
 import { toast } from 'react-toastify';
 import { isUser } from '../../types';
