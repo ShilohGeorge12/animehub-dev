@@ -4,7 +4,7 @@ import upload from '../../middlewares/Image/index.js';
 import { tryCatch } from '../../middlewares/Error/index.js';
 import { UserModel } from '../../model/user/index.js';
 import bcrypt from 'bcrypt';
-import { validatePatch, validateUsers } from '../../validator/index.js';
+import { validatePatch, validateUpdateUser, validateUsers } from '../../validator/index.js';
 import { ifError } from '../../validator/helpers.js';
 import { AnimeModel } from '../../model/anime/index.js';
 import { Auth } from '../../middlewares/Auth/index.js';
@@ -121,15 +121,11 @@ usersRouter.patch('/users/:id/theme', Auth, upload.single('image'), tryCatch(asy
 }));
 usersRouter.put('/users/:id', Auth, upload.single('image'), tryCatch(async (req, res) => {
     const { id } = req.params;
-    const { error, value } = validateUsers(req.body);
+    const { error, value } = validateUpdateUser(req.body);
     const validationError = ifError(error);
     const user = await UserModel.findOne({ _id: id }).select('-__v');
     if (validationError) {
         res.status(400).json({ error: validationError });
-        return;
-    }
-    if (!req.file) {
-        res.status(400).json({ error: "There's no Image, Please add an image" });
         return;
     }
     if (!user) {
@@ -137,15 +133,19 @@ usersRouter.put('/users/:id', Auth, upload.single('image'), tryCatch(async (req,
         return;
     }
     if (value) {
-        const { username, password, email, role, theme } = value;
+        const { username, password, email } = value;
         const result = await bcrypt.compare(password, user.password);
         if (result) {
             user.password = password;
         }
+        if (req.file) {
+            user.image = {
+                data: fs.readFileSync('dist/uploads/' + req.file.filename),
+                contentType: req.file.mimetype,
+            };
+        }
         user.username = username;
         user.email = email;
-        user.role = role;
-        user.theme = theme;
         await user.save();
         res.status(200).json(user);
     }

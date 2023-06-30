@@ -34,19 +34,6 @@ export interface Anime {
 }
 
 // Type Guards
-export const isError = (arg: unknown): arg is Error => false || true;
-export const isQueryBy = (arg: any): arg is 'title' | 'rating' => false || true;
+export const isError = (arg: unknown): arg is Error => (arg as Error).stack !== undefined;
 
-// Search and Sort Types
-type searchAndSortArr = Types.ObjectId[];
-
-export type BinarySearch = (array: Types.ObjectId[], target: Types.ObjectId, start: number, end: number) => 'not found' | BinarySearch | Types.ObjectId;
-
-export type searchType = (array: Types.ObjectId[], target: Types.ObjectId) => 'not found' | BinarySearch | Types.ObjectId;
-
-export type MergeSort = (array: searchAndSortArr[], left: searchAndSortArr[], right: searchAndSortArr[]) => any;
-
-export type sortType = (array: searchAndSortArr[]) => void;
-
-export type genCookieType = (req: Request, res: Response, next: NextFunction) => void;
 export type AuthType = (req: Request, res: Response, next: NextFunction) => void;

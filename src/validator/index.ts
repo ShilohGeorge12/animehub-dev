@@ -6,6 +6,7 @@ type validateAnimesReturnType = ValidationResult<Omit<Anime, 'image'>>;
 type validateUsersReturnType = ValidationResult<Omit<User, 'image' | 'animes'>>;
 type validateAuthReturnType = ValidationResult<Omit<User, 'image' | 'animes' | 'role' | 'theme'>>;
 type validatePatchReturnType = ValidationResult<Pick<User, 'theme'>>;
+type validateUpdateUserType = ValidationResult<Pick<User, 'password' | 'username' | 'email'>>;
 
 export function validateUsers(schema: Request): validateUsersReturnType {
 	const userSchema = joi.object({
@@ -14,6 +15,14 @@ export function validateUsers(schema: Request): validateUsersReturnType {
 		password: joi.string().min(2).required(),
 		role: joi.string().valid('BASIC', 'PREMIUM'),
 		theme: joi.string().valid('light', 'dark'),
+	});
+	return userSchema.validate(schema, { abortEarly: false });
+}
+export function validateUpdateUser(schema: Request): validateUpdateUserType {
+	const userSchema = joi.object({
+		username: joi.string().min(2).max(25),
+		email: joi.string().email().max(30),
+		password: joi.string().min(2).max(24),
 	});
 	return userSchema.validate(schema, { abortEarly: false });
 }

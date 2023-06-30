@@ -9,6 +9,14 @@ export function validateUsers(schema) {
     });
     return userSchema.validate(schema, { abortEarly: false });
 }
+export function validateUpdateUser(schema) {
+    const userSchema = joi.object({
+        username: joi.string().min(2).max(25),
+        email: joi.string().email().max(30),
+        password: joi.string().min(2).max(24),
+    });
+    return userSchema.validate(schema, { abortEarly: false });
+}
 export function validateAnimes(schema) {
     const animeSchema = joi.object({
         title: joi.string().required(),

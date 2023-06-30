@@ -1,3 +1,2 @@
 // Type Guards
-export const isError = (arg) => false || true;
-export const isQueryBy = (arg) => false || true;
+export const isError = (arg) => arg.stack !== undefined;
