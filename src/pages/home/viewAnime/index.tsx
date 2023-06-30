@@ -65,7 +65,7 @@ function ViewAnime() {
 
 	const Title = isSuccess && anime ? anime.title : 'anime';
 	const Description = isSuccess && anime ? anime.description : 'anime description';
-	const listItemClass = 'text-pink-500 font-bold';
+	const listItemClass = 'text-white font-bold';
 
 	const ParseDecription = () => {
 		if (isSuccess && anime) {
@@ -143,7 +143,7 @@ function ViewAnime() {
 							className={'w-28 rounded-md transition duration-300 hover:scale-110'}
 						/>
 
-						<ul className='list-none no-underline w-full flex flex-col justify-center px-1 gap-2 text-sm md:text-base'>
+						<ul className='list-none no-underline w-full flex flex-col justify-center px-1 gap-2 text-sm md:text-base text-pink-600'>
 							<li className='flex gap-2'>
 								Stars:
 								<Rating
@@ -199,7 +199,7 @@ function ViewAnime() {
 									<span className='text-4xl text-yellow-500 transition duration-300 hover:scale-110'>
 										<GiAlliedStar />
 									</span>
-									<p className='text-lg font-semibold text-pink-600'>You Have {anime.title} in Your Collection!</p>
+									<p className='text-lg font-semibold'>You Have {anime.title} in Your Collection!</p>
 								</span>
 							)}
 						</div>

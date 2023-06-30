@@ -5,7 +5,6 @@ import NotFound from './customPages/NotFound';
 import Home from './pages/home';
 import ViewAnime from './pages/home/viewAnime';
 import Profile from './pages/profile';
-import EditProfile from './pages/profile/editProfile';
 import Search from './pages/search';
 import UpgradeToPremuim from './pages/profile/upgradeToPremuim';
 import Login from './pages/login';
@@ -33,10 +32,6 @@ export const AllRoutes = () => {
 				<Route
 					path='search'
 					element={<ErrorPage page={<Search />} />}
-				/>
-				<Route
-					path='profile/editprofile'
-					element={<ErrorPage page={<EditProfile />} />}
 				/>
 				<Route
 					path='profile/upgrade-to-premuim'

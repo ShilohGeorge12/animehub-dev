@@ -97,14 +97,12 @@ function Nav() {
 			</div>
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} ${loggedIn ? '-left-[2px]' : 'left-1'}`}>{loggedIn ? 'LogOut' : 'LogIn'}</p>
-				<button
-					type={'button'}
-					aria-label='log In-Or-Out'
+				<Button
+					type='nav_logInOrOut'
 					name='log In-Or-Out'
-					className={classes.loginBtnClasses}
-					onClick={onClick}>
-					{loggedIn ? <FaUnlock /> : <FaLock />}
-				</button>
+					Value={loggedIn ? FaUnlock : FaLock}
+					onClick={onClick}
+				/>
 			</div>
 		</nav>
 	);

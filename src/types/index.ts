@@ -70,12 +70,15 @@ export type stateAction =
 	| { type: 'user'; payload: { user: UserType } }
 	| { type: 'logIn'; payload: { logIn: true } }
 	| { type: 'logOut'; payload: { logOut: false } }
+	| { type: 'editProfileModalOpen'; payload: { open: true } }
+	| { type: 'editProfileModalClose'; payload: { close: false } }
 	| { type: 'userTheme'; payload: { userTheme: Theme } };
 
 export interface State {
 	theme: Theme;
 	loggedIn: boolean;
 	user: UserType;
+	editProfileModal: boolean;
 }
 
 export interface Icontext {

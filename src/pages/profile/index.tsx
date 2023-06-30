@@ -8,11 +8,14 @@ import { AnimeList } from '../../components/animeList';
 import { Rating } from '../../components/rating';
 import { motion } from 'framer-motion';
 import MetaData from '../../components/metaData';
+import { EditProfileModal } from './editProfileModal';
+import { Modal } from '../../modal';
 
 function Profile() {
 	const naviTo = useNavigate();
 	const {
-		state: { user, loggedIn },
+		state: { user, loggedIn, editProfileModal },
+		dispatch,
 	} = useContextApi();
 
 	const { image, username, animes, email, role, theme, createdAt, gender } = user;
@@ -88,14 +91,15 @@ function Profile() {
 							size={'lg'}
 							name={'Edit Profile'}
 							Value={'Edit Profile'}
-							onClick={() => naviTo('/profile/editprofile')}
+							// onClick={() => naviTo('/profile/editprofile')}
+							onClick={() => dispatch({ type: 'editProfileModalOpen', payload: { open: true } })}
 						/>
 					</div>
 				</div>
 			</div>
 			<div className='flex flex-col items-center md:col-span-3'>
 				<div className='w-[98%] border-2 border-pink-500 p-2 rounded-lg relative flex flex-col gap-3'>
-					<p className='absolute -top-3 left-1 dark:bg-black text-white px-1'>Animes ({animes.length})</p>
+					<p className='absolute -top-3 left-1 dark:bg-black text-white px-1 filter backdrop-blur-sm'>Animes ({animes.length})</p>
 					<ul className='list-none no-underline flex flex-col justify-center p-1 gap-1'>
 						<li className=''>
 							<Rating rating={average} />
@@ -108,6 +112,7 @@ function Profile() {
 					<AnimeList animes={animes} />
 				</div>
 			</div>
+			{editProfileModal && <Modal element={<EditProfileModal />} />}
 		</motion.section>
 	);
 }

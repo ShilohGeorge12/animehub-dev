@@ -2,6 +2,7 @@ import { useContextApi } from '../../context';
 import { FaMoon } from 'react-icons/fa';
 import { BiSun } from 'react-icons/bi';
 import userProfile from '../../assets/images/others/user2.png';
+import Button from '../../components/button';
 
 function Header() {
 	const {
@@ -16,9 +17,9 @@ function Header() {
 
 	const IsTheme = () => {
 		if (loggedIn) {
-			return userTheme === 'light' ? <BiSun /> : <FaMoon />;
+			return userTheme === 'light' ? BiSun : FaMoon;
 		}
-		return theme === 'light' ? <BiSun /> : <FaMoon />;
+		return theme === 'light' ? BiSun : FaMoon;
 	};
 
 	return (
@@ -35,14 +36,12 @@ function Header() {
 			</div>
 			<div className=''></div>
 			<div className='flex items-center justify-end gap-4'>
-				<button
-					type='button'
+				<Button
+					type='header_theme'
 					name='theme'
-					aria-label='theme'
-					className={`p-1 md:p-2 bg-pink-500 text-white text-2xl rounded-xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 dark:hover:bg-white dark:hover:text-pink-500`}
-					onClick={updateTheme}>
-					<IsTheme />
-				</button>
+					onClick={updateTheme}
+					Value={IsTheme()}
+				/>
 				<img
 					src={loggedIn ? profileImage : userProfile}
 					alt='profile'

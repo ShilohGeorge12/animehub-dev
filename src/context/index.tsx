@@ -22,6 +22,7 @@ const initState: State = {
 		gender: 'male',
 		createdAt: new Date(),
 	},
+	editProfileModal: false,
 };
 
 const MyContext = createContext({
@@ -41,8 +42,11 @@ const reducer: ReducerType = (state, action) => {
 		case 'logIn':
 			return { ...state, loggedIn: action.payload.logIn };
 		case 'logOut':
-			// document.cookie = '';
 			return { ...state, loggedIn: action.payload.logOut };
+		case 'editProfileModalOpen':
+			return { ...state, editProfileModal: action.payload.open };
+		case 'editProfileModalClose':
+			return { ...state, editProfileModal: action.payload.close };
 		default:
 			return state;
 	}
