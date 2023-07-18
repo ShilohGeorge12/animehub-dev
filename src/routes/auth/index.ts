@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt';
 import Jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 import upload from '../../middlewares/Image/index.js';
+import { User } from '../../types/index.js';
 config();
 
 export const authRouter = Router();
@@ -39,6 +40,16 @@ authRouter.post(
 		const sercret = `${process.env.SECRET}`;
 		const signedJwt = Jwt.sign({ token: 'jwt token' }, sercret, { expiresIn: 18000 });
 		console.log('login');
+		const User: Omit<User, 'password'> = {
+			username,
+			email,
+			gender: user.gender,
+			image: user.image,
+			animes: user.animes,
+			role: user.role,
+			theme: user.theme,
+			createdAt: user.createdAt,
+		};
 		// res.header('x-api-key', signedJwt).header('access-control-expose-headers', 'x-api-key').status(200).json(user);
 		res
 			.cookie('key', signedJwt, {
@@ -47,7 +58,7 @@ authRouter.post(
 				// maxAge: 18000,
 			})
 			.status(200)
-			.json(user);
+			.json(User);
 	})
 );
 

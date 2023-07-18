@@ -32,6 +32,16 @@ authRouter.post('/login', upload.single('image'), tryCatch(async (req, res) => {
     const sercret = `${process.env.SECRET}`;
     const signedJwt = Jwt.sign({ token: 'jwt token' }, sercret, { expiresIn: 18000 });
     console.log('login');
+    const User = {
+        username,
+        email,
+        gender: user.gender,
+        image: user.image,
+        animes: user.animes,
+        role: user.role,
+        theme: user.theme,
+        createdAt: user.createdAt,
+    };
     // res.header('x-api-key', signedJwt).header('access-control-expose-headers', 'x-api-key').status(200).json(user);
     res
         .cookie('key', signedJwt, {
@@ -40,7 +50,7 @@ authRouter.post('/login', upload.single('image'), tryCatch(async (req, res) => {
         // maxAge: 18000,
     })
         .status(200)
-        .json(user);
+        .json(User);
 }));
 authRouter.get('/logout', tryCatch(async (req, res) => {
     // res.status(200).json({ status: 'logout' });
