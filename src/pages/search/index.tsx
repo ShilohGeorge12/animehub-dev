@@ -6,6 +6,7 @@ import { AnimeType, isSearchResult } from '../../types';
 import Anime from '../../components/anime';
 import { toast } from 'react-toastify';
 import MetaData from '../../components/metaData';
+import { ImSpinner9 } from 'react-icons/im';
 
 function Search() {
 	const [query, setQuery] = useState<string>('');
@@ -69,11 +70,16 @@ function Search() {
 				)}
 			</form>
 			<div className='w-full flex flex-col gap-2 items-center justify-center'>
-				<Anime
-					animes={results}
-					isSuccess={isSuccess}
-				/>
-				{query != '' && results.length === 0 && <p className='text-3xl'>"{query}" Not Found!</p>}
+				{isSuccess ? (
+					<Anime animes={results} />
+				) : (
+					<div className='w-full min-h-[150px] flex flex-col items-center justify-end'>
+						<span className='text-5xl text-white transition duration-500 animate-rotate'>
+							<ImSpinner9 />
+						</span>
+					</div>
+				)}
+				{isSuccess && query != '' && results.length === 0 && <p className='text-3xl'>"{query}" Not Found!</p>}
 			</div>
 		</motion.section>
 	);
