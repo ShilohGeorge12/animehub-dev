@@ -93,7 +93,7 @@ function Button(props: IButtonProps) {
 						'p-3 rounded-2xl transform transition motion-safe:hover:scale-110 hover:-translate-y-1 duration-150 ease-in-out text-2xl hover:bg-white hover:text-pink-500 hover:dark:text-pink-600'
 					}
 					onClick={onClick}
-					disabled={isDisabled()}>
+					disabled={editProfileModal ? true : false}>
 					{typeof Value === 'string' ? Value : <Value />}
 				</button>
 			);
