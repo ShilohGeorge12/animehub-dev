@@ -3,11 +3,12 @@ import { useContextApi } from '../../context';
 import notLoggedIn from '../../assets/images/others/lock.png';
 import { motion } from 'framer-motion';
 import Anime from '../../components/anime';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimeType, isAnimes, isError } from '../../types';
 import usePagination from '../../hooks/pagination';
 import { useFetch } from '../../hooks/fetch';
 import { toast } from 'react-toastify';
+import { ImSpinner9 } from 'react-icons/im';
 
 function Home() {
 	const {
@@ -75,16 +76,18 @@ function Home() {
 					<p className='text-3xl font-bold tracking-wider'>Your Logged Out!</p>
 				</div>
 			)}
-			<div className='flex flex-col gap-3 items-center justify-center'>
+			<div className={`flex flex-col gap-3 items-center justify-center`}>
 				{loggedIn && (
 					<>
-						<Suspense fallback={'loading...'}>
-							<Anime
-								animes={paginatedAnimes}
-								isSuccess={isSuccess}
-								key={'AnimesComponent'}
-							/>
-						</Suspense>
+						{isSuccess ? (
+							<Anime animes={paginatedAnimes} />
+						) : (
+							<div className='w-full min-h-[250px] flex flex-col items-center justify-end'>
+								<span className='text-5xl text-white transition duration-500 animate-rotate'>
+									<ImSpinner9 />
+								</span>
+							</div>
+						)}
 						<div className='absolute bottom-2 left-1/6'>
 							<PaginationNav />
 						</div>

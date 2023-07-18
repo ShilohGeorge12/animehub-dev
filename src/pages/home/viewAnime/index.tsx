@@ -127,7 +127,7 @@ function ViewAnime() {
 			/>
 			{!isSuccess && (
 				<div className='w-full h-full flex items-center justify-center'>
-					<span className='text-5xl text-pink-500 dark:text-white transition duration-500 animate-rotate'>
+					<span className='text-5xl text-white transition duration-500 animate-rotate'>
 						<ImSpinner9 />
 					</span>
 				</div>
