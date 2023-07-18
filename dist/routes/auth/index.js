@@ -33,6 +33,7 @@ authRouter.post('/login', upload.single('image'), tryCatch(async (req, res) => {
     const signedJwt = Jwt.sign({ token: 'jwt token' }, sercret, { expiresIn: 18000 });
     console.log('login');
     const User = {
+        _id: user._id,
         username,
         email,
         gender: user.gender,
@@ -42,12 +43,10 @@ authRouter.post('/login', upload.single('image'), tryCatch(async (req, res) => {
         theme: user.theme,
         createdAt: user.createdAt,
     };
-    // res.header('x-api-key', signedJwt).header('access-control-expose-headers', 'x-api-key').status(200).json(user);
     res
         .cookie('key', signedJwt, {
         secure: true,
         sameSite: 'none',
-        // maxAge: 18000,
     })
         .status(200)
         .json(User);

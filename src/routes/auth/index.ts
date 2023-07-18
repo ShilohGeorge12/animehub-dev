@@ -8,6 +8,7 @@ import Jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 import upload from '../../middlewares/Image/index.js';
 import { User } from '../../types/index.js';
+import { Types } from 'mongoose';
 config();
 
 export const authRouter = Router();
@@ -40,7 +41,8 @@ authRouter.post(
 		const sercret = `${process.env.SECRET}`;
 		const signedJwt = Jwt.sign({ token: 'jwt token' }, sercret, { expiresIn: 18000 });
 		console.log('login');
-		const User: Omit<User, 'password'> = {
+		const User: Omit<User, 'password'> & { _id: string | Types.ObjectId } = {
+			_id: user._id,
 			username,
 			email,
 			gender: user.gender,
@@ -50,12 +52,11 @@ authRouter.post(
 			theme: user.theme,
 			createdAt: user.createdAt,
 		};
-		// res.header('x-api-key', signedJwt).header('access-control-expose-headers', 'x-api-key').status(200).json(user);
+
 		res
 			.cookie('key', signedJwt, {
 				secure: true,
 				sameSite: 'none',
-				// maxAge: 18000,
 			})
 			.status(200)
 			.json(User);
