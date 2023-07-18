@@ -59,8 +59,8 @@ function Home() {
 			exit={{ opacity: 0, translateZ: -100 }}
 			transition={{ type: 'spring', damping: 10, stiffness: 100 }}>
 			<MetaData
-				title='animehub.dev'
-				description='This is AnimeHub where you can get all animes of different genres and categories.'
+				title='animehub-dev | Experience anime like never before'
+				description='animehub: Your go-to for renting, streaming, and enjoying top-notch anime content. Discover new releases, dive into captivating storytelling.'
 				path={'/'}
 				theme={loggedIn ? userTheme : theme}
 			/>

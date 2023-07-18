@@ -18,12 +18,8 @@ function MetaData(props: ImetaProps) {
 				content={description}
 			/>
 			<meta
-				http-equiv='Author'
+				name='Author'
 				content='George Shiloh'
-			/>
-			<meta
-				http-equiv='content-language'
-				content='en-us'
 			/>
 			<meta
 				name='color-scheme'
