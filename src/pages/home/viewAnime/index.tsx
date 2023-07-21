@@ -140,6 +140,7 @@ function ViewAnime() {
 							src={URL.createObjectURL(new Blob([new Uint8Array(anime.image.data.data)], { type: anime.image.contentType }))}
 							title={anime.title}
 							alt={anime.title}
+							loading='eager'
 							className={'w-28 rounded-md transition duration-300 hover:scale-110'}
 						/>
 

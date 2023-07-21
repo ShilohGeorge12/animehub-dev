@@ -15,7 +15,7 @@ function Anime({ animes }: IAnimeProps) {
 					const profileImage = URL.createObjectURL(new Blob([new Uint8Array(anime.image.data.data)], { type: anime.image.contentType }));
 
 					return (
-						<div
+						<article
 							key={anime._id}
 							className='group transition duration-1000 ease-in-out w-36 h-52 rounded-lg flex flex-col items-center justify-center gap-2'
 							onClick={() => naviTo(`/anime/${anime._id}`)}>
@@ -29,7 +29,7 @@ function Anime({ animes }: IAnimeProps) {
 							<p className='text-white text-sm font-bold text-ellipsis text-center group-hover:hidden group-hover:font-semibold overflow-hidden whitespace-nowrap w-[95%] mx-auto'>
 								{anime.title}
 							</p>
-						</div>
+						</article>
 					);
 				})}
 		</div>

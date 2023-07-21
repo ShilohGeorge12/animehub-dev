@@ -48,6 +48,7 @@ function Profile() {
 					<img
 						src={loggedIn ? profileImage : userProfile}
 						title={username}
+						alt={username}
 						loading='lazy'
 						className='w-1/3 md:w-2/4 mx-auto rounded-md'
 					/>

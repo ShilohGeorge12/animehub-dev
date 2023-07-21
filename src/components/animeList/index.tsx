@@ -12,7 +12,7 @@ export function AnimeList(props: IAnimeListProps) {
 	return (
 		<div className={`w-full flex items-center overflow-x-scroll p-2 gap-3 `}>
 			{animes.map((anime) => (
-				<div
+				<article
 					key={anime._id}
 					className={`flex items-center`}
 					onClick={() => naviTo(`/anime/${anime._id}`)}>
@@ -23,7 +23,7 @@ export function AnimeList(props: IAnimeListProps) {
 						loading='eager'
 						className='w-20 rounded-md bg-pink-500 text-white transition duration-300 ease-in-out hover:scale-110 cursor-pointer'
 					/>
-				</div>
+				</article>
 			))}
 		</div>
 	);

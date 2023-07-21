@@ -64,6 +64,31 @@ function Home() {
 				path={'/'}
 				theme={loggedIn ? userTheme : theme}
 			/>
+			<article className='hidden'>
+				<h2>
+					Welcome to <strong>AnimeHub-Dev</strong>, your ultimate destination for renting, watching, and streaming high-quality anime content. Immerse yourself in a world
+					of captivating
+				</h2>
+				storytelling, vibrant characters, and visually stunning animations. At AnimeHub-Dev, we pride ourselves on providing a seamless and immersive anime streaming
+				experience. Our extensive collection boasts a diverse range of anime series and movies, carefully curated to cater to all anime enthusiasts. Whether you're a
+				seasoned fan or just starting your anime journey, we have something for everyone.
+				<h3>
+					Discover the latest and hottest anime releases on our platform. Stay up to date with the most anticipated shows, explore new genres, and indulge in your
+					favorite anime genres.
+				</h3>
+				Our intuitive recommendation system suggests personalized picks based on your preferences, ensuring you never miss out on hidden gems. Experience anime like never
+				before with our exceptional video quality. We prioritize delivering crystal-clear visuals and immersive audio, allowing you to fully appreciate the intricate
+				details and vibrant colors of each frame. Whether you're streaming on your computer, smartphone, or smart TV, AnimeHub-Dev ensures a seamless viewing experience
+				across all devices. Renting anime series has never been easier. With AnimeHub-Dev, you can access an extensive catalog of titles available for rental. Enjoy the
+				flexibility of choosing what to watch and when to watch it. Whether you prefer marathoning through a whole season or savoring one episode at a time, the choice is
+				yours.
+				<h4>
+					Join our passionate community of anime lovers and engage in discussions, reviews, and recommendations. Connect with fellow fans, share your thoughts, and embark
+					on a collective journey through the vast world of anime. Don't miss out on the excitement.
+				</h4>
+				Unlock a world of captivating stories, unforgettable characters, and breathtaking visuals at AnimeHub-Dev. Start your anime adventure today and let us be your
+				trusted companion on this exhilarating journey.
+			</article>
 			<p className='text-2xl text-white font-bold text-center'>All Animes</p>
 			{!loggedIn && (
 				<div className='flex flex-col h-[80%] items-center justify-center gap-4'>
