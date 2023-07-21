@@ -85,6 +85,7 @@ function App() {
 				src={imageSrc()}
 				srcSet={imageSrcSet()}
 				sizes={'(max-width: 420) 22vw, (max-width: 1024) 53.5vw, 100vw'}
+				title={' '}
 				alt={luffyFull}
 				className={`fixed top-0 left-0 w-full h-full transition duration-300 ease-in-out overflow-hidden object-cover ${imageBrightness()}`}
 			/>
