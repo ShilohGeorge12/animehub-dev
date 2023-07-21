@@ -92,7 +92,6 @@ function Profile() {
 							size={'lg'}
 							name={'Edit Profile'}
 							Value={'Edit Profile'}
-							// onClick={() => naviTo('/profile/editprofile')}
 							onClick={() => dispatch({ type: 'editProfileModalOpen', payload: { open: true } })}
 						/>
 					</div>
