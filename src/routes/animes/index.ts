@@ -93,10 +93,7 @@ animeRouter.post(
 			rating,
 			season,
 			status,
-			image: {
-				data: fs.readFileSync('dist/uploads/' + req.file?.filename),
-				contentType: req.file?.mimetype,
-			},
+			image: req.file.filename,
 		});
 		await anime.save();
 		res.status(201).json(anime);

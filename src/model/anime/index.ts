@@ -38,7 +38,7 @@ const AnimeSchema = new Schema<AnimeDocument>({
 	},
 	season: {
 		type: String,
-		enum: ['summer' , 'spring', 'winter'],
+		enum: ['summer', 'spring', 'winter'],
 		required: true,
 	},
 	status: {
@@ -47,8 +47,9 @@ const AnimeSchema = new Schema<AnimeDocument>({
 		required: true,
 	},
 	image: {
-		data: Buffer,
-		contentType: String,
+		type: String,
+		default: 'null',
+		required: [true, 'Image is required'],
 	},
 });
 

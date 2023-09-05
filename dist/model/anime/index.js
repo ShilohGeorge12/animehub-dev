@@ -1,5 +1,8 @@
-import { Schema, model } from 'mongoose';
-const AnimeSchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnimeModel = void 0;
+const mongoose_1 = require("mongoose");
+const AnimeSchema = new mongoose_1.Schema({
     title: {
         type: String,
         required: true,
@@ -43,8 +46,9 @@ const AnimeSchema = new Schema({
         required: true,
     },
     image: {
-        data: Buffer,
-        contentType: String,
+        type: String,
+        default: 'null',
+        required: [true, 'Image is required'],
     },
 });
-export const AnimeModel = model('animes', AnimeSchema);
+exports.AnimeModel = (0, mongoose_1.model)('animes', AnimeSchema);

@@ -1,18 +1,25 @@
-import mongoose from 'mongoose';
-import { config } from 'dotenv';
-import { isError } from '../types/index.js';
-config();
-export const getUser = async () => { };
-export const mongoDb = () => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mongoDb = exports.getUser = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
+const index_js_1 = require("../types/index.js");
+const index_js_2 = require("../env/index.js");
+const getUser = async () => { };
+exports.getUser = getUser;
+const mongoDb = () => {
     try {
-        mongoose.set('strictQuery', false);
-        mongoose.connect(`${process.env.DATABASE_URL}`, {
+        mongoose_1.default.set('strictQuery', false);
+        mongoose_1.default.connect(index_js_2.env.DATABASE_URL, {
             writeConcern: {
                 w: 'majority',
             },
         });
     }
     catch (err) {
-        isError(err) && console.error(err.message);
+        (0, index_js_1.isError)(err) && console.error(err.message);
     }
 };
+exports.mongoDb = mongoDb;
