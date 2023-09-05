@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import sadHime from '../../assets/images/others/sad-hime.webp';
 import { useLocation, useNavigate } from 'react-router-dom';
-import MetaData from '../../components/metaData';
+import MetaData from '../metaData';
 
 function NotFound() {
 	const naviTo = useNavigate();

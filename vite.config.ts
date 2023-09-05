@@ -13,5 +13,6 @@ export default defineConfig({
 	},
 	server: {
 		port: 5051,
+		// host: '192.168.88.111',
 	},
 });

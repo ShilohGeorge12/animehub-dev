@@ -1,8 +1,9 @@
-import { useContextApi } from '../../context';
+import { useMyContext } from '../../context';
 import { FaMoon } from 'react-icons/fa';
 import { BiSun } from 'react-icons/bi';
 import userProfile from '../../assets/images/others/user2.png';
 import Button from '../../components/button';
+import { devUrl, prodUrl } from '../../types';
 
 function Header() {
 	const {
@@ -12,9 +13,8 @@ function Header() {
 			user: { image, username, theme: userTheme },
 		},
 		updateTheme,
-	} = useContextApi();
-	const profileImage = image && image.data ? URL.createObjectURL(new Blob([new Uint8Array(image.data.data)], { type: image.contentType })) : '';
-
+	} = useMyContext();
+	const profileImage = import.meta.env.VITE_MODE === 'development' ? `${devUrl}/images/${image}` : `${prodUrl}/images/${image}`;
 	const IsTheme = () => {
 		if (loggedIn) {
 			return userTheme === 'light' ? BiSun : FaMoon;
@@ -30,7 +30,7 @@ function Header() {
 					title='animehub-image'
 					alt='animehub-image'
 					loading='eager'
-					className='w-10 md:w-11 object-cover'
+					className='object-cover w-10 md:w-11'
 				/>
 				<h1 className='text-3xl font-bold text-transparent animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 bg-clip-text '>animehub</h1>
 			</div>
@@ -46,7 +46,7 @@ function Header() {
 					src={loggedIn ? profileImage : userProfile}
 					alt='profile'
 					title={`${username} Image` ?? 'profileImage'}
-					className='w-10 md:w-12 rounded-2xl object-center'
+					className='object-center w-10 md:w-12 rounded-2xl'
 					loading='lazy'
 				/>
 				{loggedIn && <p className={`hidden md:flex capitalize text-sm text-white justify-self-end`}>{username}</p>}

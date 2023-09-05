@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { useContextApi } from './context';
+import { useMyContext } from './context';
 
 interface ModalType {
 	element: JSX.Element;
@@ -14,7 +14,7 @@ export const Modal = ({ element }: ModalType) => {
 			user: { theme: userTheme },
 			loggedIn,
 		},
-	} = useContextApi();
+	} = useMyContext();
 	const Div = document.getElementById('modal') as HTMLDivElement;
 	const onClose = () => {
 		if (editProfileModal) {

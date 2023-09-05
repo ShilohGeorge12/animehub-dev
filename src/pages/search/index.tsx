@@ -7,6 +7,7 @@ import Anime from '../../components/anime';
 import { toast } from 'react-toastify';
 import MetaData from '../../components/metaData';
 import { ImSpinner9 } from 'react-icons/im';
+import { AnimeImageLoading, AnimeLoadingSkeleton } from '../../components/loading';
 
 function Search() {
 	const [query, setQuery] = useState<string>('');
@@ -38,7 +39,7 @@ function Search() {
 
 	return (
 		<motion.section
-			className='w-full h-full flex flex-col p-2 gap-3 items-center'
+			className='flex flex-col items-center w-full h-full gap-3 p-2'
 			initial={{ opacity: 0, scale: 0 }}
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0 }}
@@ -69,7 +70,7 @@ function Search() {
 					</span>
 				)}
 			</form>
-			<div className='w-full flex flex-col gap-2 items-center justify-center'>
+			<div className='flex flex-col items-center justify-center w-full gap-2'>
 				{isSuccess ? (
 					<Anime animes={results} />
 				) : (
@@ -80,6 +81,11 @@ function Search() {
 					</div>
 				)}
 				{isSuccess && query != '' && results.length === 0 && <p className='text-3xl'>"{query}" Not Found!</p>}
+				<AnimeLoadingSkeleton
+					width={'w-20'}
+					height={'w-30'}
+				/>
+				<AnimeImageLoading />
 			</div>
 		</motion.section>
 	);

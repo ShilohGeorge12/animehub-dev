@@ -39,9 +39,10 @@ const reducer: ReducerType = (state, action) => {
 		case 'userTheme':
 			return { ...state, user: { ...state.user, theme: action.payload.userTheme } };
 		case 'logIn':
-			return { ...state, loggedIn: action.payload.logIn };
+			console.log(action.payload.user);
+			return { ...state, loggedIn: action.payload.isloggedIn, user: action.payload.user };
 		case 'logOut':
-			return { ...state, loggedIn: action.payload.logOut };
+			return { ...state, loggedIn: action.payload.isloggedIn };
 		case 'editProfileModalOpen':
 			return { ...state, editProfileModal: action.payload.open };
 		case 'editProfileModalClose':
@@ -98,4 +99,4 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 	return <MyContext.Provider value={{ state, dispatch, updateTheme }}>{children}</MyContext.Provider>;
 };
 
-export const useContextApi = () => useContext(MyContext);
+export const useMyContext = () => useContext(MyContext);

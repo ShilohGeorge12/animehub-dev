@@ -4,18 +4,16 @@ import { useFetch } from '../fetch';
 import { toast } from 'react-toastify';
 
 const usePagination: PaginationType = (options) => {
-	const { animes, setAnimes, limitPerPage, totalAnimes, setLimitPerPage, setTotalAnimes, setIsSuccess } = options;
+	const { animes, setAnimes, limitPerPage, totalAnimes, setLimitPerPage, setTotalAnimes } = options;
 	const [Page, setPage] = useState<number>(1);
 
 	const onPageChange = (page: number) => {
-		setIsSuccess(false);
 		useFetch(`animes?page=${page - 1}&perpage=${limitPerPage}`, 'GET', 'force-cache')
 			.then((res) => {
 				if ('error' in res) toast.error(res.error);
 				if (isAnimes(res)) {
 					setAnimes(res.animes);
 					setTotalAnimes(res.totalAnimes);
-					setIsSuccess(true);
 				}
 			})
 			.catch((err: Error) => toast.error(err.message));
@@ -64,7 +62,7 @@ const usePagination: PaginationType = (options) => {
 
 	const PaginatedNav = () => {
 		return (
-			<ul className='w-fit flex rounded-lg mx-auto overflow-hidden last:border-r-0 last:border-white'>
+			<ul className='flex mx-auto overflow-hidden rounded-lg w-fit last:border-r-0 last:border-white'>
 				{pages.map((page) => (
 					<li
 						key={page}

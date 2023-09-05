@@ -1,16 +1,19 @@
 import { motion } from 'framer-motion';
 import MetaData from '../../../components/metaData';
-import { useContextApi } from '../../../context';
+import { useMyContext } from '../../../context';
 import { useLocation, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import { GiAlliedStar } from 'react-icons/gi';
 import { useFetch } from '../../../hooks/fetch';
-import { AnimeType, isAnime, isError, isUser } from '../../../types';
+import { AnimeType, devUrl, isAnime, isError, isUser, prodUrl } from '../../../types';
 import { ImSpinner9 } from 'react-icons/im';
 import { toast } from 'react-toastify';
 import { Rating } from '../../../components/rating';
 import Button from '../../../components/button';
+import { Image } from '@chakra-ui/image';
+// import { AnimeImageLoading } from '../../../components/loading';
+import { AnimeLoadingSkeleton } from '../../../components/loading';
 
 function ViewAnime() {
 	const { id } = useParams();
@@ -21,7 +24,7 @@ function ViewAnime() {
 			user: { _id, animes },
 		},
 		dispatch,
-	} = useContextApi();
+	} = useMyContext();
 	const [anime, setAnime] = useState<AnimeType | null>(null);
 	const [isSuccess, setIsSuccess] = useState<boolean>(true);
 	const [screenSize, setScreenSize] = useState<number>(1024);
@@ -126,7 +129,7 @@ function ViewAnime() {
 				path={pathname}
 			/>
 			{!isSuccess && (
-				<div className='w-full h-full flex items-center justify-center'>
+				<div className='flex items-center justify-center w-full h-full'>
 					<span className='text-5xl text-white transition duration-500 animate-rotate'>
 						<ImSpinner9 />
 					</span>
@@ -135,16 +138,22 @@ function ViewAnime() {
 
 			{isSuccess && anime && (
 				<div className={'grid grid-cols-1 md:grid-cols-4'}>
-					<div className='col-span-1 flex md:flex-col gap-1 md:gap-8 items-start md:items-center p-2'>
-						<img
-							src={URL.createObjectURL(new Blob([new Uint8Array(anime.image.data.data)], { type: anime.image.contentType }))}
+					<div className='flex items-start col-span-1 gap-1 p-2 md:flex-col md:gap-8 md:items-center'>
+						<Image
+							src={import.meta.env.VITE_MODE === 'development' ? `${devUrl}/images/${anime.image}` : `${prodUrl}/images/${anime.image}`}
 							title={anime.title}
 							alt={anime.title}
 							loading='eager'
+							fallback={
+								<AnimeLoadingSkeleton
+									width='w-28'
+									height='h-full'
+								/>
+							}
 							className={'w-28 rounded-md transition duration-300 hover:scale-110'}
 						/>
 
-						<ul className='list-none no-underline w-full flex flex-col justify-center px-1 gap-2 text-sm md:text-base text-pink-600'>
+						<ul className='flex flex-col justify-center w-full gap-2 px-1 text-sm text-pink-600 no-underline list-none md:text-base'>
 							<li className='flex gap-2'>
 								Stars:
 								<Rating
@@ -183,14 +192,14 @@ function ViewAnime() {
 							</li>
 						</ul>
 					</div>
-					<div className=' md:col-span-3 flex flex-col gap-6 p-2'>
+					<div className='flex flex-col gap-6 p-2 md:col-span-3'>
 						<h3 className='text-3xl font-bold tracking-wider'>{anime.title}</h3>
 						{screenSize > 414 ? (
 							<p className='text-sm font-semibold tracking-wider'>{<ParseDecription />}</p>
 						) : (
 							<details className=''>
 								<summary className='text-lg font-semibold'>{anime.title} Description</summary>
-								<p className='text-sm font-semibold tracking-wider w-full h-52 text-ellipsis overflow-y-scroll'>{<ParseDecription />}</p>
+								<p className='w-full overflow-y-scroll text-sm font-semibold tracking-wider h-52 text-ellipsis'>{<ParseDecription />}</p>
 							</details>
 						)}
 
