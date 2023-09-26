@@ -8,6 +8,7 @@ import { validatePatch, validateUpdateUser, validateUsers } from '../../validato
 import { ifError } from '../../validator/helpers.js';
 import { AnimeModel } from '../../model/anime/index.js';
 import { Auth } from '../../middlewares/Auth/index.js';
+import { env } from '../../env/index.js';
 
 export const usersRouter = Router();
 
@@ -58,16 +59,15 @@ usersRouter.post(
 			const salt = await bcrypt.genSalt(10);
 			const hashedPassword = await bcrypt.hash(password, salt);
 
+			const image = env.MODE === 'development' ? `http://localhost:5050/images/${req.file.filename}` : `http://animehub-api.onrender.com/images/${req.file.filename}`;
+
 			const newUser = new UserModel({
 				username,
 				role,
 				email,
 				theme,
 				password: hashedPassword,
-				image: {
-					data: fs.readFileSync('dist/uploads/' + req.file.filename),
-					contentType: req.file.mimetype,
-				},
+				image,
 				animes: [],
 			});
 			await newUser.save();
@@ -190,10 +190,7 @@ usersRouter.put(
 				user.password = password;
 			}
 			if (req.file) {
-				user.image = {
-					data: fs.readFileSync('dist/uploads/' + req.file.filename),
-					contentType: req.file.mimetype,
-				};
+				user.image = req.file.filename;
 			}
 			user.username = username;
 			user.email = email;

@@ -1,16 +1,16 @@
 import express, { json } from 'express';
 import cors from 'cors';
-import { config } from 'dotenv';
 import { mongoDb } from './db/index.js';
 import { Errorhandler } from './middlewares/Error/index.js';
 import { animeRouter } from './routes/animes/index.js';
 import { usersRouter } from './routes/users/index.js';
 import { authRouter } from './routes/auth/index.js';
 import cookieParser from 'cookie-parser';
+import { env } from './env/index.js';
+import { join } from 'path';
 
-config();
 const app = express();
-const port = `${process.env.PORT}`;
+const port = env.PORT;
 
 app.use(json());
 app.use(cookieParser());
@@ -20,11 +20,13 @@ app.use(
 		credentials: true,
 	})
 );
+app.use(express.static(join(__dirname, '../dist/public')));
+
 app.get('/', (req, res) => res.redirect('/api/'));
 app.get('/api/', (req, res) => res.send('welcome to animehub-dev api'));
+app.use('/api', authRouter);
 app.use('/api', usersRouter);
 app.use('/api', animeRouter);
-app.use('/api', authRouter);
 app.use('*', Errorhandler);
 
 mongoDb();

@@ -6,13 +6,11 @@ export interface User {
 	password: string;
 	email: string;
 	gender: 'male' | 'female';
-	image: {
-		data: Buffer;
-		contentType: string;
-	};
+	image: string;
 	animes: Types.ObjectId[];
 	role: 'BASIC' | 'PREMIUM';
 	theme: 'light' | 'dark';
+	authkey: string;
 	createdAt: Date;
 }
 
@@ -27,13 +25,17 @@ export interface Anime {
 	rating: number;
 	season: 'summer' | 'spring' | 'winter';
 	status: 'FinishedAiring' | 'onGoing';
-	image: {
-		data: Buffer;
-		contentType: string;
-	};
+	image: string;
 }
 
 // Type Guards
 export const isError = (arg: unknown): arg is Error => (arg as Error).stack !== undefined;
 
 export type AuthType = (req: Request, res: Response, next: NextFunction) => void;
+
+interface JwtPayload {
+	token: string;
+	exp: number;
+}
+
+export const isJWTPayload = (arg: unknown): arg is JwtPayload => (arg as JwtPayload).exp !== undefined;

@@ -1,31 +1,37 @@
-import { Router } from 'express';
-import fs from 'fs';
-import upload from '../../middlewares/Image/index.js';
-import { tryCatch } from '../../middlewares/Error/index.js';
-import { UserModel } from '../../model/user/index.js';
-import bcrypt from 'bcrypt';
-import { validatePatch, validateUpdateUser, validateUsers } from '../../validator/index.js';
-import { ifError } from '../../validator/helpers.js';
-import { AnimeModel } from '../../model/anime/index.js';
-import { Auth } from '../../middlewares/Auth/index.js';
-export const usersRouter = Router();
-usersRouter.get('/users', Auth, tryCatch(async (req, res) => {
-    const users = await UserModel.find().sort('username').select('-__v -password').populate('animes', '-__v -password');
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.usersRouter = void 0;
+const express_1 = require("express");
+const index_js_1 = __importDefault(require("../../middlewares/Image/index.js"));
+const index_js_2 = require("../../middlewares/Error/index.js");
+const index_js_3 = require("../../model/user/index.js");
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const index_js_4 = require("../../validator/index.js");
+const helpers_js_1 = require("../../validator/helpers.js");
+const index_js_5 = require("../../model/anime/index.js");
+const index_js_6 = require("../../middlewares/Auth/index.js");
+const index_js_7 = require("../../env/index.js");
+exports.usersRouter = (0, express_1.Router)();
+exports.usersRouter.get('/users', index_js_6.Auth, (0, index_js_2.tryCatch)(async (req, res) => {
+    const users = await index_js_3.UserModel.find().sort('username').select('-__v -password').populate('animes', '-__v -password');
     res.json(users);
 }));
-usersRouter.get('/users/:id', Auth, tryCatch(async (req, res) => {
+exports.usersRouter.get('/users/:id', index_js_6.Auth, (0, index_js_2.tryCatch)(async (req, res) => {
     const { id } = req.params;
-    const user = await UserModel.findOne({ _id: id }).select('-__v -password').populate('animes', '-__v');
+    const user = await index_js_3.UserModel.findOne({ _id: id }).select('-__v -password').populate('animes', '-__v');
     if (!user) {
         res.status(404).json({ error: 'User Not Found!' });
         return;
     }
     res.json(user);
 }));
-usersRouter.post('/users', Auth, upload.single('image'), tryCatch(async (req, res) => {
-    const { error, value } = validateUsers(req.body);
-    if (ifError(error)) {
-        res.status(400).json({ error: ifError(error) });
+exports.usersRouter.post('/users', index_js_6.Auth, index_js_1.default.single('image'), (0, index_js_2.tryCatch)(async (req, res) => {
+    const { error, value } = (0, index_js_4.validateUsers)(req.body);
+    if ((0, helpers_js_1.ifError)(error)) {
+        res.status(400).json({ error: (0, helpers_js_1.ifError)(error) });
         return;
     }
     if (!req.file) {
@@ -34,36 +40,34 @@ usersRouter.post('/users', Auth, upload.single('image'), tryCatch(async (req, re
     }
     if (value) {
         const { username, email, password, role, theme } = value;
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const newUser = new UserModel({
+        const salt = await bcrypt_1.default.genSalt(10);
+        const hashedPassword = await bcrypt_1.default.hash(password, salt);
+        const image = index_js_7.env.MODE === 'development' ? `http://localhost:5050/images/${req.file.filename}` : `http://animehub-api.onrender.com/images/${req.file.filename}`;
+        const newUser = new index_js_3.UserModel({
             username,
             role,
             email,
             theme,
             password: hashedPassword,
-            image: {
-                data: fs.readFileSync('dist/uploads/' + req.file.filename),
-                contentType: req.file.mimetype,
-            },
+            image,
             animes: [],
         });
         await newUser.save();
         res.status(201).json(newUser);
     }
 }));
-usersRouter.get('/users/:id/:animeid', tryCatch(async (req, res) => {
+exports.usersRouter.get('/users/:id/:animeid', (0, index_js_2.tryCatch)(async (req, res) => {
     const _id = req.params.id;
     const animeid = req.params.animeid;
-    const anime = await AnimeModel.findOne({ _id: animeid }).select('-_v');
+    const anime = await index_js_5.AnimeModel.findOne({ _id: animeid }).select('-_v');
     if (!anime) {
         res.status(404).json({ error: 'anime not found!' });
         return;
     }
-    const user = await UserModel.findOne({ _id, animes: { $nin: [anime._id] } }).select('-__v -password');
+    const user = await index_js_3.UserModel.findOne({ _id, animes: { $nin: [anime._id] } }).select('-__v -password');
     const BASIC_USER_ERROR = "You Can't have more than five animes at a time, upgrade to premium account to unlock this feature";
     if (!user) {
-        const user = await UserModel.findOne({ _id }).select('-__v -password');
+        const user = await index_js_3.UserModel.findOne({ _id }).select('-__v -password');
         if (!user)
             return;
         res.status(200).json(user);
@@ -83,11 +87,11 @@ usersRouter.get('/users/:id/:animeid', tryCatch(async (req, res) => {
     await user.save();
     res.status(200).json(user.animes);
 }));
-usersRouter.delete('/users/:id/:animeid', tryCatch(async (req, res) => {
+exports.usersRouter.delete('/users/:id/:animeid', (0, index_js_2.tryCatch)(async (req, res) => {
     const _id = req.params.id;
     const animeid = req.params.animeid;
-    const anime = await AnimeModel.findOne({ _id: animeid }).select('_id');
-    const user = await UserModel.findOneAndUpdate({ _id }, { $pull: { animes: anime === null || anime === void 0 ? void 0 : anime._id } }, { new: true })
+    const anime = await index_js_5.AnimeModel.findOne({ _id: animeid }).select('_id');
+    const user = await index_js_3.UserModel.findOneAndUpdate({ _id }, { $pull: { animes: anime === null || anime === void 0 ? void 0 : anime._id } }, { new: true })
         .populate('animes', '-__v')
         .select('-__v -password');
     if (!anime) {
@@ -100,11 +104,11 @@ usersRouter.delete('/users/:id/:animeid', tryCatch(async (req, res) => {
     }
     res.status(200).json(user);
 }));
-usersRouter.patch('/users/:id/theme', Auth, upload.single('image'), tryCatch(async (req, res) => {
+exports.usersRouter.patch('/users/:id/theme', index_js_6.Auth, index_js_1.default.single('image'), (0, index_js_2.tryCatch)(async (req, res) => {
     const { id } = req.params;
-    const { error, value } = validatePatch(req.body);
-    const validationError = ifError(error);
-    const user = await UserModel.findOne({ _id: id }).select('_id theme');
+    const { error, value } = (0, index_js_4.validatePatch)(req.body);
+    const validationError = (0, helpers_js_1.ifError)(error);
+    const user = await index_js_3.UserModel.findOne({ _id: id }).select('_id theme');
     if (validationError) {
         res.status(400).json({ error: validationError });
         return;
@@ -119,11 +123,11 @@ usersRouter.patch('/users/:id/theme', Auth, upload.single('image'), tryCatch(asy
         res.status(200).json(user);
     }
 }));
-usersRouter.put('/users/:id', Auth, upload.single('image'), tryCatch(async (req, res) => {
+exports.usersRouter.put('/users/:id', index_js_6.Auth, index_js_1.default.single('image'), (0, index_js_2.tryCatch)(async (req, res) => {
     const { id } = req.params;
-    const { error, value } = validateUpdateUser(req.body);
-    const validationError = ifError(error);
-    const user = await UserModel.findOne({ _id: id }).select('-__v');
+    const { error, value } = (0, index_js_4.validateUpdateUser)(req.body);
+    const validationError = (0, helpers_js_1.ifError)(error);
+    const user = await index_js_3.UserModel.findOne({ _id: id }).select('-__v');
     if (validationError) {
         res.status(400).json({ error: validationError });
         return;
@@ -134,15 +138,12 @@ usersRouter.put('/users/:id', Auth, upload.single('image'), tryCatch(async (req,
     }
     if (value) {
         const { username, password, email } = value;
-        const result = await bcrypt.compare(password, user.password);
+        const result = await bcrypt_1.default.compare(password, user.password);
         if (result) {
             user.password = password;
         }
         if (req.file) {
-            user.image = {
-                data: fs.readFileSync('dist/uploads/' + req.file.filename),
-                contentType: req.file.mimetype,
-            };
+            user.image = req.file.filename;
         }
         user.username = username;
         user.email = email;

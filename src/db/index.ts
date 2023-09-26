@@ -1,14 +1,13 @@
 import mongoose from 'mongoose';
-import { config } from 'dotenv';
 import { isError } from '../types/index.js';
-config();
+import { env } from '../env/index.js';
 
 export const getUser = async () => {};
 
 export const mongoDb = () => {
 	try {
 		mongoose.set('strictQuery', false);
-		mongoose.connect(`${process.env.DATABASE_URL}`, {
+		mongoose.connect(env.DATABASE_URL, {
 			writeConcern: {
 				w: 'majority',
 			},

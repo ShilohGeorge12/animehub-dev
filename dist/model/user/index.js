@@ -1,5 +1,8 @@
-import { Schema, model } from 'mongoose';
-const UserSchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserModel = void 0;
+const mongoose_1 = require("mongoose");
+const UserSchema = new mongoose_1.Schema({
     username: {
         type: String,
         required: [true, 'Username can not be empty'],
@@ -22,11 +25,11 @@ const UserSchema = new Schema({
         enum: ['male', 'female'],
     },
     image: {
-        data: Buffer,
-        contentType: String,
+        type: String,
+        required: [true, 'Image is required'],
     },
     animes: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'animes' }],
+        type: [{ type: mongoose_1.Schema.Types.ObjectId, ref: 'animes' }],
         default: [],
     },
     role: {
@@ -39,9 +42,14 @@ const UserSchema = new Schema({
         enum: ['light', 'dark'],
         default: 'light',
     },
+    authkey: {
+        type: String,
+        max: 300,
+        default: 'null',
+    },
     createdAt: {
         type: Date,
         default: () => new Date(),
     },
 });
-export const UserModel = model('User', UserSchema);
+exports.UserModel = (0, mongoose_1.model)('User', UserSchema);

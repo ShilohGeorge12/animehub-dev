@@ -4,7 +4,7 @@ import { Anime, User } from '../types/index.js';
 
 type validateAnimesReturnType = ValidationResult<Omit<Anime, 'image'>>;
 type validateUsersReturnType = ValidationResult<Omit<User, 'image' | 'animes'>>;
-type validateAuthReturnType = ValidationResult<Omit<User, 'image' | 'animes' | 'role' | 'theme'>>;
+type validateAuthReturnType = ValidationResult<Pick<User, 'username' | 'email' | 'password'>>;
 type validatePatchReturnType = ValidationResult<Pick<User, 'theme'>>;
 type validateUpdateUserType = ValidationResult<Pick<User, 'password' | 'username' | 'email'>>;
 

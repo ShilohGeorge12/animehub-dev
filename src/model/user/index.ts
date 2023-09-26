@@ -26,8 +26,8 @@ const UserSchema = new Schema<UserDocument>({
 		enum: ['male', 'female'],
 	},
 	image: {
-		data: Buffer,
-		contentType: String,
+		type: String,
+		required: [true, 'Image is required'],
 	},
 	animes: {
 		type: [{ type: Schema.Types.ObjectId, ref: 'animes' }],
@@ -42,6 +42,11 @@ const UserSchema = new Schema<UserDocument>({
 		type: String,
 		enum: ['light', 'dark'],
 		default: 'light',
+	},
+	authkey: {
+		type: String,
+		max: 300,
+		default: 'null',
 	},
 	createdAt: {
 		type: Date,
