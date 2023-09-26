@@ -2,7 +2,7 @@ import { IconType } from 'react-icons';
 import { MouseEvent } from 'react';
 import { ProfileBtn } from './profilebtn';
 import { Searchbtn } from './searchbtn';
-import { useContextApi } from '../../context';
+import { useMyContext } from '../../context';
 
 interface IButtonProps {
 	onClick: (e: MouseEvent<HTMLButtonElement>) => void;
@@ -17,7 +17,7 @@ function Button(props: IButtonProps) {
 	const { Value, onClick, size, type, more, name } = props;
 	const {
 		state: { loggedIn, editProfileModal },
-	} = useContextApi();
+	} = useMyContext();
 
 	const isDisabled = () => {
 		if (!loggedIn) return true;

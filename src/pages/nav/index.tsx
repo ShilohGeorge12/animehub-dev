@@ -1,6 +1,6 @@
 import { FaHome, FaUser, FaUnlock, FaLock } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
-import { useContextApi } from '../../context';
+import { useMyContext } from '../../context';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UrlPath } from '../../types';
 import Button from '../../components/button';
@@ -12,7 +12,7 @@ function Nav() {
 	const {
 		state: { loggedIn },
 		dispatch,
-	} = useContextApi();
+	} = useMyContext();
 	const classes = {
 		navBtnClasses: 'group relative text-white flex items-center justify-center',
 		PClassess: 'hidden absolute transition delay-1000 duration-300 ease-in-out group-hover:flex -top-7 text-sm text-white font-bold',

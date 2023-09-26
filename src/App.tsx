@@ -7,8 +7,8 @@ import luffy414 from './assets/images/bg/luffy-sun-god414.webp';
 import { AllRoutes } from './AllRoutes';
 import Nav from './pages/nav';
 import Header from './pages/header';
-import { useContextApi } from './context';
-import { useEffect } from 'react';
+import { useMyContext } from './context';
+// import { useEffect } from 'react';
 import { isError, isUser } from './types';
 import { ToastContainer, toast } from 'react-toastify';
 import { useFetch } from './hooks/fetch';
@@ -21,7 +21,8 @@ function App() {
 			loggedIn,
 		},
 		dispatch,
-	} = useContextApi();
+	} = useMyContext();
+	// console.log(userTheme);
 
 	const autoLogin = async () => {
 		const loginDetails = {
@@ -39,17 +40,17 @@ function App() {
 		}
 		if (isUser(response)) {
 			dispatch({ type: 'user', payload: { user: response } });
-			dispatch({ type: 'logIn', payload: { logIn: true } });
+			// dispatch({ type: 'logIn', payload: { logIn: true } });
 			return;
 		}
 	};
-	useEffect(() => {
-		autoLogin().catch((err) => {
-			if (isError(err)) {
-				toast.error(err.message);
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	autoLogin().catch((err) => {
+	// 		if (isError(err)) {
+	// 			toast.error(err.message);
+	// 		}
+	// 	});
+	// }, []);
 
 	const imageSrcSet = () => {
 		if (loggedIn) return userTheme === 'light' ? `${luffy414} 420w, ${luffy768} 768w, ${luffy1024} 1024w` : ``;
@@ -66,20 +67,18 @@ function App() {
 	};
 
 	return (
-		<section className={`w-screen h-screen ${loggedIn ? userTheme : theme} overflow-hidden `}>
+		<section className={`w-screen h-screen ${loggedIn ? 'light' : theme} overflow-hidden `}>
 			<ToastContainer
 				position='top-right'
-				toastClassName={'rounded-2xl'}
-				autoClose={5000}
-				hideProgressBar
-				newestOnTop={false}
-				closeOnClick
-				closeButton={false}
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
 				theme='colored'
+				toastClassName={'rounded-2xl'}
+				className={'blur-0 z-30'}
+				autoClose={8000}
+				closeButton={false}
+				closeOnClick
+				hideProgressBar
+				pauseOnHover
+				limit={4}
 			/>
 			<img
 				src={imageSrc()}

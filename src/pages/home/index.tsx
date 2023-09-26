@@ -1,5 +1,5 @@
 import MetaData from '../../components/metaData';
-import { useContextApi } from '../../context';
+import { useMyContext } from '../../context';
 import notLoggedIn from '../../assets/images/others/lock.png';
 import { motion } from 'framer-motion';
 import Anime from '../../components/anime';
@@ -8,7 +8,6 @@ import { AnimeType, isAnimes, isError } from '../../types';
 import usePagination from '../../hooks/pagination';
 import { useFetch } from '../../hooks/fetch';
 import { toast } from 'react-toastify';
-import { ImSpinner9 } from 'react-icons/im';
 
 function Home() {
 	const {
@@ -17,11 +16,11 @@ function Home() {
 			user: { theme: userTheme },
 			theme,
 		},
-	} = useContextApi();
+	} = useMyContext();
 	const [animes, setAnimes] = useState<AnimeType[]>([]);
 	const [limitPerPage, setLimitPerPage] = useState<number>(8);
 	const [totalAnimes, setTotalAnimes] = useState<number>(0);
-	const [isSuccess, setIsSuccess] = useState<boolean>(true);
+	const [_isSuccess, setIsSuccess] = useState<boolean>(true);
 
 	const [PaginationNav, paginatedAnimes] = usePagination({
 		animes,
@@ -118,14 +117,14 @@ function Home() {
 				<h5>Unlock a World of Captivating Stories, Unforgettable Characters, and Breathtaking Visuals at AnimeHub-Dev</h5>
 				<p>Start your anime adventure today and let us be your trusted companion on this exhilarating journey.</p>
 			</article>
-			<p className='text-2xl text-white font-bold text-center'>All Animes</p>
+			<p className='text-2xl font-bold text-center text-white'>All Animes</p>
 			{!loggedIn && (
 				<div className='flex flex-col h-[80%] items-center justify-center gap-4'>
 					<img
 						src={notLoggedIn}
 						alt='Not LoggedIn'
 						title='Not LoggedIn'
-						className='md:w-1/5 w-1/2 transition duration-300 hover:scale-110'
+						className='w-1/2 transition duration-300 md:w-1/5 hover:scale-110'
 					/>
 					<p className='text-3xl font-bold tracking-wider'>Your Logged Out!</p>
 				</div>
@@ -133,15 +132,7 @@ function Home() {
 			<div className={`flex flex-col gap-3 items-center justify-center`}>
 				{loggedIn && (
 					<>
-						{isSuccess ? (
-							<Anime animes={paginatedAnimes} />
-						) : (
-							<div className='w-full min-h-[250px] flex flex-col items-center justify-end'>
-								<span className='text-5xl text-white transition duration-500 animate-rotate'>
-									<ImSpinner9 />
-								</span>
-							</div>
-						)}
+						<Anime animes={paginatedAnimes} />
 						<div className='absolute bottom-2 left-1/6'>
 							<PaginationNav />
 						</div>

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { useContextApi } from '../../../context';
+import { useMyContext } from '../../../context';
 import z from 'zod';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ export function EditProfileModal(props: IEditProfileModalProps) {
 			user: { username, email, image: userImage },
 		},
 		dispatch,
-	} = useContextApi();
+	} = useMyContext();
 	const userProfileStateSchema = z.object({
 		username: z
 			.string({ invalid_type_error: 'username must be string' })

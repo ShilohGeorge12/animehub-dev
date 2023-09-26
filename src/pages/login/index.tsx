@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import loginHime from '../../assets/images/others/log-in-hime.webp';
 import MetaData from '../../components/metaData';
-import { useContextApi } from '../../context';
+import { useMyContext } from '../../context';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import { useState, MouseEvent, ChangeEvent } from 'react';
 import { toast } from 'react-toastify';
@@ -20,7 +20,7 @@ function Login(props: ILoginProps) {
 	const [viewPasword, setViewPasword] = useState<boolean>(false);
 	const [details, setDetails] = useState<typeof initState>(initState);
 	const [isSuccess, setIsSuccess] = useState<boolean>(true);
-	const { dispatch } = useContextApi();
+	const { dispatch } = useMyContext();
 	const { pathname } = useLocation();
 	const naviTo = useNavigate();
 
@@ -47,8 +47,7 @@ function Login(props: ILoginProps) {
 		Object.entries(details).forEach(([key, val]) => data.append(key, val));
 		const response = await useFetch('login', 'POST', 'no-store', data);
 		if (isUser(response)) {
-			dispatch({ type: 'user', payload: { user: response } });
-			dispatch({ type: 'logIn', payload: { logIn: true } });
+			dispatch({ type: 'logIn', payload: { isloggedIn: true, user: response } });
 			setDetails(initState);
 			setIsSuccess(true);
 			naviTo('/');
@@ -61,20 +60,20 @@ function Login(props: ILoginProps) {
 	};
 
 	return (
-		<section className='w-full h-full flex flex-col items-center gap-6 lg:gap-0'>
+		<section className='flex flex-col items-center w-full h-full gap-6 lg:gap-0'>
 			<MetaData
 				title={'Login'}
 				description={'Login To animehub.dev'}
 				path={pathname}
 			/>
-			<p className='text-4xl text-white font-semibold text-center uppercase'>Log In</p>
+			<p className='text-4xl font-semibold text-center text-white uppercase'>Log In</p>
 			<div className='w-full md:w-[70%] lg:w-[60%] flex relative'>
 				<img
 					src={loginHime}
 					alt='loginHime'
 					loading='eager'
 					title='login To Animehub-dev'
-					className='hidden md:flex h-52 md:h-72 lg:h-80 z-10'
+					className='z-10 hidden md:flex h-52 md:h-72 lg:h-80'
 				/>
 				<form
 					className={`flex flex-col items-center gap-6 md:absolute md:top-6 lg:top-7 md:right-0 md:w-[84.4%] lg:w-[85.9%] bg-black bg-opacity-80 px-2 py-6 rounded-2xl`}
