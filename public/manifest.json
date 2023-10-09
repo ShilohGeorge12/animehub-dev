@@ -1,0 +1,33 @@
+{
+	"name": "animehub",
+	"description": "animehub is your ultimate destination for renting, watching, and streaming high-quality anime content. Explore our extensive catalog of latest and hottest anime releases, discover new series, and immerse yourself in the world of captivating storytelling.",
+	"short_name": "animehub-dev",
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "rgb(203 213 225)",
+	"background_color": "rgb(203 213 225)",
+	"icons": [
+		{
+			"src": "/tv-256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "/tv-512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "/tv-512.svg",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any maskable"
+		}
+	],
+	"protocol_handlers": [
+		{
+			"protocol": "web+animehub",
+			"url": "https://animehub-dev.netlify.app/%s"
+		}
+	]
+}

@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('/Poppins-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+::-webkit-scrollbar {
+	background: transparent;
+	width: 0.4rem;
+	height: 0.25rem;
+	border-radius: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background: rgb(233, 6, 184);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(233, 6, 184);
+}
+
+::selection {
+	@apply text-white bg-pink-600 rounded-xl;
+}
+
+::-moz-selection {
+	@apply text-white bg-pink-600 rounded-xl;
+}
+
+input[type='file']::-webkit-file-upload-button {
+	@apply p-2 text-white bg-pink-600 border-0 rounded-sm outline-0;
+}
