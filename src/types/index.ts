@@ -1,11 +1,52 @@
+import { Types } from 'mongoose';
 import { Dispatch, SetStateAction } from 'react';
 import { IconType } from 'react-icons';
+import { ValidationResult } from 'joi';
 
-type Theme = 'light' | 'dark';
-type developmentUrl = 'http://localhost:5050';
-type ProductionUrl = 'http://animehub-api.onrender.com';
-export const devUrl: developmentUrl = 'http://localhost:5050';
-export const prodUrl: ProductionUrl = 'http://animehub-api.onrender.com';
+export type animeReturnType = Anime;
+export type userReturnType = Omit<User, 'animes' | 'authkey' | 'createdAt'>;
+export type authReturnType = Pick<User, 'username' | 'email' | 'password'>;
+export type patchReturnType = Pick<User, 'theme'>;
+export type updateUserReturnType = Pick<User, 'password' | 'username' | 'email' | 'image'>;
+
+export type validateAnimesReturnType = ValidationResult<animeReturnType>;
+export type validateUsersReturnType = ValidationResult<userReturnType>;
+export type validateAuthReturnType = ValidationResult<authReturnType>;
+export type validatePatchReturnType = ValidationResult<patchReturnType>;
+export type validateUpdateUserType = ValidationResult<updateUserReturnType>;
+
+export interface _ID {
+	readonly _id: string;
+}
+
+export interface User {
+	username: string;
+	password: string;
+	email: string;
+	gender: 'male' | 'female';
+	image: string;
+	animes: Types.ObjectId[];
+	role: 'BASIC' | 'PREMIUM';
+	theme: 'light' | 'dark';
+	authkey: string;
+	createdAt: Date;
+}
+
+export interface Anime {
+	title: string;
+	description: string;
+	episodes: number;
+	year: number;
+	airing: boolean;
+	aired: string;
+	duration: string;
+	rating: number;
+	season: 'summer' | 'spring' | 'winter';
+	status: 'FinishedAiring' | 'onGoing';
+	image: string;
+}
+
+export type Theme = 'light' | 'dark';
 
 export interface UserType {
 	readonly _id: string;

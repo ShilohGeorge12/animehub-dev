@@ -1,0 +1,30 @@
+###
+PATCH http://localhost:5053/api/users/64822c6f8e8c9f00ff9270d8/theme
+Content-Type: application/json
+
+{
+  "theme": "dark"
+}
+
+###
+GET http://localhost:5053/api/users
+
+###
+GET http://localhost:5053/api/users/64822c6f8e8c9f00ff9270d8
+
+###
+PUT http://localhost:5053/api/users/64822c6f8e8c9f00ff9270d8
+Content-Type: application/json
+
+{
+  "password": "shilohG@animehub",
+  "email": "shshsh@gmail.com",
+  "username": "George Shiloh",
+  "image": "image.png"
+}
+
+###
+GET http://localhost:5053/api/users/64822c6f8e8c9f00ff9270d8/6481c8cf71a6aa8e40904977
+
+###
+GET http://localhost:5053/api/users/6482e20b9bf238ac8bf74e2c/6481c8cf71a6aa8e40904977

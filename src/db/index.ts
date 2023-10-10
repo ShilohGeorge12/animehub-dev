@@ -1,16 +1,18 @@
 // db.ts
 import mongoose, { Connection, Model, Schema } from 'mongoose';
 import { env } from '@/env';
-import { carType } from '@/types';
+import { User, Anime } from '@/types';
 
 class Database {
 	private static instance: Database;
 	private connection!: Connection;
-	private carModel: Model<carType>;
+	private animeModel: Model<Anime>;
+	private userModel: Model<User>;
 
 	private constructor() {
 		this.connect();
-		this.carModel = this.createCarModel();
+		this.animeModel = this.createAnimeModel();
+		this.userModel = this.createUserModel();
 	}
 
 	private connect() {
@@ -29,55 +31,120 @@ class Database {
 		});
 	}
 
-	private createCarModel(): Model<carType> {
-		const carSchema = new Schema<carType>({
+	private createAnimeModel(): Model<Anime> {
+		const AnimeSchema = new Schema<Anime>({
 			title: {
 				type: String,
-				required: [true, 'title is Required!'],
-				minlength: 1,
+				minlength: 2,
+				required: true,
 			},
-			mileage: {
-				type: Number,
-				required: [true, 'Price is Required!'],
-				minlength: 1,
-			},
-			price: {
-				type: Number,
-				required: [true, 'Price is Required!'],
-				min: 4,
-			},
-			src: {
-				type: [String],
-				required: [true, 'images is required for car identification'],
-			},
-			vehicleReg: {
+			description: {
 				type: String,
-				minlength: 8,
-				required: [true, 'vehicleReg is Required'],
+				minlength: 2,
+				required: true,
+			},
+			episodes: {
+				type: Number,
+				min: 1,
+				required: true,
+			},
+			year: {
+				type: Number,
+				min: 4,
+				max: 4,
+				required: true,
+			},
+			airing: {
+				type: Boolean,
+				required: true,
+			},
+			aired: {
+				type: String,
+				minlength: 1,
+				required: true,
+			},
+			duration: {
+				type: String,
+				minlength: 2,
+				required: true,
+			},
+			rating: {
+				type: Number,
+				required: true,
+			},
+			season: {
+				type: String,
+				enum: ['summer', 'spring', 'winter'],
+				required: true,
 			},
 			status: {
 				type: String,
-				minlength: 1,
-				default: 'In Good Condition',
+				enum: ['FinishedAiring', 'onGoing'],
+				required: true,
 			},
-			make: {
+			image: {
+				type: String,
+				default: 'null',
+				required: [true, 'Image is required'],
+			},
+		});
+
+		return this.connection.model<Anime>('animes', AnimeSchema);
+	}
+
+	private createUserModel(): Model<User> {
+		const UserSchema = new Schema<User>({
+			username: {
 				type: String,
 				minlength: 2,
-				required: [true, 'vehicleMake is Required'],
+				required: [true, 'Username can not be empty'],
 			},
-			model: {
+			email: {
 				type: String,
-				minlength: 4,
-				maxlength: 4,
-				required: [true, 'model year is Required'],
+				minlength: 18,
+				maxlength: 40,
+				required: true,
+				unique: true,
+			},
+			password: {
+				type: String,
+				minlength: 20,
+				required: [true, 'Password Can not be empty'],
+			},
+			gender: {
+				type: String,
+				enum: ['male', 'female'],
+				required: [true, 'gender is required'],
+			},
+			image: {
+				type: String,
+				required: [true, 'Image is required'],
+			},
+			animes: {
+				default: [],
+				type: [{ type: Schema.Types.ObjectId, ref: 'animes' }],
+			},
+			role: {
+				type: String,
+				enum: ['BASIC', 'PREMIUM'],
+				default: 'BASIC',
+			},
+			theme: {
+				type: String,
+				enum: ['light', 'dark'],
+				default: 'light',
+			},
+			authkey: {
+				type: String,
+				max: 400,
+				default: 'null',
 			},
 			createdAt: {
 				type: Date,
 				default: () => new Date(),
 			},
 		});
-
-		return this.connection.model<carType>('cars', carSchema);
+		return this.connection.model<User>('users', UserSchema);
 	}
 
 	public static getInstance() {
@@ -87,9 +154,13 @@ class Database {
 		return Database.instance;
 	}
 
-	public getCarModel(): Model<carType> {
-		return this.carModel;
+	public getAnimeModel(): Model<Anime> {
+		return this.animeModel;
+	}
+
+	public getUserModel(): Model<User> {
+		return this.userModel;
 	}
 }
 
-export const DB = Database.getInstance();
+export const MongoDB = Database.getInstance();

@@ -12,7 +12,7 @@ export default function Nav() {
 	const { push } = useRouter();
 	const {
 		state: { loggedIn },
-		dispatch,
+		// dispatch,
 	} = useMyContext();
 	const classes = {
 		navBtnClasses: 'group relative text-white flex items-center justify-center',

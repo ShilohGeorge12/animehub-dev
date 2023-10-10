@@ -1,46 +1,77 @@
-// import type { carType } from '../../types';
-import z from 'zod';
+import {
+	animeReturnType,
+	authReturnType,
+	patchReturnType,
+	updateUserReturnType,
+	userReturnType,
+	validateAnimesReturnType,
+	validateAuthReturnType,
+	validatePatchReturnType,
+	validateUpdateUserType,
+	validateUsersReturnType,
+} from '@/types';
+import joi from 'joi';
 
-export const validateCar = z.object({
-	src: z.array(z.string()),
-	title: z.string().refine((value) => /^[a-zA-Z0-9\s]{2,30}$/.test(value), {
-		message: 'Car title must be 2 to 30 characters and may contain only letters, numbers, and spaces.',
-	}),
-	price: z
-		.string()
-		.min(2)
-		.refine((value) => /^0-9$/.test(value), {
-			message: 'Price Must be a valid price with 0-9 digits',
-		}),
-	mileage: z
-		.string()
-		.min(2)
-		.refine((value) => /^0-9$/.test(value), {
-			message: 'Mileage Must be a vaild number betwwen 0-9.',
-		}),
-	vehicleReg: z
-		.string()
-		.min(2)
-		.refine((value) => /^[a-zA-Z0-9\s]{9}$/.test(value), {
-			message: 'Vehicle registration number must be exactly 9 characters and may only contain letters, numbers, and spaces.',
-		}),
-	make: z
-		.string()
-		.min(2)
-		.refine((value) => /^[a-zA-Z\s]{2,}$/.test(value), {
-			message: 'Vehicle Make must be at least 2 characters and may only contain letters and spaces.',
-		}),
-	model: z
-		.string()
-		.min(4)
-		.max(4)
-		.refine((value) => /^[0-9]{4}$/.test(value), {
-			message: '`year` Must be a valid Calender Year',
-		}),
-	status: z
-		.string()
-		.min(1)
-		.refine((value) => /^[0-9]{11}$/.test(value), {
-			message: 'Faults/Missing Parts .',
-		}),
-});
+export function validateUsers(schema: unknown): validateUsersReturnType {
+	const userSchema = joi.object<userReturnType>({
+		username: joi.string().min(2).required(),
+		email: joi.string().email().required(),
+		password: joi.string().min(2).required(),
+		role: joi.string().valid('BASIC', 'PREMIUM'),
+		theme: joi.string().valid('light', 'dark'),
+		image: joi
+			.string()
+			.min(2)
+			.regex(/^[a-zA-Z_\-0-9.]{2,}$/),
+		gender: joi.string().valid('male', 'female'),
+	});
+	return userSchema.validate(schema, { abortEarly: false });
+}
+export function validateUpdateUser(schema: unknown): validateUpdateUserType {
+	const userSchema = joi.object<updateUserReturnType>({
+		username: joi.string().min(2).max(25),
+		email: joi.string().email().max(30),
+		password: joi.string().min(2).max(24),
+		image: joi
+			.string()
+			.min(2)
+			.regex(/^[a-zA-Z_\-0-9.]{2,}$/),
+	});
+	return userSchema.validate(schema, { abortEarly: false });
+}
+
+export function validateAnimes(schema: unknown): validateAnimesReturnType {
+	const animeSchema = joi.object<animeReturnType>({
+		title: joi.string().required(),
+		description: joi.string().required(),
+		episodes: joi.number().required(),
+		year: joi.number().required(),
+		airing: joi.boolean().required(),
+		aired: joi.string().required(),
+		duration: joi.string().required(),
+		rating: joi.number().required(),
+		image: joi
+			.string()
+			.min(2)
+			.regex(/^[a-zA-Z_\-0-9.]{2,}$/),
+		season: joi.string().valid('summer', 'spring', 'winter').required(),
+		status: joi.string().valid('FinishedAiring', 'onGoing').required(),
+	});
+	return animeSchema.validate(schema, { abortEarly: false });
+}
+
+export function validateAuth(schema: unknown): validateAuthReturnType {
+	const userSchema = joi.object<authReturnType>({
+		username: joi.string().min(2).required(),
+		email: joi.string().email().required(),
+		password: joi.string().min(2).required(),
+	});
+	return userSchema.validate(schema, { abortEarly: false });
+}
+
+export function validatePatch(schema: unknown): validatePatchReturnType {
+	const userSchema = joi.object<patchReturnType>({
+		theme: joi.string().valid('light', 'dark'),
+	});
+	return userSchema.validate(schema, { abortEarly: false });
+}
