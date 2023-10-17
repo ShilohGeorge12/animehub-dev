@@ -99,7 +99,7 @@ interface StatusType {
 	readonly status: string;
 }
 
-type AuthStatusType = { readonly authStatus: 'jwt expired'; readonly user: {} } | { readonly authStatus: 'Still Valid'; readonly user: UserType };
+type AuthStatusType = { readonly authStatus: 'invalid token'; readonly user: {} } | { readonly authStatus: 'Still Valid'; readonly user: UserType };
 
 export type responseTypes = UserType | AnimeType | AnimeType[] | paginatedAnimes | searchResult | StatusType | ErrorType | AuthStatusType;
 
@@ -161,3 +161,10 @@ interface ToastOptions2 {
 	position: 'top-right' | 'top-center' | 'top-left' | 'bottom-right' | 'bottom-center' | 'bottom-left';
 }
 export type ToastType = (context: string | string[], options: ToastOptions2) => void;
+
+interface JwtPayload {
+	token: string;
+	exp: number;
+}
+
+export const isJWTPayload = (arg: unknown): arg is JwtPayload => (arg as JwtPayload).exp !== undefined;

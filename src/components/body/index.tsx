@@ -3,11 +3,13 @@
 import { useMyContext } from '@/context';
 import { NextFont } from 'next/dist/compiled/@next/font';
 import { ReactNode, useEffect } from 'react';
-import { Toaster } from 'sonner';
+import { Toaster, toast } from 'sonner';
 import Image from 'next/image';
 import Header from '../header';
 import Nav from '../navBar';
 import { HelmetProvider } from 'react-helmet-async';
+import { isAuthStatus, responseTypes } from '@/types';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Body({ inter, children }: { inter: NextFont; children: ReactNode }) {
 	const luffyFull = '/bg/luffy-sun-god.webp';
@@ -18,7 +20,42 @@ export default function Body({ inter, children }: { inter: NextFont; children: R
 			theme,
 			user: { theme: userTheme },
 		},
+		dispatch,
 	} = useMyContext();
+	const { push } = useRouter();
+	const path = usePathname();
+
+	useEffect(() => {
+		const promise = async () => {
+			const req = await fetch('/api/verify-session');
+			return (await req.json()) as unknown as responseTypes;
+		};
+
+		toast.promise(promise, {
+			loading: 'verifying session....',
+			error: (error: Error) => error.message,
+			success(data) {
+				if (isAuthStatus(data)) {
+					if (data.authStatus === 'invalid token') {
+						dispatch({ type: 'logOut', payload: { isloggedIn: false } });
+						push('/login');
+						return `your session has expired, Please Sign In`;
+					}
+
+					if (data.authStatus === 'Still Valid') {
+						console.log(data.user, path);
+						dispatch({ type: 'logIn', payload: { isloggedIn: true, user: data.user } });
+						if (path === '/login') {
+							push('/');
+							return `your session is ${data.authStatus}`;
+						}
+						return `your session is ${data.authStatus}`;
+					}
+				}
+				return 'Field to verify Your Session';
+			},
+		});
+	}, []);
 
 	const imageSrc = () => {
 		if (loggedIn) return userTheme === 'light' ? luffyFull : itachi1024;

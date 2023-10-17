@@ -4,15 +4,18 @@ import { useMyContext } from '@/context';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaHome, FaUser, FaUnlock, FaLock } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
-import { UrlPath } from '@/types';
+import { UrlPath, responseTypes } from '@/types';
 import { LogInOrOutBtn, NavBtn } from '../button';
 import { toast } from 'sonner';
 
 export default function Nav() {
 	const { push } = useRouter();
 	const {
-		state: { loggedIn },
-		// dispatch,
+		state: {
+			loggedIn,
+			user: { email, username, password },
+		},
+		dispatch,
 	} = useMyContext();
 	const classes = {
 		navBtnClasses: 'group relative text-white flex items-center justify-center',
@@ -32,14 +35,28 @@ export default function Nav() {
 			push('/login');
 			return;
 		}
-		// const response = await useFetch('logOut', 'GET', 'no-store');
-		// if ('error' in response) {
-		// 	const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
-		// 	toast.error(errorMessage);
-		// 	return;
-		// }
+		const promise = async () => {
+			const req = await fetch('/api/logout', {
+				method: 'POST',
+				body: JSON.stringify({ username, password, email }),
+			});
 
-		// dispatch({ type: 'logOut', payload: { logOut: false } });
+			return (await req.json()) as unknown as responseTypes;
+		};
+
+		toast.promise(promise, {
+			loading: 'Signing User Out...',
+			success(response) {
+				if ('error' in response) {
+					const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
+					return errorMessage;
+				}
+
+				dispatch({ type: 'logOut', payload: { isloggedIn: false } });
+				return `user ${username} is successfully signed out.`;
+			},
+			error: (error: Error) => error.message,
+		});
 	};
 	return (
 		<nav className={`h-16 p-2 w-3/4 md:w-2/4 mx-auto flex items-center justify-around bg-pink-500 dark:bg-pink-600 rounded-2xl z-10`}>

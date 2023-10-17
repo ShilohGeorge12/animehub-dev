@@ -45,7 +45,7 @@ export default function Header() {
 					Value={IsTheme()}
 				/>
 				<Image
-					src={loggedIn ? image : '/others/user2.png'}
+					src={loggedIn ? `/others/${image}` : '/others/user2.png'}
 					alt='profile'
 					title={`${username} Image` ?? 'profileImage'}
 					className='object-center w-10 md:w-12 rounded-2xl'

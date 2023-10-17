@@ -21,7 +21,7 @@ export default function Login() {
 	const { push } = useRouter();
 	const usernameRegex = /^[a-zA-Z_-]{2,}$/;
 	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
-	const passwordRegex = /^[a-zA-Z@_-]{6,12}$/;
+	const passwordRegex = /^[a-zA-Z@_-]{6,24}$/;
 
 	const onViewPasword = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -56,11 +56,12 @@ export default function Login() {
 		}
 
 		if (!passwordRegex.test(password)) {
-			setErrorMessage((prev) => [...prev, `Password must be 6-12 characters long and can only contain letters, @, _, or -.`]);
+			setErrorMessage((prev) => [...prev, `Password must be 6-24 characters long and can only contain letters, @, _, or -.`]);
 			hasError = true;
 		}
 
 		if (hasError) return;
+		setStatus('fetching');
 
 		const promise = async () => {
 			const req = await fetch('/api/login', {
@@ -75,11 +76,14 @@ export default function Login() {
 			loading: 'sending login credencials...',
 			success: (data: responseTypes) => {
 				if ('error' in data) {
+					setStatus('idle');
 					return data.error;
 				}
 
 				if (isUser(data)) {
+					setStatus('idle');
 					dispatch({ type: 'logIn', payload: { isloggedIn: true, user: data } });
+					push('/');
 					return `${data.username} login was successfully`;
 				}
 
@@ -153,7 +157,7 @@ export default function Login() {
 					</div>
 
 					<button
-						disabled={status ? false : true}
+						disabled={status === 'idle' ? false : true}
 						className={`flex ${
 							status === 'fetching' ? 'items-center gap-2' : ''
 						} p-2 bg-pink-500 rounded-xl text-xl font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}

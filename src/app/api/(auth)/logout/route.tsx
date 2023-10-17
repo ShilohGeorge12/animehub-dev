@@ -35,9 +35,23 @@ export const POST = async (req: NextRequest) => {
 		});
 
 		return new Response(JSON.stringify({ status: 'logout' }), { status: 200, headers: { 'Set-Cookie': serialized } });
+		// } catch (error) {
+		// 	if (error instanceof Error) {
+		// 		console.log(error);
+		// 		return NextResponse.json(error.message, { status: 500 });
+		// 	}
+		// }
 	} catch (error) {
+		if (error instanceof Error && error.name === 'TokenExpiredError') {
+			return NextResponse.json({ authStatus: error.message, user: {} }, { status: 400 });
+		}
+
+		if (error instanceof Error && error.name === 'JsonWebTokenError') {
+			return NextResponse.json({ authStatus: 'invalid token', user: {} }, { status: 401 });
+		}
+
+		console.log(error);
 		if (error instanceof Error) {
-			console.log(error);
 			return NextResponse.json(error.message, { status: 500 });
 		}
 	}
