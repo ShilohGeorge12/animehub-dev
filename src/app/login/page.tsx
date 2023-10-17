@@ -1,4 +1,6 @@
 'use client';
+import { useMyContext } from '@/context';
+import { isUser, responseTypes } from '@/types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState, MouseEvent, ChangeEvent } from 'react';
@@ -11,6 +13,7 @@ export default function Login() {
 		password: '',
 		email: '',
 	};
+	const { dispatch } = useMyContext();
 	const [errorMessage, setErrorMessage] = useState<string[]>([]);
 	const [viewPasword, setViewPasword] = useState<boolean>(true);
 	const [details, setDetails] = useState<typeof initState>(initState);
@@ -59,11 +62,29 @@ export default function Login() {
 
 		if (hasError) return;
 
-		const promise = () => new Promise((resolve) => setTimeout(() => resolve(JSON.stringify(details)), 4000));
+		const promise = async () => {
+			const req = await fetch('/api/login', {
+				method: 'POST',
+				body: JSON.stringify(details),
+			});
+			const res = (await req.json()) as unknown as responseTypes;
+			return res;
+		};
 
 		toast.promise(promise, {
-			loading: 'Loading...',
-			success: (data) => `${data}`,
+			loading: 'sending login credencials...',
+			success: (data: responseTypes) => {
+				if ('error' in data) {
+					return data.error;
+				}
+
+				if (isUser(data)) {
+					dispatch({ type: 'logIn', payload: { isloggedIn: true, user: data } });
+					return `${data.username} login was successfully`;
+				}
+
+				return 'login failed!';
+			},
 			error: (error: Error) => error.message,
 		});
 	};
@@ -149,7 +170,11 @@ export default function Login() {
 			{errorMessage.length > 0 && (
 				<div className='flex flex-col gap-2 w-[60%] h-40 rounded-lg mt-3 bg-black/70 text-white p-3 items-center'>
 					{errorMessage.map((error) => (
-						<p className='text-base font-semibold tracking-wider'>{error}</p>
+						<p
+							className='text-base font-semibold tracking-wider'
+							key={error}>
+							{error}
+						</p>
 					))}
 				</div>
 			)}
