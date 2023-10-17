@@ -37,7 +37,7 @@ export function ThemeBtn({ name, onClick, Value }: Omit<ButtonProps, 'size' | 'm
 			type='button'
 			name={name}
 			aria-label={name}
-			className={`p-1 md:p-2 bg-pink-500 text-white text-2xl rounded-xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 dark:hover:bg-white dark:hover:text-pink-500`}
+			className={`p-1 md:p-2 bg-pink-500 text-white text-2xl rounded-xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:bg-white hover:text-pink-500`}
 			onClick={onClick}
 			disabled={isDisabled()}>
 			{typeof Value === 'string' ? Value : <Value />}

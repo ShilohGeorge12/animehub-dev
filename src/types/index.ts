@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction } from 'react';
 import { IconType } from 'react-icons';
 import { ValidationResult } from 'joi';
 
+export const MAX_AGE = 800000;
+export const COOKIE_NAME = 'key';
 export type animeReturnType = Anime;
 export type userReturnType = Omit<User, 'animes' | 'authkey' | 'createdAt'>;
 export type authReturnType = Pick<User, 'username' | 'email' | 'password'>;

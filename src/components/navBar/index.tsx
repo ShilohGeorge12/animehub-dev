@@ -27,20 +27,20 @@ export default function Nav() {
 		}
 		return '';
 	}; // check for other scenerios
-	// const onClick = async () => {
-	// 	if (!loggedIn) {
-	// 		push('/login');
-	// 		return;
-	// 	}
-	// 	const response = await useFetch('logOut', 'GET', 'no-store');
-	// 	if ('error' in response) {
-	// 		const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
-	// 		toast.error(errorMessage);
-	// 		return;
-	// 	}
+	const onClick = async () => {
+		if (!loggedIn) {
+			push('/login');
+			return;
+		}
+		// const response = await useFetch('logOut', 'GET', 'no-store');
+		// if ('error' in response) {
+		// 	const errorMessage = Array.isArray(response.error) ? response.error.join('\n') : response.error;
+		// 	toast.error(errorMessage);
+		// 	return;
+		// }
 
-	// 	dispatch({ type: 'logOut', payload: { logOut: false } });
-	// };
+		// dispatch({ type: 'logOut', payload: { logOut: false } });
+	};
 	return (
 		<nav className={`h-16 p-2 w-3/4 md:w-2/4 mx-auto flex items-center justify-around bg-pink-500 dark:bg-pink-600 rounded-2xl z-10`}>
 			<div className={classes.navBtnClasses}>
@@ -85,8 +85,8 @@ export default function Nav() {
 				<LogInOrOutBtn
 					name='log In-Or-Out'
 					Value={loggedIn ? FaUnlock : FaLock}
-					// onClick={onClick}
-					onClick={() => toast('onClick', { description: 'You Clicked OnClick' })}
+					onClick={onClick}
+					// onClick={() => toast('onClick', { description: 'You Clicked OnClick' })}
 				/>
 			</div>
 		</nav>

@@ -28,3 +28,23 @@ GET http://localhost:5053/api/users/64822c6f8e8c9f00ff9270d8/6481c8cf71a6aa8e409
 
 ###
 GET http://localhost:5053/api/users/6482e20b9bf238ac8bf74e2c/6481c8cf71a6aa8e40904977
+
+###
+POST http://localhost:5053/api/login
+Content-Type: application/json
+
+{
+  "username": "Guest",
+  "email": "guest@animehub.dev",
+  "password": "guest@animehub"
+}
+
+###
+POST http://localhost:5053/api/logout
+Content-Type: application/json
+
+{
+  "username": "Guest",
+  "email": "guest@animehub.dev",
+  "password": "guest@animehub"
+}
