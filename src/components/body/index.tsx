@@ -8,8 +8,8 @@ import Image from 'next/image';
 import Header from '../header';
 import Nav from '../navBar';
 import { HelmetProvider } from 'react-helmet-async';
-import { isAuthStatus, responseTypes } from '@/types';
-import { usePathname, useRouter } from 'next/navigation';
+import { isAuthStatus, isUser, responseTypes } from '@/types';
+// import { usePathname, useRouter } from 'next/navigation';
 
 export default function Body({ inter, children }: { inter: NextFont; children: ReactNode }) {
 	const luffyFull = '/bg/luffy-sun-god.webp';
@@ -22,40 +22,42 @@ export default function Body({ inter, children }: { inter: NextFont; children: R
 		},
 		dispatch,
 	} = useMyContext();
-	const { push } = useRouter();
-	const path = usePathname();
 
-	useEffect(() => {
-		const promise = async () => {
-			const req = await fetch('/api/verify-session');
-			return (await req.json()) as unknown as responseTypes;
-		};
+	// useEffect(() => {
+	// 	const promise = async () => {
+	// 		const loginDetails = {
+	// 			username: 'Guest',
+	// 			password: 'guest@animehub',
+	// 			email: 'guest@animehub.dev',
+	// 		};
+	// 		const req = await fetch('/api/login', {
+	// 			method: 'POST',
+	// 			body: JSON.stringify(loginDetails),
+	// 		});
+	// 		const res = (await req.json()) as unknown as responseTypes;
+	// 		return res;
+	// 	};
+	// 	if (loggedIn === false) {
+	// 		console.log('auto login system');
 
-		toast.promise(promise, {
-			loading: 'verifying session....',
-			error: (error: Error) => error.message,
-			success(data) {
-				if (isAuthStatus(data)) {
-					if (data.authStatus === 'invalid token') {
-						dispatch({ type: 'logOut', payload: { isloggedIn: false } });
-						push('/login');
-						return `your session has expired, Please Sign In`;
-					}
+	// 		toast.promise(promise, {
+	// 			loading: 'sending login credencials...',
+	// 			success: (data: responseTypes) => {
+	// 				if ('error' in data) {
+	// 					return data.error;
+	// 				}
 
-					if (data.authStatus === 'Still Valid') {
-						console.log(data.user, path);
-						dispatch({ type: 'logIn', payload: { isloggedIn: true, user: data.user } });
-						if (path === '/login') {
-							push('/');
-							return `your session is ${data.authStatus}`;
-						}
-						return `your session is ${data.authStatus}`;
-					}
-				}
-				return 'Field to verify Your Session';
-			},
-		});
-	}, []);
+	// 				if (isUser(data)) {
+	// 					dispatch({ type: 'logIn', payload: { isloggedIn: true, user: data } });
+	// 					return `${data.username} login was successfully`;
+	// 				}
+
+	// 				return 'login failed!';
+	// 			},
+	// 			error: (error: Error) => error.message,
+	// 		});
+	// 	}
+	// }, []);
 
 	const imageSrc = () => {
 		if (loggedIn) return userTheme === 'light' ? luffyFull : itachi1024;

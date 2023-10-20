@@ -1,11 +1,10 @@
 'use client';
 import { useContext, useReducer, createContext, ReactNode } from 'react';
 import { State, ReducerType, stateAction } from '../types';
-// import { useFetch } from '../hooks/fetch';
 // import { toast } from 'sonner';
 
 const initState: State = {
-	theme: 'dark',
+	theme: 'light',
 	loggedIn: false,
 	user: {
 		_id: '',

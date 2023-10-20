@@ -136,7 +136,7 @@ class Database {
 			},
 			authkey: {
 				type: String,
-				max: 400,
+				// max: 400,
 				default: 'null',
 			},
 			createdAt: {

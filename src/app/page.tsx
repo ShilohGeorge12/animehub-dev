@@ -1,34 +1,4 @@
-// import Image from 'next/image'
 import { HomeContent } from '@/components/homeContent';
-import { MongoDB } from '@/db';
-import { COOKIE_NAME, MAX_AGE } from '@/types';
-import { serialize } from 'cookie';
-import { redirect } from 'next/navigation';
-import Jwt from 'jsonwebtoken';
-import { env } from '@/env';
-
-const login = async () => {
-	const loginDetails = {
-		username: 'Guest',
-		password: 'guest@animehub',
-		email: 'guest@animehub.dev',
-	};
-	const { email, username } = loginDetails;
-	const user = await MongoDB.getUserModel().findOne({ username, email }).select('-password -__v');
-	if (!user) {
-		redirect('/login');
-	}
-	const secret = env.SECRET;
-	try {
-		const storedToken = Jwt.verify(user.authkey, secret);
-		console.log(user.authkey);
-	} catch (error) {
-		if (error && error instanceof Error && error.name === 'TokenExpiredError') {
-			// res.status(401).json({ authStatus: error.message, user: {} });
-			redirect('/login');
-		}
-	}
-};
 
 export default async function Home() {
 	return (
@@ -92,40 +62,3 @@ export default async function Home() {
 		</section>
 	);
 }
-
-// const handleLogin = async ({email, password, username}: { username: string, email: string, password: string }) => {
-
-// 	const user = await MongoDB.getUserModel().findOne({ email, username }).select('-__v -authkey').populate('animes', '-__v');
-
-// 		if (!user) {
-// 			// return NextResponse.json({ error: `User with email ${email} was not found!` }, { status: 404 });
-// 		}
-
-// 		const result = await bcrypt.compare(password, user.password);
-// 		if (!result) {
-// 			return NextResponse.json({ error: 'Password is In-Correct!' }, { status: 400 });
-// 		}
-
-// 		const details: Omit<User, 'password' | 'authkey'> & { _id: Types.ObjectId } = {
-// 			_id: user._id,
-// 			username,
-// 			email,
-// 			gender: user.gender,
-// 			image: user.image,
-// 			animes: user.animes,
-// 			role: user.role,
-// 			theme: user.theme,
-// 			createdAt: user.createdAt,
-// 		};
-
-// 		const sercret = env.SECRET;
-// 		const signedJwt = Jwt.sign({ token: email }, sercret, { expiresIn: MAX_AGE });
-// 		user.authkey = signedJwt;
-// 		await user.save();
-
-// 		const serialized = serialize(COOKIE_NAME, signedJwt, {
-// 			httpOnly: true,
-// 			maxAge: MAX_AGE,
-// 			path: '/',
-// 		});
-// };

@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { IconType } from 'react-icons';
 import { ValidationResult } from 'joi';
 
-export const MAX_AGE = 800000;
+export const MAX_AGE = 30 * 60;
 export const COOKIE_NAME = 'key';
 export type animeReturnType = Anime;
 export type userReturnType = Omit<User, 'animes' | 'authkey' | 'createdAt'>;
@@ -148,9 +148,8 @@ interface PaginationOptions {
 	limitPerPage: number;
 	totalAnimes: number;
 	setAnimes: Dispatch<SetStateAction<AnimeType[]>>;
-	setLimitPerPage: Dispatch<SetStateAction<number>>;
 	setTotalAnimes: Dispatch<SetStateAction<number>>;
-	setIsSuccess: Dispatch<SetStateAction<boolean>>;
+	// setIsFetching: Dispatch<SetStateAction<'fetching' | 'idle'>>;
 }
 export type PaginationType = (options: PaginationOptions) => [() => JSX.Element, AnimeType[]];
 
@@ -163,8 +162,23 @@ interface ToastOptions2 {
 export type ToastType = (context: string | string[], options: ToastOptions2) => void;
 
 interface JwtPayload {
-	token: string;
-	exp: number;
+	jti: string;
+	iat: number;
+	// token: string;
+	// exp: number;
 }
 
-export const isJWTPayload = (arg: unknown): arg is JwtPayload => (arg as JwtPayload).exp !== undefined;
+export const isJWTPayload = (arg: unknown): arg is JwtPayload => (arg as JwtPayload).iat !== undefined && (arg as JwtPayload).jti !== undefined;
+
+export type Prettify<T> = {
+	[K in keyof T]: T[K];
+} & {};
+
+export type verifyLoginReturnType =
+	| (Omit<User, 'authkey' | 'password'> & {
+			_id: Types.ObjectId;
+	  })
+	| {
+			error: string;
+			status: 400 | 404;
+	  };
