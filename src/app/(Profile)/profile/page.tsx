@@ -1,10 +1,9 @@
-'use client';
+import { ProfileContent } from '@/components/profileContent';
 
 export default function Profile() {
 	return (
-		<section className={`grid w-full h-full grid-cols-1 md:grid-cols-4`}>
-			<div className=''></div>
-			<div className=''></div>
+		<section className={`grid w-full h-full grid-cols-1 md:grid-cols-4 overflow-y-scroll`}>
+			<ProfileContent />
 		</section>
 	);
 }

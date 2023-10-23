@@ -36,7 +36,6 @@ const reducer: ReducerType = (state, action) => {
 		case 'userTheme':
 			return { ...state, user: { ...state.user, theme: action.payload.userTheme } };
 		case 'logIn':
-			console.log(action.payload.user);
 			return { ...state, loggedIn: action.payload.isloggedIn, user: action.payload.user };
 		case 'logOut':
 			return { ...state, loggedIn: action.payload.isloggedIn };

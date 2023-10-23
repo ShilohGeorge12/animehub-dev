@@ -15,11 +15,11 @@ export default function Login() {
 	};
 	const { dispatch } = useMyContext();
 	const [errorMessage, setErrorMessage] = useState<string[]>([]);
-	const [viewPasword, setViewPasword] = useState<boolean>(true);
+	const [viewPasword, setViewPasword] = useState<boolean>(false);
 	const [details, setDetails] = useState<typeof initState>(initState);
 	const [status, setStatus] = useState<'fetching' | 'idle'>('idle');
 	const { push } = useRouter();
-	const usernameRegex = /^[a-zA-Z_-]{2,}$/;
+	const usernameRegex = /^[a-zA-Z\s_-]{2,}$/;
 	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
 	const passwordRegex = /^[a-zA-Z@_-]{6,24}$/;
 

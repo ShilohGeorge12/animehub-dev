@@ -6,7 +6,6 @@ export async function middleware(req: NextRequest) {
 	const cookie = req.cookies.get('key');
 	try {
 		if (req.nextUrl.pathname.includes('/api/animes') || req.nextUrl.pathname.includes('/api/users') || req.nextUrl.pathname.includes('/api/logout')) {
-			console.log(cookie);
 			if (!cookie) return NextResponse.json({ error: 'you are not allowed!' }, { status: 401 });
 			// const secret = process.env.SECRET ? process.env.SECRET : 'null';
 			await verifyAuth(cookie.value).catch((error) => {

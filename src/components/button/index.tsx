@@ -98,7 +98,7 @@ export function LogInOrOutBtn({ name, Value, onClick }: Omit<ButtonProps, 'size'
 		</button>
 	);
 }
-export function ProfilBtn({ name, onClick, Value, size }: ButtonProps) {
+export function ProfilBtn({ name, onClick, Value, size }: Omit<ButtonProps, 'more'>) {
 	let padding: string;
 
 	switch (size) {

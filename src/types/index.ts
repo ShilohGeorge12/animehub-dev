@@ -87,8 +87,8 @@ interface paginatedAnimes {
 }
 
 interface searchResult {
-	results: AnimeType[];
-	totalAnimes: number;
+	q: string;
+	animes: AnimeType[];
 }
 
 interface ErrorType {
@@ -108,8 +108,8 @@ export const isUserAnime = (_arg: (string | AnimeType)[]): _arg is AnimeType[] =
 export const isAnime = (_arg: responseTypes): _arg is AnimeType => (_arg as AnimeType).description !== undefined;
 export const isAnimes = (_arg: responseTypes): _arg is paginatedAnimes => (_arg as paginatedAnimes).animes !== undefined;
 export const isUser = (_arg: responseTypes): _arg is UserType => (_arg as UserType).username !== undefined;
-export const isError = (_arg: unknown): _arg is Error => (_arg as Error).stack !== undefined;
-export const isSearchResult = (_arg: responseTypes): _arg is searchResult => (_arg as searchResult).results !== undefined;
+export const isError = (_arg: responseTypes): _arg is ErrorType => (_arg as ErrorType).error !== undefined;
+export const isSearchResult = (_arg: responseTypes): _arg is searchResult => (_arg as searchResult).animes !== undefined;
 export const isStatus = (arg: responseTypes): arg is StatusType => (arg as StatusType).status !== undefined;
 export const isAuthStatus = (arg: responseTypes): arg is AuthStatusType => {
 	return (arg as AuthStatusType).user !== undefined && (arg as AuthStatusType).authStatus !== undefined;

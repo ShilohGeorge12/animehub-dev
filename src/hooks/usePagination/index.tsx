@@ -1,6 +1,6 @@
 'use client';
 import { useMyContext } from '@/context';
-import { PaginationType, isAnimes, responseTypes } from '@/types';
+import { PaginationType, isAnimes, isAuthStatus, responseTypes } from '@/types';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -22,6 +22,13 @@ export const usePagination: PaginationType = (options) => {
 					push('/login');
 					return;
 				}
+
+				if (isAuthStatus(res) && res.authStatus === 'invalid token') {
+					dispatch({ type: 'logOut', payload: { isloggedIn: false } });
+					push('/login');
+					return;
+				}
+
 				if (isAnimes(res)) {
 					setAnimes(res.animes);
 					setTotalAnimes(res.totalAnimes);

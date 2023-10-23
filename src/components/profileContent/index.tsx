@@ -1,0 +1,105 @@
+'use client';
+
+import Image from 'next/image';
+import { useMyContext } from '@/context';
+import { FaMoon } from 'react-icons/fa';
+import { BiSun } from 'react-icons/bi';
+import { useRouter } from 'next/navigation';
+import { Rating } from '../rating';
+import { AnimeList } from '../animelist';
+import { ProfilBtn } from '../button';
+
+export function ProfileContent() {
+	const { push } = useRouter();
+	const {
+		state: {
+			user: { animes, createdAt, email, gender, image, role, theme: userTheme, username },
+		},
+		dispatch,
+	} = useMyContext();
+	const Joined = new Date(createdAt).toDateString();
+
+	const calculateAverageRating = (ratings: number[]): number => {
+		const sum = ratings.reduce((acc, rating) => acc + rating, 0);
+		const average = sum / ratings.length;
+		return Number(average.toFixed(2));
+	};
+
+	const arr: number[] = [];
+	animes.map((anime) => arr.push(anime.rating));
+	const average: number = calculateAverageRating(arr);
+
+	return (
+		<>
+			<div className='flex flex-col items-center gap-4'>
+				<div className='flex items-center justify-center w-full'>
+					<Image
+						src={`/others/${image}`}
+						title={username}
+						alt={`${username}-profile-image`}
+						loading='lazy'
+						className='w-1/3 mx-auto rounded-md md:w-2/4'
+						width={100}
+						height={100}
+					/>
+				</div>
+				<div className='flex flex-col w-full gap-1 text-center md:text-left md:px-4 dark:text-gray-300'>
+					<p>{username}</p>
+					<p>{email}</p>
+					<p className='capitalize'>{gender}</p>
+					<p>
+						<strong>Joined @</strong> {Joined}
+					</p>
+					<div className='flex items-center justify-center gap-4 md:justify-normal'>
+						<strong>Theme: </strong>
+						{userTheme === 'dark' && (
+							<span className='p-1 text-xl text-white bg-black rounded-lg dark:bg-white dark:text-black'>
+								<FaMoon />
+							</span>
+						)}
+						{userTheme === 'light' && (
+							<span className='text-xl p-[2px] bg-pink-500 text-white rounded-lg'>
+								<BiSun />
+							</span>
+						)}
+					</div>
+
+					{role === 'BASIC' && (
+						<div className='w-2/4 mx-auto mt-1 md:w-full'>
+							<ProfilBtn
+								name={'upgrade to Premium Account!'}
+								size='sm'
+								Value={'upgrade to Premium Account!'}
+								onClick={() => push('/profile/upgrade-to-premuim')}
+							/>
+						</div>
+					)}
+
+					<div className='flex items-center justify-center w-full mx-auto my-2'>
+						<ProfilBtn
+							size={'lg'}
+							name={'Edit Profile'}
+							Value={'Edit Profile'}
+							onClick={() => dispatch({ type: 'editProfileModalOpen', payload: { open: true } })}
+						/>
+					</div>
+				</div>
+			</div>
+			<div className='flex flex-col items-center md:col-span-3'>
+				<div className='w-[98%] border-2 border-pink-500 p-2 rounded-lg relative flex flex-col gap-3'>
+					<p className='absolute px-1 text-white -top-3 left-1 dark:bg-black filter backdrop-blur-sm'>Animes ({animes.length})</p>
+					<ul className='flex flex-col justify-center gap-1 p-1 no-underline list-none'>
+						<li>
+							<Rating rating={average} />
+						</li>
+						<li className='flex items-center gap-4'>
+							<p className='flex justify-self-start'>Avg Rating: </p>
+							<p className='flex justify-self-end'>{average}</p>
+						</li>
+					</ul>
+					<AnimeList animes={animes} />
+				</div>
+			</div>
+		</>
+	);
+}
