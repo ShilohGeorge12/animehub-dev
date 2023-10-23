@@ -21,10 +21,10 @@ export default function Button({}: ButtonProps) {
 	);
 }
 export function ThemeBtn({ name, onClick, Value }: Omit<ButtonProps, 'size' | 'more'>) {
+	const {
+		state: { loggedIn, editProfileModal },
+	} = useMyContext();
 	const isDisabled = () => {
-		const {
-			state: { loggedIn, editProfileModal },
-		} = useMyContext();
 		if (!loggedIn) return true;
 		if (editProfileModal) return true;
 		return false;
@@ -43,10 +43,10 @@ export function ThemeBtn({ name, onClick, Value }: Omit<ButtonProps, 'size' | 'm
 	);
 }
 export function SearchBtn({ name, onClick, Value }: ButtonProps) {
+	const {
+		state: { loggedIn, editProfileModal },
+	} = useMyContext();
 	const isDisabled = () => {
-		const {
-			state: { loggedIn, editProfileModal },
-		} = useMyContext();
 		if (!loggedIn) return true;
 		if (editProfileModal) return true;
 		return false;
@@ -62,10 +62,10 @@ export function SearchBtn({ name, onClick, Value }: ButtonProps) {
 	);
 }
 export function NavBtn({ name, onClick, Value, more }: Omit<ButtonProps, 'size'>) {
+	const {
+		state: { loggedIn, editProfileModal },
+	} = useMyContext();
 	const isDisabled = () => {
-		const {
-			state: { loggedIn, editProfileModal },
-		} = useMyContext();
 		if (!loggedIn) return true;
 		if (editProfileModal) return true;
 		return false;
@@ -83,10 +83,10 @@ export function NavBtn({ name, onClick, Value, more }: Omit<ButtonProps, 'size'>
 	);
 }
 export function VeiwAnimeBtn({ name, onClick, Value }: ButtonProps) {
+	const {
+		state: { loggedIn, editProfileModal },
+	} = useMyContext();
 	const isDisabled = () => {
-		const {
-			state: { loggedIn, editProfileModal },
-		} = useMyContext();
 		if (!loggedIn) return true;
 		if (editProfileModal) return true;
 		return false;
@@ -121,10 +121,10 @@ export function LogInOrOutBtn({ name, Value, onClick }: Omit<ButtonProps, 'size'
 	);
 }
 export function ProfilBtn({ name, onClick, Value, size }: Omit<ButtonProps, 'more'>) {
+	const {
+		state: { loggedIn, editProfileModal },
+	} = useMyContext();
 	const isDisabled = () => {
-		const {
-			state: { loggedIn, editProfileModal },
-		} = useMyContext();
 		if (!loggedIn) return true;
 		if (editProfileModal) return true;
 		return false;
