@@ -4,10 +4,17 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import MetaData from '@/components/metaData';
+import { useLayoutEffect, useState } from 'react';
 
 function NotFound() {
 	const { push } = useRouter();
-	const { origin, pathname } = window.location;
+	const [location, setLocation] = useState<{ origin: string; pathname: string }>({ origin: '', pathname: '' });
+	const { origin, pathname } = location;
+
+	useLayoutEffect(() => {
+		setLocation({ origin: window.location.origin, pathname: window.location.pathname });
+	}, []);
+
 	return (
 		<motion.section
 			className={`flex-1 flex flex-col md:flex-row items-center justify-center gap-8`}
