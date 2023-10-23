@@ -16,12 +16,10 @@ GET http://localhost:5053/api/users/64822c6f8e8c9f00ff9270d8
 ###
 PUT http://localhost:5053/api/users/64822c6f8e8c9f00ff9270d8
 Content-Type: application/json
-
 {
-  "password": "shilohG@animehub",
-  "email": "shshsh@gmail.com",
-  "username": "George Shiloh",
-  "image": "image.png"
+  "username": "Guest",
+  "email": "guest@animehub.dev",
+  "password": "guest@animehub"
 }
 
 ###
@@ -43,7 +41,6 @@ Content-Type: application/json
 ###
 POST http://localhost:5053/api/logout
 Content-Type: application/json
-
 {
   "username": "Guest",
   "email": "guest@animehub.dev",

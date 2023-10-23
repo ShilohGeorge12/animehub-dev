@@ -20,19 +20,31 @@ export default function manifest(): MetadataRoute.Manifest {
 				type: 'image/x-icon',
 			},
 			{
-				src: '/tv-256.png',
-				sizes: '256x256',
+				src: '/tv-32.png',
+				sizes: '32x32',
 				type: 'image/png',
 			},
 			{
-				src: '/tv-512.png',
-				sizes: '512x512',
+				src: '/tv-64.png',
+				sizes: '64x64',
 				type: 'image/png',
 			},
 			{
 				src: '/tv-150.png',
 				sizes: '150x150',
 				type: 'image/png',
+			},
+			{
+				src: '/tv-256.png',
+				sizes: '256x256',
+				type: 'image/png',
+				purpose: 'maskable',
+			},
+			{
+				src: '/tv-512.png',
+				sizes: '512x512',
+				type: 'image/png',
+				purpose: 'maskable',
 			},
 		],
 		protocol_handlers: [

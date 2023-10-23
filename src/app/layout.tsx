@@ -30,6 +30,9 @@ export const metadata: Metadata = {
 			{
 				url: '/tv-32.png',
 			},
+			{
+				url: '/tv-64.png',
+			},
 		],
 	},
 	alternates: { canonical: url },
