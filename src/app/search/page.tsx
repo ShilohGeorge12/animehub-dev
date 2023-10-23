@@ -93,7 +93,7 @@ export default function Search() {
 						</span>
 					</div>
 				)}
-				{fetchStatus === 'idle' && query !== '' && results.length === 0 && <p className='text-3xl'>"{query}" Was Not Found!</p>}
+				{fetchStatus === 'idle' && query !== '' && results.length === 0 && <p className='text-3xl'>&quot;{query}&quot; Was Not Found!</p>}
 			</div>
 		</section>
 	);

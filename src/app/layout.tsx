@@ -39,10 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='en'>
 			<ContextProvider>
-				<Body
-					children={children}
-					inter={inter}
-				/>
+				<Body inter={inter}>{children}</Body>
 			</ContextProvider>
 		</html>
 	);
