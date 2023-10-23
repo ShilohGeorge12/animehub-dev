@@ -8,8 +8,8 @@ import Image from 'next/image';
 import Header from '../header';
 import Nav from '../navBar';
 import { HelmetProvider } from 'react-helmet-async';
-import { isAuthStatus, isUser, responseTypes } from '@/types';
-import { usePathname, useRouter } from 'next/navigation';
+import { isUser, responseTypes } from '@/types';
+import { usePathname } from 'next/navigation';
 
 export default function Body({ inter, children }: { inter: NextFont; children: ReactNode }) {
 	const luffyFull = '/bg/luffy-sun-god.webp';

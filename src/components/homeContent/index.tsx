@@ -4,7 +4,7 @@ import { useMyContext } from '@/context';
 import { usePagination } from '@/hooks/usePagination';
 import { AnimeType, isAnimes, responseTypes } from '@/types';
 import Image from 'next/image';
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { Anime } from '../anime';
 import { useRouter } from 'next/navigation';

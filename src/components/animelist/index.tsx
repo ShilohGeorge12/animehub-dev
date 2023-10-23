@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import { AnimeType } from '../../types';
-import { useMyContext } from '@/context';
 import { useRouter } from 'next/navigation';
 // import Link from 'next/link';
 
