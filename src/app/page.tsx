@@ -1,6 +1,8 @@
 import { HomeContent } from '@/components/homeContent';
+import Link from 'next/link';
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: { page: string | undefined; perpage: string | undefined } }) {
+	console.log({ page: searchParams.page, perpage: searchParams.perpage });
 	return (
 		<section className={`w-full h-full relative`}>
 			<article className='hidden'>
@@ -88,6 +90,11 @@ export default async function Home() {
 				<p>Start your anime adventure today and let us be your trusted companion on this exhilarating journey.</p>
 			</article>
 			<p className='text-2xl font-bold text-center text-white'>All Animes</p>
+			<Link
+				href={'/'}
+				className='text-sm text-white'>
+				Pagination
+			</Link>
 			<HomeContent />
 		</section>
 	);

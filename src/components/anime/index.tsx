@@ -10,7 +10,7 @@ export function Anime({ animes }: AnimeProps) {
 	const { push } = useRouter();
 
 	return (
-		<div className='grid w-full w-xsm:grid-cols-1 h-lg:h-[450px] h-sm:h-[435px] md:h-full h-md:h-[660px] grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-4 place-items-center'>
+		<div className='grid w-full h-[80%] w-xsm:grid-cols-1 h-lg:h-[450px] h-sm:h-[435px] md:h-full h-md:h-[660px] grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-4 place-items-center'>
 			{animes &&
 				Array.isArray(animes) &&
 				animes.map((anime) => (

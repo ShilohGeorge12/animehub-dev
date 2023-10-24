@@ -35,6 +35,12 @@ export const metadata: Metadata = {
 			},
 		],
 	},
+	twitter: {
+		card: 'summary',
+		site: url,
+		creator: 'Shiloh George',
+		images: '/tv-150.png',
+	},
 	alternates: { canonical: url },
 };
 
