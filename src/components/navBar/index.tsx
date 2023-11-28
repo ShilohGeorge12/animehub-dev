@@ -24,12 +24,13 @@ export default function Nav() {
 			'p-3 rounded-2xl transform transition motion-safe:hover:scale-110 hover:-translate-y-1 duration-150 ease-in-out text-2xl hover:bg-white hover:text-pink-500 hover:dark:text-pink-600',
 	};
 	const pathname = usePathname();
-	const isPath = (path: UrlPath) => {
-		if (pathname === path) {
+	const isPath = (path: UrlPath, subPaths: string) => {
+		if (pathname === path || pathname.includes(subPaths)) {
 			return 'bg-white text-pink-500 dark:text-pink-600 hover:shadow-3xl';
 		}
 		return '';
 	}; // check for other scenerios
+
 	const onClick = async () => {
 		if (!loggedIn) {
 			push('/login');
@@ -53,18 +54,20 @@ export default function Nav() {
 				}
 
 				dispatch({ type: 'logOut', payload: { isloggedIn: false } });
+				push('/');
 				return `user ${username} is successfully signed out.`;
 			},
 			error: (error: Error) => error.message,
 		});
 	};
+
 	return (
 		<nav className={`h-16 p-2 w-3/4 md:w-2/4 mx-auto flex items-center justify-around bg-pink-500 dark:bg-pink-600 rounded-2xl z-10`}>
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1`}>Home</p>
 				<NavBtn
 					name={'home'}
-					more={`${isPath('/')}`}
+					more={`${isPath('/', 'anime')}`}
 					onClick={() => push('/')}
 					Value={FaHome}
 				/>
@@ -73,7 +76,7 @@ export default function Nav() {
 				<p className={`${classes.PClassess} left-1`}>Profile</p>
 				<NavBtn
 					name={'profile'}
-					more={`${isPath('/profile')}`}
+					more={`${isPath('/profile', '/profile')}`}
 					onClick={() => push('/profile')}
 					Value={FaUser}
 				/>
@@ -92,7 +95,7 @@ export default function Nav() {
 				<p className={`${classes.PClassess} -left-[2px]`}>Search</p>
 				<NavBtn
 					name={'search'}
-					more={`${isPath('/search')}`}
+					more={`${isPath('/search', 'search')}`}
 					onClick={() => push('/search')}
 					Value={BiSearch}
 				/>

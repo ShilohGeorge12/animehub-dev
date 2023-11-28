@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { FaMoon } from 'react-icons/fa';
 import { BiSun } from 'react-icons/bi';
 import { ThemeBtn } from '../button';
+import Link from 'next/link';
+import { BiUserPlus } from 'react-icons/bi';
 
 export default function Header() {
 	const {
@@ -39,6 +41,17 @@ export default function Header() {
 			</div>
 			<div className=''></div>
 			<div className='flex items-center justify-end gap-4'>
+				<Link
+					className={`hidden md:flex p-2 bg-pink-500 text-white text-md rounded-xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:bg-white hover:text-pink-500`}
+					href={'signup'}>
+					Sign Up
+				</Link>
+				<Link
+					className={`flex md:hidden text-2xl p-1 bg-pink-500 text-white text-md rounded-lg transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:bg-white hover:text-pink-500`}
+					href={'signup'}>
+					<BiUserPlus />
+				</Link>
+
 				<ThemeBtn
 					name='theme'
 					onClick={updateTheme}

@@ -1,17 +1,13 @@
 import { MongoDB } from '@/db';
-import { validateAuth } from '@/db/schema';
+import { validateAuthLogOut } from '@/db/schema';
 import { NextResponse, NextRequest } from 'next/server';
-import bcrypt from 'bcrypt';
-import { env } from '@/env';
-import Jwt from 'jsonwebtoken';
-import { Types } from 'mongoose';
 import { COOKIE_NAME, MAX_AGE, User } from '@/types';
 import { serialize } from 'cookie';
 
 export const POST = async (req: NextRequest) => {
 	try {
 		const body = (await req.json()) as unknown;
-		const { error, value } = validateAuth(body);
+		const { error, value } = validateAuthLogOut(body);
 
 		if (error) {
 			console.log(error);
@@ -35,12 +31,6 @@ export const POST = async (req: NextRequest) => {
 		});
 
 		return new Response(JSON.stringify({ status: 'logout' }), { status: 200, headers: { 'Set-Cookie': serialized } });
-		// } catch (error) {
-		// 	if (error instanceof Error) {
-		// 		console.log(error);
-		// 		return NextResponse.json(error.message, { status: 500 });
-		// 	}
-		// }
 	} catch (error) {
 		if (error instanceof Error && error.name === 'TokenExpiredError') {
 			return NextResponse.json({ authStatus: error.message, user: {} }, { status: 400 });

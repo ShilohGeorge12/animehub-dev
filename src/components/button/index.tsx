@@ -66,7 +66,7 @@ export function NavBtn({ name, onClick, Value, more }: Omit<ButtonProps, 'size'>
 		state: { loggedIn, editProfileModal },
 	} = useMyContext();
 	const isDisabled = () => {
-		if (!loggedIn) return true;
+		if (!loggedIn && name !== 'home') return true;
 		if (editProfileModal) return true;
 		return false;
 	};
@@ -82,7 +82,7 @@ export function NavBtn({ name, onClick, Value, more }: Omit<ButtonProps, 'size'>
 		</button>
 	);
 }
-export function VeiwAnimeBtn({ name, onClick, Value }: ButtonProps) {
+export function VeiwAnimeBtn({ name, onClick, Value }: Pick<ButtonProps, 'name' | 'onClick' | 'Value'>) {
 	const {
 		state: { loggedIn, editProfileModal },
 	} = useMyContext();
@@ -95,7 +95,7 @@ export function VeiwAnimeBtn({ name, onClick, Value }: ButtonProps) {
 		<button
 			type={'button'}
 			name={name}
-			className='p-3 font-semibold text-white transition duration-300 bg-pink-500 w-fit rounded-xl hover:scale-110 hover:shadow-lg'
+			className='p-2 text-3xl font-semibold text-white transition duration-300 ease-in-out bg-pink-500 peer dark:hover:bg-white dark:hover:text-pink-500 w-fit rounded-xl hover:scale-110 hover:shadow-lg'
 			onClick={onClick}
 			disabled={isDisabled()}>
 			{typeof Value === 'string' ? Value : <Value />}

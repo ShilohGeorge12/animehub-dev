@@ -1,10 +1,12 @@
 import {
 	animeReturnType,
+	authLogOutReturnType,
 	authReturnType,
 	patchReturnType,
 	updateUserReturnType,
 	userReturnType,
 	validateAnimesReturnType,
+	validateAuthLogOutReturnType,
 	validateAuthReturnType,
 	validatePatchReturnType,
 	validateUpdateUserType,
@@ -17,13 +19,13 @@ export function validateUsers(schema: unknown): validateUsersReturnType {
 		username: joi.string().min(2).required(),
 		email: joi.string().email().required(),
 		password: joi.string().min(2).required(),
-		role: joi.string().valid('BASIC', 'PREMIUM'),
-		theme: joi.string().valid('light', 'dark'),
-		image: joi
-			.string()
-			.min(2)
-			.regex(/^[a-zA-Z_\-0-9.]{2,}$/),
-		gender: joi.string().valid('male', 'female'),
+		// role: joi.string().valid('BASIC', 'PREMIUM'),
+		// theme: joi.string().valid('light', 'dark'),
+		image: joi.allow(),
+		// .string()
+		// .min(2)
+		// .regex(/^[a-zA-Z_\-0-9.]{2,}$/)
+		gender: joi.string().valid('male', 'female').required(),
 	});
 	return userSchema.validate(schema, { abortEarly: false });
 }
@@ -68,10 +70,32 @@ export function validateAuth(schema: unknown): validateAuthReturnType {
 	});
 	return userSchema.validate(schema, { abortEarly: false });
 }
+export function validateAuthLogOut(schema: unknown): validateAuthLogOutReturnType {
+	const userSchema = joi.object<authLogOutReturnType>({
+		username: joi.string().min(2).required(),
+		email: joi.string().email().required(),
+	});
+	return userSchema.validate(schema, { abortEarly: false });
+}
 
 export function validatePatch(schema: unknown): validatePatchReturnType {
 	const userSchema = joi.object<patchReturnType>({
 		theme: joi.string().valid('light', 'dark'),
 	});
 	return userSchema.validate(schema, { abortEarly: false });
+}
+
+export function validateNewUser(body: FormData) {
+	try {
+		const username = body.get('username');
+		const email = body.get('email');
+		const password = body.get('password');
+		const gender = body.get('gender');
+		const image = body.get('image');
+
+		return {};
+	} catch (error: any) {
+		// if(!error)
+		return { error: error.message };
+	}
 }

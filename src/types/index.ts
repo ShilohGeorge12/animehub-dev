@@ -6,14 +6,16 @@ import { ValidationResult } from 'joi';
 export const MAX_AGE = 30 * 60;
 export const COOKIE_NAME = 'key';
 export type animeReturnType = Anime;
-export type userReturnType = Omit<User, 'animes' | 'authkey' | 'createdAt'>;
+export type userReturnType = Omit<User, 'animes' | 'authkey' | 'createdAt' | 'theme' | 'role'>;
 export type authReturnType = Pick<User, 'username' | 'email' | 'password'>;
+export type authLogOutReturnType = Pick<User, 'username' | 'email'>;
 export type patchReturnType = Pick<User, 'theme'>;
 export type updateUserReturnType = Pick<User, 'password' | 'username' | 'email' | 'image'>;
 
 export type validateAnimesReturnType = ValidationResult<animeReturnType>;
 export type validateUsersReturnType = ValidationResult<userReturnType>;
 export type validateAuthReturnType = ValidationResult<authReturnType>;
+export type validateAuthLogOutReturnType = ValidationResult<authLogOutReturnType>;
 export type validatePatchReturnType = ValidationResult<patchReturnType>;
 export type validateUpdateUserType = ValidationResult<updateUserReturnType>;
 

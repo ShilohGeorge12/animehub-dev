@@ -3,7 +3,7 @@ import { useMyContext } from '@/context';
 import { isUser, responseTypes } from '@/types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState, MouseEvent, ChangeEvent } from 'react';
+import { useState, MouseEvent, ChangeEvent, useLayoutEffect } from 'react';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import { toast } from 'sonner';
 
@@ -13,7 +13,11 @@ export default function Login() {
 		password: '',
 		email: '',
 	};
-	const { dispatch } = useMyContext();
+
+	const {
+		dispatch,
+		state: { loggedIn },
+	} = useMyContext();
 	const [errorMessage, setErrorMessage] = useState<string[]>([]);
 	const [viewPasword, setViewPasword] = useState<boolean>(false);
 	const [details, setDetails] = useState<typeof initState>(initState);
@@ -23,6 +27,11 @@ export default function Login() {
 	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
 	const passwordRegex = /^[a-zA-Z@_-]{6,24}$/;
 
+	useLayoutEffect(() => {
+		if (loggedIn) {
+			dispatch({ type: 'logOut', payload: { isloggedIn: false } });
+		}
+	}, []);
 	const onViewPasword = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		if (viewPasword) {
@@ -64,9 +73,15 @@ export default function Login() {
 		setStatus('fetching');
 
 		const promise = async () => {
+			const body = {
+				username: details.username.trim(),
+				password: details.password.trim(),
+				email: details.email.trim(),
+			};
+
 			const req = await fetch('/api/login', {
 				method: 'POST',
-				body: JSON.stringify(details),
+				body: JSON.stringify(body),
 			});
 			const res = (await req.json()) as unknown as responseTypes;
 			return res;
@@ -77,7 +92,8 @@ export default function Login() {
 			success: (data: responseTypes) => {
 				if ('error' in data) {
 					setStatus('idle');
-					return data.error;
+					throw new Error(typeof data.error === 'string' ? data.error : '');
+					// return data.error;
 				}
 
 				if (isUser(data)) {
