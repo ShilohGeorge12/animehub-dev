@@ -21,7 +21,8 @@ export function validateUsers(schema: unknown): validateUsersReturnType {
 		password: joi.string().min(2).required(),
 		// role: joi.string().valid('BASIC', 'PREMIUM'),
 		// theme: joi.string().valid('light', 'dark'),
-		image: joi.allow(),
+		// image: joi.().required(),
+		image: joi.any().required(),
 		// .string()
 		// .min(2)
 		// .regex(/^[a-zA-Z_\-0-9.]{2,}$/)
@@ -29,6 +30,7 @@ export function validateUsers(schema: unknown): validateUsersReturnType {
 	});
 	return userSchema.validate(schema, { abortEarly: false });
 }
+
 export function validateUpdateUser(schema: unknown): validateUpdateUserType {
 	const userSchema = joi.object<updateUserReturnType>({
 		username: joi.string().min(2).max(25),

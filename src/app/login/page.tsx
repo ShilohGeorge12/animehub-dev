@@ -116,7 +116,7 @@ export default function Login() {
 				description={'Login To animehub.dev'}
 				path={pathname}
 			/> */}
-			<p className='text-4xl font-semibold text-center text-white uppercase'>Log In</p>
+			<p className='text-4xl font-semibold text-center text-white uppercase'>Sign In</p>
 			<div className='w-full md:w-[70%] lg:w-[60%] flex relative items-center justify-center'>
 				<Image
 					src={'/others/log-in-hime.webp'}
@@ -125,10 +125,10 @@ export default function Login() {
 					title='login To Animehub-dev'
 					width={100}
 					height={100}
-					className='hidden w-auto lg:-top-7 md:-top-6 lg:-left-9 md:-left-[41px] md:absolute md:flex lg:h-80 md:h-72'
+					className='hidden w-auto lg:-top-7 md:-top-6 lg:-left-9 md:-left-[41px] md:absolute md:flex lg:h-80 md:h-72 z-10'
 				/>
 				<form
-					className={`bg-black bg-opacity-80 px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
+					className={`bg-black/80 dark:bg-zinc-900/80 backdrop-blur px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
 					autoComplete='off'
 					aria-autocomplete='none'>
 					<input
@@ -178,7 +178,7 @@ export default function Login() {
 							status === 'fetching' ? 'items-center gap-2' : ''
 						} p-2 bg-pink-500 rounded-xl text-xl font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}
 						onClick={onSubmit}>
-						Submit
+						Sign In
 						{status === 'fetching' && (
 							<span className='animate-rotate'>
 								<FaSpinner />

@@ -21,7 +21,7 @@ export default function Nav() {
 		navBtnClasses: 'group relative text-white flex items-center justify-center',
 		PClassess: 'hidden absolute transition delay-1000 duration-300 ease-in-out group-hover:flex -top-7 text-sm text-white font-bold',
 		loginBtnClasses:
-			'p-3 rounded-2xl transform transition motion-safe:hover:scale-110 hover:-translate-y-1 duration-150 ease-in-out text-2xl hover:bg-white hover:text-pink-500 hover:dark:text-pink-600',
+			'p-2 rounded-xl transform transition motion-safe:hover:scale-105 hover:-translate-y-1 duration-150 ease-in-out text-xl hover:bg-white hover:text-pink-500 hover:dark:text-pink-600',
 	};
 	const pathname = usePathname();
 	const isPath = (path: UrlPath, subPaths: string) => {
@@ -62,7 +62,7 @@ export default function Nav() {
 	};
 
 	return (
-		<nav className={`h-16 p-2 w-3/4 md:w-2/4 mx-auto flex items-center justify-around bg-pink-500 dark:bg-pink-600 rounded-2xl z-10`}>
+		<nav className={`h-12 p-2 w-3/4 md:w-2/4 mx-auto flex items-center justify-around bg-pink-500 dark:bg-pink-600 rounded-2xl z-10`}>
 			<div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1`}>Home</p>
 				<NavBtn
@@ -101,7 +101,7 @@ export default function Nav() {
 				/>
 			</div>
 			<div className={classes.navBtnClasses}>
-				<p className={`${classes.PClassess} ${loggedIn ? '-left-[2px]' : 'left-1'}`}>{loggedIn ? 'LogOut' : 'LogIn'}</p>
+				<p className={`${classes.PClassess} ${loggedIn ? '-left-[2px]' : 'left-1'}`}>{loggedIn ? 'SignOut' : 'SignIn'}</p>
 				<LogInOrOutBtn
 					name='log In-Or-Out'
 					Value={loggedIn ? FaUnlock : FaLock}

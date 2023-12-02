@@ -25,7 +25,7 @@ export function ThemeBtn({ name, onClick, Value }: Omit<ButtonProps, 'size' | 'm
 		state: { loggedIn, editProfileModal },
 	} = useMyContext();
 	const isDisabled = () => {
-		if (!loggedIn) return true;
+		// if (!loggedIn) return true;
 		if (editProfileModal) return true;
 		return false;
 	};
@@ -75,7 +75,7 @@ export function NavBtn({ name, onClick, Value, more }: Omit<ButtonProps, 'size'>
 			name={name}
 			aria-label={typeof Value !== 'string' ? name : undefined}
 			type={'button'}
-			className={`p-3 rounded-2xl transform transition motion-safe:hover:scale-110 hover:-translate-y-1 duration-150 ease-in-out text-2xl ${more}`}
+			className={`p-2 rounded-xl transform transition motion-safe:hover:scale-105 hover:-translate-y-1 duration-150 ease-in-out text-xl ${more}`}
 			onClick={onClick}
 			disabled={isDisabled()}>
 			{typeof Value === 'string' ? Value : <Value />}
@@ -112,7 +112,7 @@ export function LogInOrOutBtn({ name, Value, onClick }: Omit<ButtonProps, 'size'
 			aria-label={name}
 			name={name}
 			className={
-				'p-3 rounded-2xl transform transition motion-safe:hover:scale-110 hover:-translate-y-1 duration-150 ease-in-out text-2xl hover:bg-white hover:text-pink-500 hover:dark:text-pink-600'
+				'p-2 rounded-xl transform transition motion-safe:hover:scale-105 hover:-translate-y-1 duration-150 ease-in-out text-xl hover:bg-white hover:text-pink-500 hover:dark:text-pink-600'
 			}
 			onClick={onClick}
 			disabled={editProfileModal ? true : false}>

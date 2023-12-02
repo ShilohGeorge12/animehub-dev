@@ -25,7 +25,9 @@ export default function SignUp() {
 		image: '',
 	};
 
+	const defaultImage = '/others/user2.png';
 	const [details, setdetails] = useState<SignUpUser>(initState);
+	const [selectedImage, setSelectedImage] = useState<{ name: string; url: string }>({ name: 'default', url: defaultImage });
 	const [viewPasword, setViewPasword] = useState<boolean>(false);
 	const [errorMessage, setErrorMessage] = useState<string[]>([]);
 	const [isErrorMsgModalOpen, setIsErrorMsgModalOpen] = useState<boolean>(false);
@@ -44,7 +46,8 @@ export default function SignUp() {
 	};
 	const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, files } = e.target;
-		if (!files) return;
+		if (!files) return; //setSelectedImage(defaultImage);
+		setSelectedImage({ name: files[0].name, url: URL.createObjectURL(files[0]) });
 		setdetails((prev) => ({ ...prev, [name]: files[0] }));
 	};
 
@@ -123,9 +126,9 @@ export default function SignUp() {
 			return;
 		}
 		console.log(res);
-		// setdetails(initState);
+		setdetails(initState);
 		setStatus('idle');
-		// push('/');
+		push('/');
 	};
 
 	useEffect(() => (isErrorMsgModalOpen ? dialogRef.current?.showModal() : dialogRef.current?.close()), [isErrorMsgModalOpen]);
@@ -146,10 +149,10 @@ export default function SignUp() {
 					title='Sign Up In Animehub-dev'
 					width={300}
 					height={300}
-					className='hidden w-auto lg:bottom-1 md:bottom-1 lg:-left-6 md:-left-8 md:absolute md:flex lg:h-80 md:h-72'
+					className='z-10 hidden w-auto lg:bottom-1 md:bottom-1 lg:-left-6 md:-left-8 md:absolute md:flex lg:h-80 md:h-72'
 				/>
 				<form
-					className={`bg-black bg-opacity-80 px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
+					className={`bg-black/80 dark:bg-zinc-900/80 backdrop-blur px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
 					autoComplete='off'
 					aria-autocomplete='none'>
 					<input
@@ -207,12 +210,33 @@ export default function SignUp() {
 					<input
 						type='file'
 						name='image'
+						id='image'
+						hidden
 						placeholder={'image'}
-						accept='png, webp'
+						accept='.png, .webp'
 						required={true}
-						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-2 rounded-lg p-1 border-white dark:border-pink-500 bg-transparent placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
 						onChange={onImageChange}
 					/>
+
+					<div
+						className={
+							'w-[90%] md:w-3/4 h-10 text-white text-sm md:text-base flex gap-2 items-center'
+							// 'w-[90%] md:w-3/4 h-10 px-8 outline-none rounded-lg p-1 bg-transparent placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base'
+						}>
+						<Image
+							src={selectedImage.url}
+							alt=''
+							className='w-12 rounded-[50%] object-cover'
+							width={100}
+							height={100}
+						/>
+
+						<label
+							htmlFor='image'
+							className='flex-1 h-full p-2 text-center align-middle transition duration-500 ease-in-out border-2 border-white rounded-md cursor-pointer dark:border-pink-500 hover:bg-pink-500 hover:border-pink-500'>
+							{selectedImage.url === defaultImage ? 'Select An Image' : selectedImage.name}
+						</label>
+					</div>
 
 					<button
 						disabled={status === 'idle' ? false : true}
@@ -220,7 +244,7 @@ export default function SignUp() {
 							status === 'fetching' ? 'items-center gap-2' : ''
 						} p-2 bg-pink-500 rounded-xl text-xl font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}
 						onClick={onSubmit}>
-						Submit
+						Sign Up
 						{status === 'fetching' && (
 							<span className='animate-rotate'>
 								<FaSpinner />
@@ -232,7 +256,7 @@ export default function SignUp() {
 			<dialog
 				ref={dialogRef}
 				onClick={() => setIsErrorMsgModalOpen(false)}
-				className='w-[95%] md:w-3/5 text-red-500 bg-white/90 rounded-xl'>
+				className='w-[95%] md:w-[55%] text-red-500 bg-gray-100/90 rounded-xl backdrop-blur'>
 				<section
 					onClick={(e) => e.stopPropagation()}
 					className='flex flex-col gap-4 md:gap-7'>

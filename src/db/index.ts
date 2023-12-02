@@ -101,7 +101,7 @@ class Database {
 			},
 			email: {
 				type: String,
-				minlength: 18,
+				minlength: 13,
 				maxlength: 40,
 				required: true,
 				unique: true,
