@@ -36,10 +36,8 @@ export function validateUpdateUser(schema: unknown): validateUpdateUserType {
 		username: joi.string().min(2).max(25),
 		email: joi.string().email().max(30),
 		password: joi.string().min(2).max(24),
-		image: joi
-			.string()
-			.min(2)
-			.regex(/^[a-zA-Z_\-0-9.]{2,}$/),
+		image: joi.any(),
+		gender: joi.string().valid('male', 'female'),
 	});
 	return userSchema.validate(schema, { abortEarly: false });
 }
@@ -67,7 +65,7 @@ export function validateAnimes(schema: unknown): validateAnimesReturnType {
 export function validateAuth(schema: unknown): validateAuthReturnType {
 	const userSchema = joi.object<authReturnType>({
 		username: joi.string().min(2).required(),
-		email: joi.string().email().required(),
+		// email: joi.string().email().required(),
 		password: joi.string().min(2).required(),
 	});
 	return userSchema.validate(schema, { abortEarly: false });
@@ -85,19 +83,4 @@ export function validatePatch(schema: unknown): validatePatchReturnType {
 		theme: joi.string().valid('light', 'dark'),
 	});
 	return userSchema.validate(schema, { abortEarly: false });
-}
-
-export function validateNewUser(body: FormData) {
-	try {
-		const username = body.get('username');
-		const email = body.get('email');
-		const password = body.get('password');
-		const gender = body.get('gender');
-		const image = body.get('image');
-
-		return {};
-	} catch (error: any) {
-		// if(!error)
-		return { error: error.message };
-	}
 }

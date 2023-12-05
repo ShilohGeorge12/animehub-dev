@@ -126,7 +126,7 @@ export function ProfilBtn({ name, onClick, Value, size }: Omit<ButtonProps, 'mor
 	} = useMyContext();
 	const isDisabled = () => {
 		if (!loggedIn) return true;
-		if (editProfileModal) return true;
+		// if (editProfileModal) return true;
 		return false;
 	};
 

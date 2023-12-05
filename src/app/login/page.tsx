@@ -2,6 +2,7 @@
 import { useMyContext } from '@/context';
 import { isUser, responseTypes } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, MouseEvent, ChangeEvent, useLayoutEffect } from 'react';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
@@ -11,7 +12,7 @@ export default function Login() {
 	const initState = {
 		username: '',
 		password: '',
-		email: '',
+		// email: '',
 	};
 
 	const {
@@ -24,7 +25,7 @@ export default function Login() {
 	const [status, setStatus] = useState<'fetching' | 'idle'>('idle');
 	const { push } = useRouter();
 	const usernameRegex = /^[a-zA-Z\s_-]{2,}$/;
-	const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
+	// const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
 	const passwordRegex = /^[a-zA-Z@_-]{6,24}$/;
 
 	useLayoutEffect(() => {
@@ -46,9 +47,9 @@ export default function Login() {
 	const onSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		setErrorMessage([]);
-		const { username, email, password } = details;
+		const { username, password } = details;
 
-		if (username === '' || email === '' || password === '') {
+		if (username === '' || password === '') {
 			setErrorMessage((prev) => [...prev, 'All Input Fields are required!!']);
 			return;
 		}
@@ -59,10 +60,10 @@ export default function Login() {
 			hasError = true;
 		}
 
-		if (!emailRegex.test(email)) {
-			setErrorMessage((prev) => [...prev, `Invalid email address (${email}). Please enter a valid email.`]);
-			hasError = true;
-		}
+		// if (!emailRegex.test(email)) {
+		// 	setErrorMessage((prev) => [...prev, `Invalid email address (${email}). Please enter a valid email.`]);
+		// 	hasError = true;
+		// }
 
 		if (!passwordRegex.test(password)) {
 			setErrorMessage((prev) => [...prev, `Password must be 6-24 characters long and can only contain letters, @, _, or -.`]);
@@ -76,7 +77,7 @@ export default function Login() {
 			const body = {
 				username: details.username.trim(),
 				password: details.password.trim(),
-				email: details.email.trim(),
+				// email: details.email.trim(),
 			};
 
 			const req = await fetch('/api/login', {
@@ -142,17 +143,6 @@ export default function Login() {
 						value={details.username}
 						onChange={onChange}
 					/>
-					<input
-						type='text'
-						placeholder={'Email'}
-						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
-						name='email'
-						autoComplete='off'
-						aria-autocomplete='none'
-						required={true}
-						value={details.email}
-						onChange={onChange}
-					/>
 					<div className='w-[90%] md:w-3/4 h-10 relative'>
 						<input
 							type={viewPasword ? 'text' : 'password'}
@@ -170,6 +160,14 @@ export default function Login() {
 							onClick={onViewPasword}>
 							{viewPasword ? <FaEyeSlash /> : <FaEye />}
 						</button>
+					</div>
+
+					<div className='flex items-center md:w-[90%] w-[95%] px-6'>
+						<Link
+							href={'/forget-password'}
+							className='flex items-center justify-center text-xs underline transition duration-500 ease-in-out hover:scale-105 w-fit'>
+							forget password
+						</Link>
 					</div>
 
 					<button

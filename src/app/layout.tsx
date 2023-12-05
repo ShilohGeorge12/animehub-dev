@@ -44,15 +44,11 @@ export const metadata: Metadata = {
 	alternates: { canonical: url },
 };
 
-export default function RootLayout({ children, modal }: { children: React.ReactNode; modal: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en'>
 			<ContextProvider>
-				<Body
-					inter={inter}
-					modal={modal}>
-					{children}
-				</Body>
+				<Body inter={inter}>{children}</Body>
 			</ContextProvider>
 		</html>
 	);

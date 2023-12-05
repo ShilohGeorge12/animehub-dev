@@ -20,14 +20,14 @@ export const POST = async (req: NextRequest) => {
 			error.details.map((err) => errArr.push(err.message));
 			return NextResponse.json({ error: errArr });
 		}
-		const { email, password, username } = value;
+		const { password, username } = value;
 		const cookie = req.cookies.get('key');
 
 		if (cookie) {
-			const user = await MongoDB.getUserModel().findOne({ email, username }).select('-__v').populate('animes', '-__v');
+			const user = await MongoDB.getUserModel().findOne({ username }).select('-__v').populate('animes', '-__v');
 
 			if (!user) {
-				return NextResponse.json({ error: `User with email ${email} was not found!` }, { status: 404 });
+				return NextResponse.json({ error: `User with username ${username} was not found!` }, { status: 404 });
 			}
 			await verifyAuth(user.authkey);
 			const result = await bcrypt.compare(password, user.password);
@@ -38,7 +38,7 @@ export const POST = async (req: NextRequest) => {
 			const details: Omit<User, 'password' | 'authkey'> & { _id: Types.ObjectId } = {
 				_id: user._id,
 				username,
-				email,
+				email: user.email,
 				gender: user.gender,
 				image: user.image,
 				animes: user.animes,
@@ -50,10 +50,10 @@ export const POST = async (req: NextRequest) => {
 			return NextResponse.json(details, { status: 200 });
 		}
 
-		const user = await MongoDB.getUserModel().findOne({ email, username }).select('-__v').populate('animes', '-__v');
+		const user = await MongoDB.getUserModel().findOne({ username }).select('-__v').populate('animes', '-__v');
 
 		if (!user) {
-			return NextResponse.json({ error: `User with email ${email} was not found!` }, { status: 404 });
+			return NextResponse.json({ error: `User with username ${username} was not found!` }, { status: 404 });
 		}
 
 		const result = await bcrypt.compare(password, user.password);
@@ -64,7 +64,7 @@ export const POST = async (req: NextRequest) => {
 		const details: Omit<User, 'password' | 'authkey'> & { _id: Types.ObjectId } = {
 			_id: user._id,
 			username,
-			email,
+			email: user.email,
 			gender: user.gender,
 			image: user.image,
 			animes: user.animes,
@@ -74,7 +74,7 @@ export const POST = async (req: NextRequest) => {
 		};
 
 		const sercret = env.SECRET;
-		const signedJwt = Jwt.sign({ token: email }, sercret, { expiresIn: MAX_AGE });
+		const signedJwt = Jwt.sign({ token: user.email }, sercret, { expiresIn: MAX_AGE });
 		user.authkey = signedJwt;
 		await user.save();
 

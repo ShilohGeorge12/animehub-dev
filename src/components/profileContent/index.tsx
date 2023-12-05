@@ -8,15 +8,35 @@ import { useRouter } from 'next/navigation';
 import { Rating } from '../rating';
 import { AnimeList } from '../animelist';
 import { ProfilBtn } from '../button';
+import { useEffect, useRef, useState } from 'react';
+import { IoMdClose, IoMdRefresh } from 'react-icons/io';
+import { EditProfile } from '../editProfile';
+import { type editProfileInitState } from '@/types';
 
 export function ProfileContent() {
 	const { push } = useRouter();
 	const {
-		state: {
-			user: { animes, createdAt, email, gender, image, role, theme: userTheme, username },
-		},
+		state: { user },
 		dispatch,
 	} = useMyContext();
+
+	const { animes, createdAt, email, gender, image, role, theme: userTheme, username } = user;
+	const dialogRef = useRef<HTMLDialogElement | null>(null);
+	const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+	const editProfileInitState: editProfileInitState = {
+		username: user.username,
+		email: user.email,
+		gender: user.gender,
+		image: user.image,
+		password: '',
+	};
+
+	const [details, setDetails] = useState<typeof editProfileInitState>(editProfileInitState);
+
+	useEffect(() => {
+		isDialogOpen ? dialogRef.current?.showModal() : dialogRef.current?.close();
+	}, [isDialogOpen]);
+
 	const Joined = new Date(createdAt).toDateString();
 
 	const calculateAverageRating = (ratings: number[]): number => {
@@ -80,7 +100,7 @@ export function ProfileContent() {
 							size={'lg'}
 							name={'Edit Profile'}
 							Value={'Edit Profile'}
-							onClick={() => dispatch({ type: 'editProfileModalOpen', payload: { open: true } })}
+							onClick={() => setIsDialogOpen(true)}
 						/>
 					</div>
 				</div>
@@ -100,6 +120,39 @@ export function ProfileContent() {
 					<AnimeList animes={animes} />
 				</div>
 			</div>
+
+			<dialog
+				ref={dialogRef}
+				className='w-[95%] md:w-[55%] min-h-[60vh] text-red-500 text-sm bg-gray-100/90 rounded-xl backdrop-blur'>
+				<section className='flex flex-col gap-4 md:gap-7'>
+					<div className='relative flex w-full p-2 text-white bg-pink-500'>
+						<button
+							type='button'
+							name={`close edit profile Modal`}
+							className={`peer/close flex self-end rounded-lg text-2xl p-1 bg-white text-pink-500 hover:bg-red-400 hover:text-white transition duration-500 ease-in-out hover:scale-105`}
+							onClick={() => setIsDialogOpen(false)}>
+							<IoMdClose />
+						</button>
+						<span className='absolute hidden text-sm text-pink-500 top-12 left-2 peer-hover/close:flex'>Minimize</span>
+						<h1 className='flex items-center justify-center flex-1 text-xl font-semibold'>Update Profile</h1>
+						<button
+							type='button'
+							name={`reset edit profile to default`}
+							className={`peer/reset flex self-end rounded-lg text-2xl p-1 bg-white text-pink-500 hover:bg-green-400 hover:text-white transition duration-500 ease-in-out hover:scale-105`}
+							onClick={() => setDetails(editProfileInitState)}>
+							<IoMdRefresh />
+						</button>
+						<span className='absolute hidden text-sm text-pink-500 top-12 right-2 peer-hover/reset:flex'>Reset Profile to Default</span>
+					</div>
+					<EditProfile
+						user={user}
+						setDetails={setDetails}
+						details={details}
+						dispatch={dispatch}
+						setIsDialogOpen={setIsDialogOpen}
+					/>
+				</section>
+			</dialog>
 		</>
 	);
 }

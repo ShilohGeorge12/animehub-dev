@@ -7,10 +7,10 @@ export const MAX_AGE = 30 * 60;
 export const COOKIE_NAME = 'key';
 export type animeReturnType = Anime;
 export type userReturnType = Omit<User, 'animes' | 'authkey' | 'createdAt' | 'theme' | 'role' | 'image'> & { image: File };
-export type authReturnType = Pick<User, 'username' | 'email' | 'password'>;
+export type authReturnType = Pick<User, 'username' | 'password'>;
 export type authLogOutReturnType = Pick<User, 'username' | 'email'>;
 export type patchReturnType = Pick<User, 'theme'>;
-export type updateUserReturnType = Pick<User, 'password' | 'username' | 'email' | 'image'>;
+export type updateUserReturnType = Pick<User, 'password' | 'username' | 'email' | 'gender'> & { image: File };
 
 export type validateAnimesReturnType = ValidationResult<animeReturnType>;
 export type validateUsersReturnType = ValidationResult<userReturnType>;
@@ -184,3 +184,6 @@ export type verifyLoginReturnType =
 			error: string;
 			status: 400 | 404;
 	  };
+
+export type ErrorMessage = { path: 'null' | 'username' | 'email' | 'password'; message: string }[];
+export type editProfileInitState = Pick<UserType, 'username' | 'email' | 'password' | 'gender'> & { image: string | File };

@@ -11,7 +11,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { isUser, responseTypes } from '@/types';
 import { usePathname } from 'next/navigation';
 
-export default function Body({ inter, children, modal }: { inter: NextFont; children: ReactNode; modal: ReactNode }) {
+export default function Body({ inter, children }: { inter: NextFont; children: ReactNode }) {
 	const luffyFull = '/bg/luffy-sun-god.webp';
 	const itachi1024 = '/bg/itachi-1024.jpg';
 	const {
@@ -38,7 +38,7 @@ export default function Body({ inter, children, modal }: { inter: NextFont; chil
 			const res = (await req.json()) as unknown as responseTypes;
 			return res;
 		};
-		if (loggedIn === false && path !== '/login' && path !== '/signup') {
+		if (loggedIn === false && path !== '/login' && path !== '/signup' && !path.includes('/forget-password')) {
 			toast.promise(promise, {
 				loading: 'sending login credencials...',
 				success: (data: responseTypes) => {
@@ -83,7 +83,6 @@ export default function Body({ inter, children, modal }: { inter: NextFont; chil
 				<main className={`relative w-full h-full flex flex-col items-center font-semibold font-poppins text-white dark:text-white`}>
 					<Header />
 					{children}
-					{modal}
 					<Nav />
 				</main>
 			</HelmetProvider>
