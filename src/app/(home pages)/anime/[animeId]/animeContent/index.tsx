@@ -55,7 +55,7 @@ export function AnimeContent({ animeId, anime }: animeContentProp) {
 	useEffect(() => {
 		const hasAnimeWithId = animes.find((anime) => anime._id === animeId) ?? false;
 		hasAnimeWithId ? setHasAnime(true) : setHasAnime(false);
-	}, [animes]);
+	}, [animes, animeId]);
 
 	return (
 		<>

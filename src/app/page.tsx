@@ -1,5 +1,4 @@
 import { HomeContent } from '@/components/homeContent';
-import { MongoDB } from '@/db';
 
 export default async function Home() {
 	return (

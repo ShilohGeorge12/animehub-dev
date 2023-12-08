@@ -1,7 +1,7 @@
 import { MongoDB } from '@/db';
 import { NextResponse, NextRequest } from 'next/server';
 
-export const GET = async (req: NextRequest, { params }: { params: { _id: string } }) => {
+export const GET = async (_: NextRequest, { params }: { params: { _id: string } }) => {
 	try {
 		const { _id } = params;
 		const anime = await MongoDB.getAnimeModel().findOne({ _id }).select('-__v');

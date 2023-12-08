@@ -153,15 +153,13 @@ export default function SignUp() {
 				/>
 				<form
 					className={`bg-black/80 dark:bg-zinc-900/80 backdrop-blur px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
-					autoComplete='off'
-					aria-autocomplete='none'>
+					autoComplete='off'>
 					<input
 						type='text'
 						placeholder={'Username'}
 						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
 						name='username'
 						autoComplete='off'
-						aria-autocomplete='none'
 						required={true}
 						value={details.username}
 						onChange={onChange}
@@ -172,7 +170,6 @@ export default function SignUp() {
 						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
 						name='email'
 						autoComplete='off'
-						aria-autocomplete='none'
 						required={true}
 						value={details.email}
 						onChange={onChange}
@@ -186,7 +183,6 @@ export default function SignUp() {
 							name='password'
 							autoComplete='off'
 							required={true}
-							aria-autocomplete='none'
 							value={details.password}
 							onChange={onChange}
 						/>

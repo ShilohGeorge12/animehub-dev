@@ -138,7 +138,6 @@ export default function Login() {
 						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
 						name='username'
 						autoComplete='off'
-						aria-autocomplete='none'
 						required={true}
 						value={details.username}
 						onChange={onChange}
@@ -151,7 +150,6 @@ export default function Login() {
 							name='password'
 							autoComplete='off'
 							required={true}
-							aria-autocomplete='none'
 							value={details.password}
 							onChange={onChange}
 						/>

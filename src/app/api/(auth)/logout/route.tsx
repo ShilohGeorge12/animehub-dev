@@ -1,7 +1,7 @@
 import { MongoDB } from '@/db';
 import { validateAuthLogOut } from '@/db/schema';
 import { NextResponse, NextRequest } from 'next/server';
-import { COOKIE_NAME, MAX_AGE, User } from '@/types';
+import { COOKIE_NAME } from '@/types';
 import { serialize } from 'cookie';
 
 export const POST = async (req: NextRequest) => {
