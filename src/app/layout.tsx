@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { env } from '@/env';
 import Body from '@/components/body';
 import { ContextProvider } from '@/context';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang='en'>
 			<ContextProvider>
 				<Body inter={inter}>{children}</Body>
+				<SpeedInsights />
 			</ContextProvider>
 		</html>
 	);
