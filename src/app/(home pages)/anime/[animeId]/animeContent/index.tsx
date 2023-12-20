@@ -18,7 +18,7 @@ export function AnimeContent({ animeId, anime }: animeContentProp) {
 		state: {
 			user: { _id, animes },
 		},
-		dispatch,
+		// dispatch,
 	} = useMyContext();
 	const [hasAnime, setHasAnime] = useState<boolean>(false);
 

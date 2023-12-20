@@ -16,7 +16,7 @@ export default async function ForgetPassword() {
 			<div className='flex items-center justify-start w-[95%] md:w-3/5 lg:w-1/2'>
 				<Link
 					href={`/login`}
-					className={`text-xl p-2 rounded-md bg-pink-500 transition duration-300 ease-in-out hover:scale-105 hover:rounded-lg dark:hover:bg-white dark:hover:text-pink-500`}>
+					className={`text-xl p-2 rounded-md bg-pink-500 transition duration-300 ease-in-out hover:scale-105 hover:rounded-lg hover:bg-white hover:text-pink-500`}>
 					<FaArrowLeft />
 				</Link>
 				<h1 className='flex-1 text-2xl font-semibold tracking-wider text-center'>Reset Password</h1>
@@ -28,7 +28,7 @@ export default async function ForgetPassword() {
 					type='text'
 					name='email'
 					placeholder={'email'}
-					className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
+					className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
 				/>
 			</ResetPasswordForm>
 			{/* <form

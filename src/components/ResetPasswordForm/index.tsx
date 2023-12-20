@@ -32,7 +32,7 @@ export function ResetPasswordForm({ children, submitText, action }: ResetPasswor
 	return (
 		<form
 			action={onAction}
-			className='bg-black/80 dark:bg-zinc-900/80 backdrop-blur w-[95%] md:w-3/5 lg:w-1/2 min-h-[20vh] rounded-2xl flex-col flex gap-4 items-center py-4'>
+			className='bg-zinc-900/80 backdrop-blur w-[95%] md:w-3/5 lg:w-1/2 min-h-[20vh] rounded-2xl flex-col flex gap-4 items-center py-4'>
 			{children}
 			<button
 				type='submit'

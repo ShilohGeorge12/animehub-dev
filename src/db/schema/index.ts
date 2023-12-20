@@ -2,13 +2,13 @@ import {
 	animeReturnType,
 	authLogOutReturnType,
 	authReturnType,
-	patchReturnType,
+	// patchReturnType,
 	updateUserReturnType,
 	userReturnType,
 	validateAnimesReturnType,
 	validateAuthLogOutReturnType,
 	validateAuthReturnType,
-	validatePatchReturnType,
+	// validatePatchReturnType,
 	validateUpdateUserType,
 	validateUsersReturnType,
 } from '@/types';
@@ -78,9 +78,9 @@ export function validateAuthLogOut(schema: unknown): validateAuthLogOutReturnTyp
 	return userSchema.validate(schema, { abortEarly: false });
 }
 
-export function validatePatch(schema: unknown): validatePatchReturnType {
-	const userSchema = joi.object<patchReturnType>({
-		theme: joi.string().valid('light', 'dark'),
-	});
-	return userSchema.validate(schema, { abortEarly: false });
-}
+// export function validatePatch(schema: unknown): validatePatchReturnType {
+// 	const userSchema = joi.object<patchReturnType>({
+// 		theme: joi.string().valid('light', 'dark'),
+// 	});
+// 	return userSchema.validate(schema, { abortEarly: false });
+// }

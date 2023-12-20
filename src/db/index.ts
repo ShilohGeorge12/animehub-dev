@@ -129,11 +129,11 @@ class Database {
 				enum: ['BASIC', 'PREMIUM'],
 				default: 'BASIC',
 			},
-			theme: {
-				type: String,
-				enum: ['light', 'dark'],
-				default: 'light',
-			},
+			// theme: {
+			// 	type: String,
+			// 	enum: ['light', 'dark'],
+			// 	default: 'light',
+			// },
 			authkey: {
 				type: String,
 				// max: 400,

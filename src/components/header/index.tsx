@@ -12,18 +12,18 @@ export default function Header() {
 	const {
 		state: {
 			loggedIn,
-			theme,
-			user: { image, username, theme: userTheme },
+			// theme,
+			user: { image, username },
 		},
-		updateTheme,
+		// updateTheme,
 	} = useMyContext();
 
-	const IsTheme = () => {
-		if (loggedIn) {
-			return userTheme === 'light' ? BiSun : FaMoon;
-		}
-		return theme === 'light' ? BiSun : FaMoon;
-	};
+	// const IsTheme = () => {
+	// 	if (loggedIn) {
+	// 		return userTheme === 'light' ? BiSun : FaMoon;
+	// 	}
+	// 	return theme === 'light' ? BiSun : FaMoon;
+	// };
 
 	return (
 		<header className='grid grid-cols-3 items-center gap-4 p-2 md:w-[99%] mx-auto mt-[2px]'>
@@ -52,11 +52,11 @@ export default function Header() {
 					<BiUserPlus />
 				</Link>
 
-				<ThemeBtn
+				{/* <ThemeBtn
 					name='theme'
 					onClick={updateTheme}
 					Value={IsTheme()}
-				/>
+				/> */}
 				<Image
 					src={loggedIn ? `/others/${image}` : '/others/user2.png'}
 					alt='profile'

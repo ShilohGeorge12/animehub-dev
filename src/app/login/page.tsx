@@ -135,7 +135,7 @@ export default function Login() {
 					<input
 						type='text'
 						placeholder={'Username'}
-						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
+						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
 						name='username'
 						autoComplete='off'
 						required={true}
@@ -146,7 +146,7 @@ export default function Login() {
 						<input
 							type={viewPasword ? 'text' : 'password'}
 							placeholder={'Password'}
-							className={`w-full h-full px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
+							className={`w-full h-full px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
 							name='password'
 							autoComplete='off'
 							required={true}

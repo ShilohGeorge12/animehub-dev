@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { useMyContext } from '@/context';
-import { FaMoon } from 'react-icons/fa';
-import { BiSun } from 'react-icons/bi';
+// import { FaMoon } from 'react-icons/fa';
+// import { BiSun } from 'react-icons/bi';
 import { useRouter } from 'next/navigation';
 import { Rating } from '../rating';
 import { AnimeList } from '../animelist';
@@ -20,7 +20,7 @@ export function ProfileContent() {
 		dispatch,
 	} = useMyContext();
 
-	const { animes, createdAt, email, gender, image, role, theme: userTheme, username } = user;
+	const { animes, createdAt, email, gender, image, role, username } = user;
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 	const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 	const editProfileInitState: editProfileInitState = {
@@ -28,7 +28,7 @@ export function ProfileContent() {
 		email: user.email,
 		gender: user.gender,
 		image: user.image,
-		password: '',
+		password: user.password,
 	};
 
 	const [details, setDetails] = useState<typeof editProfileInitState>(editProfileInitState);
@@ -63,17 +63,17 @@ export function ProfileContent() {
 						height={100}
 					/>
 				</div>
-				<div className='flex flex-col w-full gap-1 text-center md:text-left md:px-4 dark:text-gray-300'>
+				<div className='flex flex-col w-full gap-1 text-center text-gray-300 md:text-left md:px-4'>
 					<p>{username}</p>
 					<p>{email}</p>
 					<p className='capitalize'>{gender}</p>
 					<p>
 						<strong>Joined @</strong> {Joined}
 					</p>
-					<div className='flex items-center justify-center gap-4 md:justify-normal'>
+					{/* <div className='flex items-center justify-center gap-4 md:justify-normal'>
 						<strong>Theme: </strong>
 						{userTheme === 'dark' && (
-							<span className='p-1 text-xl text-white bg-black rounded-lg dark:bg-white dark:text-black'>
+							<span className='p-1 text-xl text-black bg-white rounded-lg'>
 								<FaMoon />
 							</span>
 						)}
@@ -82,7 +82,7 @@ export function ProfileContent() {
 								<BiSun />
 							</span>
 						)}
-					</div>
+					</div> */}
 
 					{role === 'BASIC' && (
 						<div className='w-2/4 mx-auto mt-1 md:w-full'>
@@ -107,7 +107,7 @@ export function ProfileContent() {
 			</div>
 			<div className='flex flex-col items-center md:col-span-3'>
 				<div className='w-[98%] border-2 border-pink-500 p-2 rounded-lg relative flex flex-col gap-3'>
-					<p className='absolute px-1 text-white -top-3 left-1 dark:bg-black filter backdrop-blur-sm'>Animes ({animes.length})</p>
+					<p className='absolute px-1 text-white bg-black -top-3 left-1 filter backdrop-blur-sm'>Animes ({animes.length})</p>
 					<ul className='flex flex-col justify-center gap-1 p-1 no-underline list-none'>
 						<li>
 							<Rating rating={average} />

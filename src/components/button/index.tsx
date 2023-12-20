@@ -12,17 +12,9 @@ interface ButtonProps {
 	// type: 'header_theme' | 'profile' | 'search' | 'nav' | 'nav_logInOrOut' | 'ViewAnime';
 }
 
-export default function Button({}: ButtonProps) {
-	return (
-		<section className={``}>
-			<div className=''></div>
-			<div className=''></div>
-		</section>
-	);
-}
 export function ThemeBtn({ name, onClick, Value }: Omit<ButtonProps, 'size' | 'more'>) {
 	const {
-		state: { loggedIn, editProfileModal },
+		state: { editProfileModal },
 	} = useMyContext();
 	const isDisabled = () => {
 		// if (!loggedIn) return true;
@@ -35,7 +27,7 @@ export function ThemeBtn({ name, onClick, Value }: Omit<ButtonProps, 'size' | 'm
 			type='button'
 			name={name}
 			aria-label={name}
-			className={`p-1 md:p-2 bg-pink-500 text-white text-2xl rounded-xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:bg-white hover:text-pink-500`}
+			className={`p-1 md:p-2 bg-pink-500 text-white text-2xl rounded-xl transition duration-300 ease-in-out hover:translate-y-1 hover:scale-110 hover:bg-white`}
 			onClick={onClick}
 			disabled={isDisabled()}>
 			{typeof Value === 'string' ? Value : <Value />}
@@ -95,7 +87,7 @@ export function VeiwAnimeBtn({ name, onClick, Value }: Pick<ButtonProps, 'name' 
 		<button
 			type={'button'}
 			name={name}
-			className='p-2 text-3xl font-semibold text-white transition duration-300 ease-in-out bg-pink-500 peer dark:hover:bg-white dark:hover:text-pink-500 w-fit rounded-xl hover:scale-110 hover:shadow-lg'
+			className='p-2 text-3xl font-semibold text-white transition duration-300 ease-in-out bg-pink-500 peer hover:bg-white hover:text-pink-500 w-fit rounded-xl hover:scale-110 hover:shadow-lg'
 			onClick={onClick}
 			disabled={isDisabled()}>
 			{typeof Value === 'string' ? Value : <Value />}
@@ -112,7 +104,7 @@ export function LogInOrOutBtn({ name, Value, onClick }: Omit<ButtonProps, 'size'
 			aria-label={name}
 			name={name}
 			className={
-				'p-2 rounded-xl transform transition motion-safe:hover:scale-105 hover:-translate-y-1 duration-150 ease-in-out text-xl hover:bg-white hover:text-pink-500 hover:dark:text-pink-600'
+				'p-2 rounded-xl transform transition motion-safe:hover:scale-105 hover:-translate-y-1 duration-150 ease-in-out text-xl hover:bg-white hover:text-pink-600'
 			}
 			onClick={onClick}
 			disabled={editProfileModal ? true : false}>

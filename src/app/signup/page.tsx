@@ -152,12 +152,12 @@ export default function SignUp() {
 					className='z-10 hidden w-auto lg:bottom-1 md:bottom-1 lg:-left-6 md:-left-8 md:absolute md:flex lg:h-80 md:h-72'
 				/>
 				<form
-					className={`bg-black/80 dark:bg-zinc-900/80 backdrop-blur px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
+					className={`bg-zinc-900/80 backdrop-blur px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
 					autoComplete='off'>
 					<input
 						type='text'
 						placeholder={'Username'}
-						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
+						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
 						name='username'
 						autoComplete='off'
 						required={true}
@@ -167,7 +167,7 @@ export default function SignUp() {
 					<input
 						type='email'
 						placeholder={'Email'}
-						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
+						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
 						name='email'
 						autoComplete='off'
 						required={true}
@@ -179,7 +179,7 @@ export default function SignUp() {
 						<input
 							type={viewPasword ? 'text' : 'password'}
 							placeholder={'Password'}
-							className={`w-full h-full px-8 outline-none border-b-2 border-white dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
+							className={`w-full h-full px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
 							name='password'
 							autoComplete='off'
 							required={true}
@@ -196,7 +196,7 @@ export default function SignUp() {
 					<select
 						name='gender'
 						id='gender'
-						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-2 rounded-lg border-white bg-black/80  dark:border-pink-500 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
+						className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-2 rounded-lg bg-black/80  border-pink-500 placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
 						onChange={(e) => setdetails((prev) => ({ ...prev, [e.target.name]: e.target.value }))}>
 						<option value='Specify Your Gender'>Specify Your Gender</option>
 						<option value='male'>Male</option>
@@ -229,7 +229,7 @@ export default function SignUp() {
 
 						<label
 							htmlFor='image'
-							className='flex-1 h-full p-2 text-center align-middle transition duration-500 ease-in-out border-2 border-white rounded-md cursor-pointer dark:border-pink-500 hover:bg-pink-500 hover:border-pink-500'>
+							className='flex-1 h-full p-2 text-center align-middle transition duration-500 ease-in-out border-2 border-pink-500 rounded-md cursor-pointer hover:bg-pink-500 hover:border-pink-500'>
 							{selectedImage.url === defaultImage ? 'Select An Image' : selectedImage.name}
 						</label>
 					</div>

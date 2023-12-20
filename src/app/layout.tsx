@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang='en'>
 			<ContextProvider>
 				<Body inter={inter}>{children}</Body>
-				<SpeedInsights />
+				{env.VERCEL_URL !== 'null' && <SpeedInsights />}
 			</ContextProvider>
 		</html>
 	);

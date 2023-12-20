@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { env } from '@/env';
 import Jwt from 'jsonwebtoken';
 import { Types } from 'mongoose';
-import { COOKIE_NAME, MAX_AGE, User } from '@/types';
+import { COOKIE_NAME, MAX_AGE, User, isAnError } from '@/types';
 import { serialize } from 'cookie';
 import { verifyAuth } from '@/lib/verifyAuth';
 
@@ -29,7 +29,14 @@ export const POST = async (req: NextRequest) => {
 			if (!user) {
 				return NextResponse.json({ error: `User with username ${username} was not found!` }, { status: 404 });
 			}
-			await verifyAuth(user.authkey);
+
+			try {
+				await verifyAuth(user.authkey);
+			} catch (err) {
+				if (!isAnError(err)) return NextResponse.json({ error: 'Something Went Wrong!' }, { status: 500 });
+				if (err.name !== 'JWTExpired') console.log({ name: err.name, msg: err.message });
+			}
+
 			const result = await bcrypt.compare(password, user.password);
 			if (!result) {
 				return NextResponse.json({ error: 'Password is In-Correct!' }, { status: 400 });
@@ -43,7 +50,7 @@ export const POST = async (req: NextRequest) => {
 				image: user.image,
 				animes: user.animes,
 				role: user.role,
-				theme: user.theme,
+				// theme: user.theme,
 				createdAt: user.createdAt,
 			};
 
@@ -69,7 +76,7 @@ export const POST = async (req: NextRequest) => {
 			image: user.image,
 			animes: user.animes,
 			role: user.role,
-			theme: user.theme,
+			// theme: user.theme,
 			createdAt: user.createdAt,
 		};
 
@@ -90,8 +97,12 @@ export const POST = async (req: NextRequest) => {
 			return NextResponse.json({ authStatus: 'invalid token', user: {} }, { status: 401 });
 		}
 		if (error instanceof Error) {
-			console.log(error);
-			return NextResponse.json(error.message, { status: 500 });
+			// if (error.name === 'JWTExpired') {
+			// 	const url = new URL('/login', req.url);
+			// 	return NextResponse.redirect(url);
+			// }
+			console.log(error, '=> jwt');
+			return NextResponse.json({ error: error.message }, { status: 500 });
 		}
 	}
 };

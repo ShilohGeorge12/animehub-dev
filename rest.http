@@ -33,10 +33,10 @@ POST http://localhost:5053/api/login
 Content-Type: application/json
 
 {
-  "username": "Guest",
-  "email": "guest@animehub.dev",
-  "password": "guest@animehub"
+  "username": "animehub",
+  "password": "animehub@dev"
 }
+
 
 ###
 POST http://localhost:5053/api/logout

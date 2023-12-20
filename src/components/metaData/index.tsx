@@ -5,11 +5,11 @@ interface metaProps {
 	title: string;
 	description: string;
 	path: string;
-	theme?: 'light' | 'dark';
+	// theme?: 'light' | 'dark';
 }
 
 function MetaData(props: metaProps) {
-	const { title, description, path, theme } = props;
+	const { title, description, path } = props;
 	// const UrlPath =  ? `http://localhost:5053${path}` : `https://animehub-dev.netlify.app${path}`;
 	return (
 		<Helmet>
@@ -24,11 +24,11 @@ function MetaData(props: metaProps) {
 			/>
 			<meta
 				name='color-scheme'
-				content={theme ?? 'light dark'}
+				content={'dark'}
 			/>
 			<meta
 				name='theme-color'
-				content={theme ?? 'light dark'}
+				content={'dark'}
 			/>
 			<meta
 				property={'og:title'}

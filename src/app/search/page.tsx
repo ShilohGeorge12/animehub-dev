@@ -68,7 +68,7 @@ export default function Search() {
 					value={searchQuery}
 					placeholder='Search Your Favorite Anime...'
 					onChange={(e) => setSearchQuery(e.target.value)}
-					className={`w-full py-2 px-7 rounded-xl border-2 bg-black bg-opacity-70 border-black dark:bg-transparent border-opacity-25 dark:border-pink-500 outline-0 tracking-wider`}
+					className={`w-full py-2 px-7 rounded-xl border-2 bg-black bg-opacity-70 bg-transparent border-opacity-25 border-pink-500 outline-0 tracking-wider`}
 				/>
 				<span className='absolute text-pink-500 font-bold text-sm top-[14px] left-2'>
 					<FaSearch />

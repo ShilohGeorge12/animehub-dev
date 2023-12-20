@@ -9,14 +9,14 @@ export type animeReturnType = Anime;
 export type userReturnType = Omit<User, 'animes' | 'authkey' | 'createdAt' | 'theme' | 'role' | 'image'> & { image: File };
 export type authReturnType = Pick<User, 'username' | 'password'>;
 export type authLogOutReturnType = Pick<User, 'username' | 'email'>;
-export type patchReturnType = Pick<User, 'theme'>;
+// export type patchReturnType = Pick<User, 'theme'>;
 export type updateUserReturnType = Pick<User, 'password' | 'username' | 'email' | 'gender'> & { image: File };
 
 export type validateAnimesReturnType = ValidationResult<animeReturnType>;
 export type validateUsersReturnType = ValidationResult<userReturnType>;
 export type validateAuthReturnType = ValidationResult<authReturnType>;
 export type validateAuthLogOutReturnType = ValidationResult<authLogOutReturnType>;
-export type validatePatchReturnType = ValidationResult<patchReturnType>;
+// export type validatePatchReturnType = ValidationResult<patchReturnType>;
 export type validateUpdateUserType = ValidationResult<updateUserReturnType>;
 
 export interface _ID {
@@ -31,7 +31,7 @@ export interface User {
 	image: string;
 	animes: Types.ObjectId[];
 	role: 'BASIC' | 'PREMIUM';
-	theme: 'light' | 'dark';
+	// theme: 'light' | 'dark';
 	authkey: string;
 	createdAt: Date;
 }
@@ -61,7 +61,7 @@ export interface UserType {
 	image: string;
 	animes: AnimeType[];
 	role: 'BASIC' | 'PREMIUM';
-	theme: Theme;
+	// theme: Theme;
 	createdAt: Date;
 }
 
@@ -120,16 +120,16 @@ export const isAnError = (arg: unknown): arg is Error => (arg as Error).message 
 
 // Context Types
 export type stateAction =
-	| { type: 'theme'; payload: { theme: Theme } }
+	// | { type: 'theme'; payload: { theme: Theme } }
 	| { type: 'user'; payload: { user: UserType } }
 	| { type: 'logIn'; payload: { isloggedIn: true; user: UserType } }
 	| { type: 'logOut'; payload: { isloggedIn: false } }
 	| { type: 'editProfileModalOpen'; payload: { open: true } }
-	| { type: 'editProfileModalClose'; payload: { close: false } }
-	| { type: 'userTheme'; payload: { userTheme: Theme } };
+	| { type: 'editProfileModalClose'; payload: { close: false } };
+// | { type: 'userTheme'; payload: { userTheme: Theme } };
 
 export interface State {
-	theme: Theme;
+	// theme: Theme;
 	loggedIn: boolean;
 	user: UserType;
 	editProfileModal: boolean;

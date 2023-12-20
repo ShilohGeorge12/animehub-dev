@@ -94,7 +94,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 				<input
 					type='text'
 					placeholder={'Username'}
-					className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 dark:placeholder:text-pink-500 placeholder:text-xl text-pink-500 text-base autofill:bg-transparent`}
+					className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-pink-500 text-base autofill:bg-transparent`}
 					name='username'
 					autoComplete='off'
 					aria-autocomplete='none'
@@ -111,7 +111,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 				<input
 					type='email'
 					placeholder={'Email'}
-					className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 dark:placeholder:text-pink-500 placeholder:text-xl text-pink-500 text-base autofill:bg-transparent`}
+					className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-pink-500 text-base autofill:bg-transparent`}
 					name='email'
 					autoComplete='off'
 					aria-autocomplete='none'
@@ -128,7 +128,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 				<input
 					type={viewPasword ? 'text' : 'password'}
 					placeholder={'Password'}
-					className={`w-full h-10 px-8 outline-none border-b-2 border-pink-500 dark:border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 dark:placeholder:text-pink-500 placeholder:text-xl text-pink-500 text-base autofill:bg-none`}
+					className={`w-full h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500  placeholder:text-xl text-pink-500 text-base autofill:bg-none`}
 					name='password'
 					autoComplete='off'
 					aria-autocomplete='none'
@@ -158,7 +158,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 			<select
 				name='gender'
 				id='gender'
-				className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-2 rounded-lg border-pink-500 bg-pink-500  dark:border-pink-500 placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
+				className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-2 rounded-lg border-pink-500 bg-pink-500 placeholder:text-white placeholder:text-xl text-white text-base`}
 				value={details.gender}
 				onChange={(e) => setDetails((prev) => ({ ...prev, [e.target.name]: e.target.value }))}>
 				<option value='male'>Male</option>
@@ -173,6 +173,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 				placeholder={'image'}
 				accept='.png, .webp'
 				onChange={onImageChange}
+				// value={details.image}
 			/>
 
 			<div
@@ -190,7 +191,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 
 				<label
 					htmlFor='image'
-					className='flex-1 h-full p-2 text-center align-middle transition duration-500 ease-in-out border-2 border-pink-500 rounded-md cursor-pointer hover:text-white dark:border-pink-500 hover:bg-pink-500 hover:border-pink-500'>
+					className='flex-1 h-full p-2 text-center align-middle transition duration-500 ease-in-out border-2 border-pink-500 rounded-md cursor-pointer hover:text-white hover:bg-pink-500 hover:border-pink-500'>
 					{selectedImage.name === 'default Image' ? 'Update Profile Image' : selectedImage.name}
 				</label>
 			</div>
