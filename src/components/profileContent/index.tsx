@@ -28,7 +28,7 @@ export function ProfileContent() {
 		email: user.email,
 		gender: user.gender,
 		image: user.image,
-		password: user.password,
+		password: '',
 	};
 
 	const [details, setDetails] = useState<typeof editProfileInitState>(editProfileInitState);

@@ -43,7 +43,6 @@ export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
 			confirmPassword: confirmPassword.toString().replaceAll(' ', ''),
 			email: ResetPasswordEmail,
 		};
-		console.log(ResetPasswordEmail);
 
 		const data = new FormData();
 		Object.entries(details).forEach(([key, val]) => data.append(key, val));
@@ -63,7 +62,7 @@ export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
 			<PasswordInput name='password' />
 
 			<PasswordInput name='confirm-password' />
-			<span className='font-medium tracking-wider text-white text-md w-[80%]'>{error}</span>
+			<span className='font-medium tracking-wider text-white text-md w-[80%] text-center'>{error}</span>
 
 			<button
 				disabled={isSending === 'fetching'}

@@ -43,8 +43,10 @@ export async function PUT(req: NextRequest, { params }: { params: { _id: string 
 		if (value) {
 			const { username, password, email, image } = value;
 			const result = await bcrypt.compare(password, user.password);
-			if (result) {
-				user.password = password;
+			if (!result) {
+				const salt = await bcrypt.genSalt(10);
+				const hashedPassword = await bcrypt.hash(password, salt);
+				user.password = hashedPassword;
 			}
 			user.username = username;
 			user.email = email;

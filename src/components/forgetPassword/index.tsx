@@ -40,7 +40,6 @@ export function ForgetPasswordForm({ action }: ResetPasswordFormProps) {
 		}
 
 		dispatch({ type: 'resetPasswordEmail', payload: { userEmail: emailAddress } });
-		console.log('done');
 		setIsSending('idle');
 	};
 

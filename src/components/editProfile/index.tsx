@@ -88,6 +88,8 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 		}
 	};
 
+	console.log(details);
+
 	return (
 		<form className={`flex flex-col items-center gap-6 md:mb-6 mb-4`}>
 			<div className='flex flex-col items-center justify-center w-full gap-1'>
