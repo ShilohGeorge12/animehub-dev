@@ -44,14 +44,14 @@ export default async function AnimePage({ params: { animeId } }: { params: { ani
 						height={100}
 						width={100}
 						priority
-						className={'w-28 rounded-md transition duration-300 hover:scale-110'}
+						className={'iphone_sm:w-24 w-xl:w-44 rounded-md transition duration-300 hover:scale-110'}
 					/>
 
-					<ul className='flex flex-col justify-center w-full gap-2 px-1 text-sm font-semibold text-pink-300 no-underline list-none md:text-base'>
+					<ul className='flex flex-col justify-center w-full gap-2 px-1 font-semibold text-pink-400 no-underline list-none iphone_sm:text-xs w-xl:text-3xl md:text-base'>
 						<li className='flex gap-2'>
 							Stars:
 							<Rating
-								size='text-sm'
+								size='text-xs w-xl:text-2xl'
 								rating={anime.rating}
 							/>
 						</li>
@@ -87,11 +87,13 @@ export default async function AnimePage({ params: { animeId } }: { params: { ani
 					</ul>
 				</div>
 				<div className='flex flex-col gap-3 p-2 md:gap-6 md:col-span-3'>
-					<h3 className='text-xl font-bold tracking-wider md:text-3xl'>{anime.title}</h3>
-					<p className='hidden text-sm font-semibold tracking-wider '>{<ParseDecription />}</p>
-					<details className='hidden h-md:flex h-sm:flex'>
-						<summary className='text-lg font-semibold'>{anime.title} Description</summary>
-						<p className='w-[96%] mx-auto overflow-y-scroll text-sm font-semibold tracking-wider h-sm:h-44 h-md:h-60 text-ellipsis '>{<ParseDecription />}</p>
+					<h3 className='hidden font-bold tracking-wider md:flex md:text-3xl w-xl:text-4xl'>{anime.title}</h3>
+					<p className='hidden overflow-auto text-sm font-semibold tracking-wider rounded w-lg:flex w-lg:h-32 w-xl:h-auto w-xl:overflow-visible w-xl:pr-2 w-xl:text-xl bg-black/60'>
+						{<ParseDecription />}
+					</p>
+					<details className='hidden iphone_lg:flex iphone_sm:flex'>
+						<summary className='text-lg font-semibold'>{anime.title}</summary>
+						<p className='w-[96%] mx-auto overflow-y-scroll text-xs font-semibold tracking-wider iphone_sm:h-44 h-md:h-60 text-ellipsis'>{<ParseDecription />}</p>
 					</details>
 					<AnimeContent
 						anime={anime}

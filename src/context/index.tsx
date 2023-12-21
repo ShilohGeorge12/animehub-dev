@@ -1,6 +1,6 @@
 'use client';
 import { useContext, useReducer, createContext, ReactNode } from 'react';
-import { State, ReducerType, stateAction } from '../types';
+import type { State, ReducerType, stateAction } from '../types';
 // import { toast } from 'sonner';
 
 const initState: State = {
@@ -18,6 +18,7 @@ const initState: State = {
 		createdAt: new Date(),
 	},
 	editProfileModal: false,
+	ResetPasswordEmail: '',
 };
 
 const MyContext = createContext({
@@ -42,6 +43,8 @@ const reducer: ReducerType = (state, action) => {
 			return { ...state, editProfileModal: action.payload.open };
 		case 'editProfileModalClose':
 			return { ...state, editProfileModal: action.payload.close };
+		case 'resetPasswordEmail':
+			return { ...state, ResetPasswordEmail: action.payload.userEmail };
 		default:
 			return state;
 	}

@@ -20,7 +20,7 @@ export function HomeContent() {
 	const [totalAnimes, setTotalAnimes] = useState<number>(0);
 	const limitPerPage = 8;
 
-	const [PaginationNav, paginatedAnimes] = usePagination({
+	const [PaginationNav, paginatedAnimes, status] = usePagination({
 		animes,
 		limitPerPage,
 		totalAnimes,
@@ -87,7 +87,10 @@ export function HomeContent() {
 			<div className={`flex flex-col gap-3 items-center justify-center`}>
 				{loggedIn && (
 					<>
-						<Anime animes={paginatedAnimes} />
+						<Anime
+							animes={paginatedAnimes}
+							status={status}
+						/>
 						<div className='absolute w-full bottom-3 left-1/6'>
 							<PaginationNav />
 						</div>

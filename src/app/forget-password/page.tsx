@@ -1,13 +1,12 @@
 import { onForgetPassword } from '@/actions';
-import { ResetPasswordForm } from '@/components/ResetPasswordForm';
+import { ForgetPasswordForm } from '@/components/forgetPassword';
 import { Metadata } from 'next';
 import Link from 'next/link';
-// import { redirect } from 'next/navigation';
 import { FaArrowLeft } from 'react-icons/fa';
 
 export const metadata: Metadata = {
-	title: 'reset password | Experience anime like never before',
-	description: 'Reset Your Password For Animehub here',
+	title: 'Forget Password | Experience anime like never before',
+	description: 'Forgotten Your Password For Animehub. You Can Recover Your Account Using Your Email Address',
 };
 
 export default async function ForgetPassword() {
@@ -21,26 +20,7 @@ export default async function ForgetPassword() {
 				</Link>
 				<h1 className='flex-1 text-2xl font-semibold tracking-wider text-center'>Reset Password</h1>
 			</div>
-			<ResetPasswordForm
-				action={onForgetPassword}
-				submitText='forget password'>
-				<input
-					type='text'
-					name='email'
-					placeholder={'email'}
-					className={`w-[90%] md:w-3/4 h-10 px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4 placeholder:text-pink-500 placeholder:text-xl text-white text-base autofill:bg-transparent`}
-				/>
-			</ResetPasswordForm>
-			{/* <form
-				action={handleEmailVerification}
-				className='bg-black/80 dark:bg-zinc-900/80 backdrop-blur w-[95%] md:w-3/5 lg:w-1/2 min-h-[20vh] rounded-2xl flex-col flex gap-4 items-center py-4'>
-
-				<button
-					type='submit'
-					className={`p-2 bg-pink-500 rounded-lg text-sm font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}>
-					
-				</button>
-			</form> */}
+			<ForgetPasswordForm action={onForgetPassword} />
 		</section>
 	);
 }

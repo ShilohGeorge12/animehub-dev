@@ -87,7 +87,7 @@ export function VeiwAnimeBtn({ name, onClick, Value }: Pick<ButtonProps, 'name' 
 		<button
 			type={'button'}
 			name={name}
-			className='p-2 text-3xl font-semibold text-white transition duration-300 ease-in-out bg-pink-500 peer hover:bg-white hover:text-pink-500 w-fit rounded-xl hover:scale-110 hover:shadow-lg'
+			className='p-2 text-3xl font-semibold text-white transition duration-300 ease-in-out bg-pink-500 iphone_sm:text-2xl w-xl:text-4xl peer hover:bg-white hover:text-pink-500 w-fit rounded-xl hover:scale-110 hover:shadow-lg'
 			onClick={onClick}
 			disabled={isDisabled()}>
 			{typeof Value === 'string' ? Value : <Value />}

@@ -59,16 +59,16 @@ export function AnimeContent({ animeId, anime }: animeContentProp) {
 
 	return (
 		<>
-			<div className='flex flex-col gap-4'>
-				{hasAnime && (
-					<span className='flex items-center gap-2'>
-						<span className='p-1 text-4xl text-yellow-500 transition duration-300 rounded-md hover:scale-110'>
-							<GiAlliedStar />
-						</span>
-						<p className='text-lg font-semibold'>Presently in Your Collection!</p>
+			{/* <div className='flex flex-col gap-2'> */}
+			{hasAnime && (
+				<span className='flex items-center gap-2'>
+					<span className='p-1 text-4xl text-yellow-500 transition duration-300 rounded-md w-xl:text-5xl iphone_sm:text-2xl hover:scale-110'>
+						<GiAlliedStar />
 					</span>
-				)}
-			</div>
+					<p className='font-semibold iphone_sm:text-sm md:text-lg'>Presently in Your Collection!</p>
+				</span>
+			)}
+			{/* </div> */}
 			<div className='grid items-center justify-start grid-cols-2 gap-4 md:grid-cols-3 md:gap-6'>
 				{hasAnime && (
 					<div className='flex flex-col justify-center gap-2'>

@@ -1,6 +1,6 @@
 'use client';
 import { useMyContext } from '@/context';
-import { PaginationType, isAnimes, isAuthStatus, responseTypes } from '@/types';
+import { FetchingStatus, PaginationType, isAnimes, isAuthStatus, responseTypes } from '@/types';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -8,10 +8,12 @@ import { toast } from 'sonner';
 export const usePagination: PaginationType = (options) => {
 	const { animes, setAnimes, limitPerPage, totalAnimes, setTotalAnimes } = options;
 	const [Page, setPage] = useState<number>(1);
+	const [status, setStatus] = useState<FetchingStatus>('idle');
 	const { push } = useRouter();
 	const { dispatch } = useMyContext();
 
 	const onPageChange = async (page: number) => {
+		setStatus('fetching');
 		fetch(`/api/animes?page=${page - 1}&perpage=${limitPerPage}`)
 			.then((req) => req.json())
 			.then((res: responseTypes) => {
@@ -34,7 +36,8 @@ export const usePagination: PaginationType = (options) => {
 					setTotalAnimes(res.totalAnimes);
 				}
 			})
-			.catch((err: Error) => toast.error(err.message));
+			.catch((err: Error) => toast.error(err.message))
+			.finally(() => setStatus('idle'));
 		setPage(page);
 	};
 
@@ -65,5 +68,5 @@ export const usePagination: PaginationType = (options) => {
 		);
 	};
 
-	return [PaginatedNav, paginatedData];
+	return [PaginatedNav, paginatedData, status];
 };

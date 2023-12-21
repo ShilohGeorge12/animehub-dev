@@ -28,7 +28,6 @@ export const PasswordInput = ({ name }: PasswordInputProps) => {
 				aria-autocomplete='none'
 				autoComplete='off'
 				className={`w-full h-full px-8 outline-none border-b-2 border-pink-500 bg-transparent focus:border-b-4  placeholder:text-pink-500 placeholder:text-xl text-white text-base`}
-				required={true}
 				// value={details.password}
 				// onChange={onChange}
 			/>

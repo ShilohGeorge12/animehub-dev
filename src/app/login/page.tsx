@@ -1,6 +1,6 @@
 'use client';
 import { useMyContext } from '@/context';
-import { isUser, responseTypes } from '@/types';
+import { PASSWORD_FORMAT_MESSAGE, PASSWORD_REGEX, USERNAME_REGEX, isUser, responseTypes } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -24,9 +24,6 @@ export default function Login() {
 	const [details, setDetails] = useState<typeof initState>(initState);
 	const [status, setStatus] = useState<'fetching' | 'idle'>('idle');
 	const { push } = useRouter();
-	const usernameRegex = /^[a-zA-Z\s_-]{2,}$/;
-	// const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
-	const passwordRegex = /^[a-zA-Z@_-]{6,24}$/;
 
 	useLayoutEffect(() => {
 		if (loggedIn) {
@@ -55,7 +52,7 @@ export default function Login() {
 		}
 		let hasError: boolean = false;
 
-		if (!usernameRegex.test(username)) {
+		if (!USERNAME_REGEX.test(username)) {
 			setErrorMessage((prev) => [...prev, `Username (${username}) must be at least 2 characters long and can only contain letters, @, _, or -.`]);
 			hasError = true;
 		}
@@ -65,8 +62,8 @@ export default function Login() {
 		// 	hasError = true;
 		// }
 
-		if (!passwordRegex.test(password)) {
-			setErrorMessage((prev) => [...prev, `Password must be 6-24 characters long and can only contain letters, @, _, or -.`]);
+		if (!PASSWORD_REGEX.test(password)) {
+			setErrorMessage((prev) => [...prev, PASSWORD_FORMAT_MESSAGE]);
 			hasError = true;
 		}
 

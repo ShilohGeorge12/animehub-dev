@@ -125,7 +125,8 @@ export type stateAction =
 	| { type: 'logIn'; payload: { isloggedIn: true; user: UserType } }
 	| { type: 'logOut'; payload: { isloggedIn: false } }
 	| { type: 'editProfileModalOpen'; payload: { open: true } }
-	| { type: 'editProfileModalClose'; payload: { close: false } };
+	| { type: 'editProfileModalClose'; payload: { close: false } }
+	| { type: 'resetPasswordEmail'; payload: { userEmail: string } };
 // | { type: 'userTheme'; payload: { userTheme: Theme } };
 
 export interface State {
@@ -133,6 +134,7 @@ export interface State {
 	loggedIn: boolean;
 	user: UserType;
 	editProfileModal: boolean;
+	ResetPasswordEmail: string;
 }
 
 export interface Icontext {
@@ -145,23 +147,17 @@ export type ReducerType = (state: State, action: stateAction) => State;
 export type UrlPath = '/' | '/profile' | '/search' | '/cart';
 
 // Pagination type
+export type FetchingStatus = 'fetching' | 'idle';
 interface PaginationOptions {
 	animes: AnimeType[];
 	limitPerPage: number;
 	totalAnimes: number;
 	setAnimes: Dispatch<SetStateAction<AnimeType[]>>;
 	setTotalAnimes: Dispatch<SetStateAction<number>>;
+	// isFetching:
 	// setIsFetching: Dispatch<SetStateAction<'fetching' | 'idle'>>;
 }
-export type PaginationType = (options: PaginationOptions) => [() => JSX.Element, AnimeType[]];
-
-// Toast Type
-interface ToastOptions2 {
-	bg: 'green' | 'red' | 'pink';
-	icon: IconType;
-	position: 'top-right' | 'top-center' | 'top-left' | 'bottom-right' | 'bottom-center' | 'bottom-left';
-}
-export type ToastType = (context: string | string[], options: ToastOptions2) => void;
+export type PaginationType = (options: PaginationOptions) => [() => JSX.Element, AnimeType[], FetchingStatus];
 
 interface JwtPayload {
 	jti: string;
@@ -187,3 +183,14 @@ export type verifyLoginReturnType =
 
 export type ErrorMessage = { path: 'null' | 'username' | 'email' | 'password'; message: string }[];
 export type editProfileInitState = Pick<UserType, 'username' | 'email' | 'password' | 'gender'> & { image: string | File };
+
+export interface UserPasswords {
+	password: string;
+	confirmPassword: string;
+}
+
+export const PASSWORD_REGEX = /^[a-zA-Z0-9@_-\s]{6,24}$/;
+export const USERNAME_REGEX = /^[a-zA-Z\s_-]{2,}$/;
+export const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
+export const PASSWORD_FORMAT_MESSAGE = `Password must be 6-24 characters long and can only contain letters, numbers, @, _, or -.`;
+export const INVALID_EMAIL_MESSAGE = 'Please Verify You Entered A Valid Email Address';

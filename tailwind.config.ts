@@ -49,14 +49,17 @@ const config: Config = {
 			'xl': '1280px',
 			'2xl': '1536px',
 			'w-xsm': { raw: 'screen and (max-width: 300px)' },
-			'h-sm': {
+			'iphone_sm': {
 				raw: 'screen and (max-width: 375px) and (max-height: 670px), screen and (min-width: 360px) and (max-width: 414px) and (min-height: 736px) and (max-height: 812px), screen and (width: 540px) and (min-height: 710px) and (max-height: 812px)',
 			},
-			'h-md': { raw: 'screen and (min-width: 376px) and (max-width: 420px) and (max-height: 915px) and (min-height: 813px)' },
+			'iphone_md': { raw: '' },
+			'iphone_lg': { raw: 'screen and (min-width: 400px) and (max-width: 440px) and (min-height: 895px) and (max-height: 933px)' },
+			'h-md': { raw: 'screen and (min-width: 376px) and (max-width: 430px) and (max-height: 915px) and (min-height: 813px)' },
 			'h-md-2': {
 				raw: '(min-height: 1024px) and (max-height: 1200px) and (min-width: 630px) and (max-width: 822px)',
 			},
-			'h-lg': { raw: 'screen and (max-width: 1024px) and (max-height: 700px)' },
+			'w-lg': { raw: 'screen and (min-width: 1000px) and (min-height: 600px)' },
+			'w-xl': { raw: 'screen and (min-width: 1600px) and (min-height: 700px)' },
 		},
 		scrollbar: ['rounded'],
 	},
