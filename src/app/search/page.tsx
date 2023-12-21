@@ -85,7 +85,12 @@ export default function Search() {
 				)}
 			</form>
 			<div className='flex flex-col items-center justify-center w-full gap-2'>
-				{fetchStatus === 'idle' && results.length > 0 && <Anime animes={results} />}
+				{fetchStatus === 'idle' && results.length > 0 && (
+					<Anime
+						animes={results}
+						status={fetchStatus}
+					/>
+				)}
 				{fetchStatus === 'fetching' && (
 					<div className='w-full min-h-[150px] flex flex-col items-center justify-end'>
 						<span className='text-5xl text-white transition duration-500 animate-rotate'>
