@@ -2,7 +2,7 @@
 
 import { useMyContext } from '@/context';
 import { usePagination } from '@/hooks/usePagination';
-import { AnimeType, isAnimes, responseTypes } from '@/types';
+import { AnimeType, isAnimes, isError, responseTypes } from '@/types';
 import Image from 'next/image';
 import { useState, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
@@ -37,7 +37,7 @@ export function HomeContent() {
 		if (loggedIn) {
 			promise()
 				.then((data) => {
-					if ('error' in data) {
+					if (isError(data)) {
 						const error = typeof data.error === 'string' ? data.error : data.error[0];
 						toast.error(error);
 						dispatch({ type: 'logOut', payload: { isloggedIn: false } });
