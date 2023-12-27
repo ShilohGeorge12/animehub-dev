@@ -1,9 +1,18 @@
 import { ProfileContent } from '@/components/profileContent';
+import { Animation } from '@/components/animation';
 
 export default function Profile() {
 	return (
-		<section className={`grid w-full h-full grid-cols-1 md:grid-cols-4 overflow-y-scroll lg:pt-2`}>
+		<Animation
+			uniqueKey='Profile-animation-layer'
+			className='grid w-full h-full grid-cols-1 overflow-y-scroll md:grid-cols-4 lg:pt-2'
+			styles={{
+				initial: { opacity: 0, translateX: '-100vw', translateZ: -100 },
+				animate: { opacity: 1, translateX: '0vw', translateZ: 0 },
+				exit: { opacity: 0, translateX: '100vw' },
+				transition: { duration: 0.5 },
+			}}>
 			<ProfileContent />
-		</section>
+		</Animation>
 	);
 }

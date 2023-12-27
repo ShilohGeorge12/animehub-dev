@@ -9,6 +9,7 @@ import { AnimeType, isAuthStatus, isSearchResult, responseTypes } from '@/types'
 import { toast } from 'sonner';
 import { Anime } from '@/components/anime';
 import { useMyContext } from '@/context';
+import { Animation } from '@/components/animation';
 
 export default function Search() {
 	const { push } = useRouter();
@@ -61,45 +62,57 @@ export default function Search() {
 	}, [query]);
 
 	return (
-		<section className={`flex flex-col items-center w-full h-full gap-3 p-2`}>
-			<form className={`w-4/5 md:w-2/4 flex flex-col items-center relative mx-auto h-fit text-white`}>
-				<input
-					type='text'
-					value={searchQuery}
-					placeholder='Search Your Favorite Anime...'
-					onChange={(e) => setSearchQuery(e.target.value)}
-					className={`w-full py-2 px-7 rounded-xl border-2 bg-black/60 bg-opacity-70 border-opacity-25 focus-within:shadow-sm focus-within:shadow-pink-500 border-pink-500 outline-0 tracking-wider`}
-				/>
-				<span className='absolute text-pink-500 font-bold text-sm top-[14px] left-2'>
-					<FaSearch />
-				</span>
-				{fetchStatus === 'fetching' && (
-					<span className='absolute text-white font-bold text-sm top-[14px] right-2 animate-rotate'>
-						<FaSpinner />
-					</span>
-				)}
-				{fetchStatus === 'idle' && query != '' && (
-					<span className='absolute text-green-500 font-bold text-sm top-[14px] right-2'>
-						<FaCheckCircle />
-					</span>
-				)}
-			</form>
-			<div className='flex flex-col items-center justify-center w-full gap-2'>
-				{fetchStatus === 'idle' && results.length > 0 && (
-					<Anime
-						animes={results}
-						status={fetchStatus}
+		// <section >
+		<Animation
+			className={`flex flex-col items-center w-full h-full gap-3 p-2`}
+			uniqueKey={'search-animation-layer'}
+			styles={{
+				initial: { opacity: 0, scale: 0 },
+				animate: { opacity: 1, scale: 1 },
+				exit: { opacity: 0, scale: 0 },
+				transition: { type: 'spring', damping: 10, stiffness: 100 },
+			}}>
+			<>
+				<form className={`w-4/5 md:w-2/4 flex flex-col items-center relative mx-auto h-fit text-white`}>
+					<input
+						type='text'
+						value={searchQuery}
+						placeholder='Search Your Favorite Anime...'
+						onChange={(e) => setSearchQuery(e.target.value)}
+						className={`w-full py-2 px-7 rounded-xl border-2 bg-black/60 bg-opacity-70 border-opacity-40 focus-within:shadow focus-within:shadow-pink-500 border-pink-500 outline-0 tracking-wider`}
 					/>
-				)}
-				{fetchStatus === 'fetching' && (
-					<div className='w-full min-h-[150px] flex flex-col items-center justify-end'>
-						<span className='text-5xl text-white transition duration-500 animate-rotate'>
-							<ImSpinner9 />
+					<span className='absolute text-pink-500 font-bold text-sm top-[14px] left-2'>
+						<FaSearch />
+					</span>
+					{fetchStatus === 'fetching' && (
+						<span className='absolute text-white font-bold text-sm top-[14px] right-2 animate-rotate'>
+							<FaSpinner />
 						</span>
-					</div>
-				)}
-				{fetchStatus === 'idle' && query !== '' && results.length === 0 && <p className='text-3xl'>&quot;{query}&quot; Was Not Found!</p>}
-			</div>
-		</section>
+					)}
+					{fetchStatus === 'idle' && query != '' && (
+						<span className='absolute text-green-500 font-bold text-sm top-[14px] right-2'>
+							<FaCheckCircle />
+						</span>
+					)}
+				</form>
+				<div className='flex flex-col items-center justify-center w-full gap-2'>
+					{fetchStatus === 'idle' && results.length > 0 && (
+						<Anime
+							animes={results}
+							status={fetchStatus}
+						/>
+					)}
+					{fetchStatus === 'fetching' && (
+						<div className='w-full min-h-[150px] flex flex-col items-center justify-end'>
+							<span className='text-5xl text-white transition duration-500 animate-rotate'>
+								<ImSpinner9 />
+							</span>
+						</div>
+					)}
+					{fetchStatus === 'idle' && query !== '' && results.length === 0 && <p className='text-3xl'>&quot;{query}&quot; Was Not Found!</p>}
+				</div>
+			</>
+		</Animation>
+		// </section>
 	);
 }

@@ -1,8 +1,11 @@
 import { HomeContent } from '@/components/homeContent';
+import { Animation } from '@/components/animation';
 
 export default async function Home() {
 	return (
-		<section className={`w-full h-full relative`}>
+		<section
+			className={`w-full h-full relative`}
+			key={'homePage'}>
 			<article className='hidden'>
 				{/* <h2>
 					Welcome to <strong>AnimeHub-Dev</strong>, your ultimate destination for renting, watching, and streaming high-quality anime content. Immerse yourself in a world
@@ -87,8 +90,21 @@ export default async function Home() {
 				<h5>Unlock a World of Captivating Stories, Unforgettable Characters, and Breathtaking Visuals at AnimeHub-Dev</h5>
 				<p>Start your anime adventure today and let us be your trusted companion on this exhilarating journey.</p>
 			</article>
-			<p className='text-2xl font-bold text-center text-white'>All Animes</p>
-			<HomeContent />
+			<Animation
+				uniqueKey={'homePage-animation-layer'}
+				className='w-full h-full'
+				styles={{
+					variants: {},
+					initial: { opacity: 0, translateY: '-100vh', translateZ: -100 },
+					animate: { opacity: 1, translateX: '0vw', translateY: '0vh', translateZ: 0 },
+					exit: { opacity: 0, translateZ: -100, translateY: '100vh' },
+					transition: { type: 'spring', damping: 10, stiffness: 100 },
+				}}>
+				<>
+					<p className='text-2xl font-bold text-center text-white'>All Animes</p>
+					<HomeContent />
+				</>
+			</Animation>
 		</section>
 	);
 }

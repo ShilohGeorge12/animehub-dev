@@ -84,6 +84,7 @@ export function HomeContent() {
 					</div>
 				</div>
 			)}
+
 			<div className={`flex flex-col gap-3 items-center justify-center`}>
 				{loggedIn && (
 					<>

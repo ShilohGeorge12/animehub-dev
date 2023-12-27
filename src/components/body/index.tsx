@@ -1,19 +1,20 @@
 'use client';
 
 import { useMyContext } from '@/context';
-import { NextFont } from 'next/dist/compiled/@next/font';
+// import { NextFont } from 'next/dist/compiled/@next/font';
 import { ReactNode, useEffect } from 'react';
-import { Toaster, toast } from 'sonner';
-import Image from 'next/image';
+import { toast } from 'sonner';
+// import Image from 'next/image';
 import Header from '../header';
 import Nav from '../navBar';
 import { HelmetProvider } from 'react-helmet-async';
 import { isError, isUser, responseTypes } from '@/types';
 import { usePathname } from 'next/navigation';
+import { AnimatePresence } from 'framer-motion';
 
-export default function Body({ inter, children }: { inter: NextFont; children: ReactNode }) {
-	const luffyFull = '/bg/luffy-sun-god.webp';
-	const itachi1024 = '/bg/itachi-1024.jpg';
+export default function Body({ children }: { children: ReactNode }) {
+	// const luffyFull = '/bg/luffy-sun-god.webp';
+	// const itachi1024 = '/bg/itachi-1024.jpg';
 	const {
 		state: { loggedIn },
 		dispatch,
@@ -66,30 +67,13 @@ export default function Body({ inter, children }: { inter: NextFont; children: R
 	// };
 
 	return (
-		<body className={`${inter.className} w-screen h-screen overflow-hidden `}>
-			<Image
-				src={itachi1024}
-				sizes={'(max-width: 420) 22vw, (max-width: 1024) 53.5vw, 100vw'}
-				title={'__'}
-				alt={'__'}
-				className={`fixed top-0 left-0 w-full h-full transition duration-300 ease-in-out overflow-hidden object-cover brightness-50`}
-				width={100}
-				height={100}
-			/>
-			<HelmetProvider>
-				<main className={`relative w-full h-full flex flex-col items-center font-semibold font-poppins text-white`}>
-					<Header />
-					{children}
-					<Nav />
-				</main>
-			</HelmetProvider>
-			<Toaster
-				richColors
-				position='bottom-left'
-				duration={4000}
-				closeButton
-				theme={'dark'}
-			/>
-		</body>
+		// <HelmetProvider>
+		<main className={`relative w-full h-full flex flex-col items-center font-semibold font-poppins text-white`}>
+			{/* <AnimatePresence mode='wait'> */}
+			<Header key={'header-component'} />
+			{children}
+			<Nav key={'navBar-component'} />
+			{/* </AnimatePresence> */}
+		</main>
 	);
 }

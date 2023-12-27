@@ -5,6 +5,9 @@ import { env } from '@/env';
 import Body from '@/components/body';
 import { ContextProvider } from '@/context';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Image from 'next/image';
+import { Toaster } from 'sonner';
+// import { EdgeStoreProvider } from '@/lib/edgestore';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -46,12 +49,35 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+	const itachi1024 = '/bg/itachi-1024.jpg';
+
 	return (
 		<html lang='en'>
-			<ContextProvider>
-				<Body inter={inter}>{children}</Body>
-				{env.VERCEL_URL !== 'null' && <SpeedInsights />}
-			</ContextProvider>
+			<body className={`${inter.className} w-screen h-screen overflow-hidden `}>
+				{/* <EdgeStoreProvider> */}
+				<ContextProvider>
+					<Image
+						src={itachi1024}
+						sizes={'(max-width: 420) 22vw, (max-width: 1024) 53.5vw, 100vw'}
+						title={'__'}
+						alt={'__'}
+						className={`fixed top-0 left-0 w-full h-full transition duration-300 ease-in-out overflow-hidden object-cover brightness-50`}
+						width={100}
+						height={100}
+						priority
+					/>
+					<Body>{children}</Body>
+					<Toaster
+						richColors
+						position='bottom-left'
+						duration={4000}
+						closeButton
+						theme={'dark'}
+					/>
+				</ContextProvider>
+			</body>
+			{env.VERCEL_URL !== 'null' && <SpeedInsights />}
+			{/* </EdgeStoreProvider> */}
 		</html>
 	);
 }
