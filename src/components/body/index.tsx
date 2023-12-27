@@ -7,10 +7,8 @@ import { toast } from 'sonner';
 // import Image from 'next/image';
 import Header from '../header';
 import Nav from '../navBar';
-import { HelmetProvider } from 'react-helmet-async';
 import { isError, isUser, responseTypes } from '@/types';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence } from 'framer-motion';
 
 export default function Body({ children }: { children: ReactNode }) {
 	// const luffyFull = '/bg/luffy-sun-god.webp';
@@ -69,11 +67,9 @@ export default function Body({ children }: { children: ReactNode }) {
 	return (
 		// <HelmetProvider>
 		<main className={`relative w-full h-full flex flex-col items-center font-semibold font-poppins text-white`}>
-			{/* <AnimatePresence mode='wait'> */}
 			<Header key={'header-component'} />
 			{children}
 			<Nav key={'navBar-component'} />
-			{/* </AnimatePresence> */}
 		</main>
 	);
 }
