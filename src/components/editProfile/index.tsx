@@ -48,10 +48,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 		setError([]);
 		const result = validateUpdateProfile({ details, user, setError });
 
-		if (result === 'error') {
-			console.log('error occured');
-			return;
-		}
+		if (result === 'error') return;
 
 		const formdata = new FormData();
 
@@ -87,8 +84,6 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 			setIsDialogOpen(false);
 		}
 	};
-
-	console.log(details);
 
 	return (
 		<form className={`flex flex-col items-center gap-6 md:mb-6 mb-4`}>

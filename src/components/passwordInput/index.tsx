@@ -32,6 +32,7 @@ export const PasswordInput = ({ name }: PasswordInputProps) => {
 				// onChange={onChange}
 			/>
 			<button
+				type='button'
 				className={`absolute top-2 right-2 text-white`}
 				onClick={onViewPassword}>
 				{viewPasword ? <FaEyeSlash /> : <FaEye />}

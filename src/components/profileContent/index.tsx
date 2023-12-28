@@ -106,7 +106,7 @@ export function ProfileContent() {
 				</div>
 			</div>
 			<div className='flex flex-col items-center md:col-span-3'>
-				<div className='w-[98%] border-2 border-pink-500 p-2 rounded-lg relative flex flex-col gap-3'>
+				<div className='w-[98%] border-2 border-pink-500 p-2 ml-[6px] md:ml-0 rounded-lg relative flex flex-col gap-3'>
 					<p className='absolute px-1 text-white bg-black -top-3 left-1 filter backdrop-blur-sm'>Animes ({animes.length})</p>
 					<ul className='flex flex-col justify-center gap-1 p-1 no-underline list-none'>
 						<li>

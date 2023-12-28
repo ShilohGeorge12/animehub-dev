@@ -101,7 +101,7 @@ export default function Nav() {
 				/>
 			</div>
 			<div className={classes.navBtnClasses}>
-				<p className={`${classes.PClassess} ${loggedIn ? '-left-[2px]' : 'left-1'}`}>{loggedIn ? 'SignOut' : 'SignIn'}</p>
+				<p className={`${classes.PClassess} ${loggedIn ? '-left-[2px]' : 'left-1'}`}>{loggedIn ? 'Logout' : 'Login'}</p>
 				<LogInOrOutBtn
 					name='log In-Or-Out'
 					Value={loggedIn ? FaUnlock : FaLock}

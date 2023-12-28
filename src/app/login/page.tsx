@@ -129,6 +129,7 @@ export default function Login() {
 						title='login To Animehub-dev'
 						width={100}
 						height={100}
+						priority
 						className='hidden w-auto lg:-top-7 md:-top-6 lg:-left-9 md:-left-[41px] md:absolute md:flex lg:h-80 md:h-72 z-10'
 					/>
 					<form
