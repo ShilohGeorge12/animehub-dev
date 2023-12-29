@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { env } from '@/env';
-import Body from '@/components/body';
+import BodyComponent from '@/components/bodyComponent';
 import { ContextProvider } from '@/context';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Image from 'next/image';
@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						height={100}
 						priority
 					/>
-					<Body>{children}</Body>
+					<BodyComponent>{children}</BodyComponent>
 					<Toaster
 						richColors
 						position='bottom-left'

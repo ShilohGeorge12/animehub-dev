@@ -11,7 +11,7 @@ import { isError, isUser, responseTypes } from '@/types';
 import { usePathname } from 'next/navigation';
 import { HelmetProvider } from 'react-helmet-async';
 
-export default function Body({ children }: { children: ReactNode }) {
+export default function BodyComponent({ children }: { children: ReactNode }) {
 	// const luffyFull = '/bg/luffy-sun-god.webp';
 	// const itachi1024 = '/bg/itachi-1024.jpg';
 	const {
