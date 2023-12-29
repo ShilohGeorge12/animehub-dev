@@ -32,21 +32,22 @@ function NotFound() {
 				loading='eager'
 				alt='sadhime'
 				title='sadhime'
-				className={`w-4/5 md:w-auto`}
+				className={`w-4/5 md:w-auto hover:scale-105 transition duration-300 ease-in-out`}
 				width={1000}
 				height={1000}
 			/>
-			<div className='flex flex-col items-center gap-4'>
-				<div className='flex items-center gap-1 text-xl'>
+			<section className='flex flex-col items-center gap-4'>
+				<section className='flex items-center gap-1 text-sm md:text-xl'>
 					<p className='px-3 py-2 text-white transition duration-300 bg-red-500 rounded-lg hover:scale-105'>{pathname}</p>
 					<p>is Not Found</p>
-				</div>
+				</section>
 				<button
+					type='button'
 					className={`p-2 bg-pink-500 text-white rounded-lg transition duration-500 hover:shadow-md hover:scale-110`}
 					onClick={() => push('/')}>
 					Back To Home Page
 				</button>
-			</div>
+			</section>
 		</motion.section>
 	);
 }

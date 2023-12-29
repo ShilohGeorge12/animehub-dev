@@ -34,8 +34,8 @@ export default async function AnimePage({ params: { animeId } }: { params: { ani
 
 	return (
 		<section className={`flex flex-col w-full h-full gap-6 lg:gap-0 overflow-y-auto`}>
-			<div className={'grid grid-cols-1 md:grid-cols-4'}>
-				<div className='flex items-start col-span-1 gap-1 p-2 md:flex-col md:gap-8 md:items-center'>
+			<section className={'grid grid-cols-1 md:grid-cols-4'}>
+				<section className='flex items-start col-span-1 gap-1 p-2 md:flex-col md:gap-8 md:items-center'>
 					<Image
 						src={`/cover/${anime.image}`}
 						title={anime.title}
@@ -78,14 +78,19 @@ export default async function AnimePage({ params: { animeId } }: { params: { ani
 						</li>
 
 						<li>
-							Year Released: <span className={listItemClass}>{anime.year}</span>
+							Year Released:{' '}
+							<time
+								dateTime={`${anime.year}`}
+								className={listItemClass}>
+								{anime.year}
+							</time>
 						</li>
 
 						<li>
 							Seasons: <span className={listItemClass}>{anime.season}</span>
 						</li>
 					</ul>
-				</div>
+				</section>
 				<div className='flex flex-col gap-3 p-2 md:gap-6 md:col-span-3'>
 					<h3 className='hidden font-bold tracking-wider md:flex md:text-3xl w-xl:text-4xl'>{anime.title}</h3>
 					<p className='hidden overflow-auto text-sm font-semibold tracking-wider rounded w-lg:flex w-lg:h-32 w-xl:h-auto w-xl:overflow-visible w-xl:pr-2 w-xl:text-xl bg-black/60'>
@@ -100,7 +105,7 @@ export default async function AnimePage({ params: { animeId } }: { params: { ani
 						animeId={animeId}
 					/>
 				</div>
-			</div>
+			</section>
 		</section>
 	);
 }

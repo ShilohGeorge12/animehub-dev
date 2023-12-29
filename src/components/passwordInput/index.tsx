@@ -20,7 +20,7 @@ export const PasswordInput = ({ name }: PasswordInputProps) => {
 	};
 
 	return (
-		<div className='w-[90%] md:w-3/4 h-10 relative'>
+		<section className='w-[90%] md:w-3/4 h-10 relative'>
 			<input
 				type={viewPasword ? 'text' : 'password'}
 				placeholder={name}
@@ -37,6 +37,6 @@ export const PasswordInput = ({ name }: PasswordInputProps) => {
 				onClick={onViewPassword}>
 				{viewPasword ? <FaEyeSlash /> : <FaEye />}
 			</button>
-		</div>
+		</section>
 	);
 };

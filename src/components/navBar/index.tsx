@@ -17,19 +17,21 @@ export default function Nav() {
 		},
 		dispatch,
 	} = useMyContext();
+
 	const classes = {
 		navBtnClasses: 'group relative text-white flex items-center justify-center',
 		PClassess: 'hidden absolute transition delay-1000 duration-300 ease-in-out group-hover:flex -top-7 text-sm text-white font-bold',
 		loginBtnClasses:
 			'p-2 rounded-xl transform transition motion-safe:hover:scale-105 hover:-translate-y-1 duration-150 ease-in-out text-xl hover:bg-white hover:text-pink-600',
 	};
+
 	const pathname = usePathname();
 	const isPath = (path: UrlPath, subPaths: string) => {
 		if (pathname === path || pathname.includes(subPaths)) {
 			return 'bg-white text-pink-600 hover:shadow-3xl';
 		}
 		return '';
-	}; // check for other scenerios
+	};
 
 	const onClick = async () => {
 		if (!loggedIn) {
@@ -63,7 +65,7 @@ export default function Nav() {
 
 	return (
 		<nav className={`h-12 p-2 w-3/4 md:w-2/4 mx-auto flex items-center justify-around bg-pink-600 rounded-2xl z-10`}>
-			<div className={classes.navBtnClasses}>
+			<section className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1`}>Home</p>
 				<NavBtn
 					name={'home'}
@@ -71,8 +73,8 @@ export default function Nav() {
 					onClick={() => push('/')}
 					Value={FaHome}
 				/>
-			</div>
-			<div className={classes.navBtnClasses}>
+			</section>
+			<section className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1`}>Profile</p>
 				<NavBtn
 					name={'profile'}
@@ -80,7 +82,7 @@ export default function Nav() {
 					onClick={() => push('/profile')}
 					Value={FaUser}
 				/>
-			</div>
+			</section>
 			{/* <div className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} left-1/4`}>Cart</p>
 				<Button
@@ -91,7 +93,7 @@ export default function Nav() {
 					type={'nav'}
 				/>
 			</div> */}
-			<div className={classes.navBtnClasses}>
+			<section className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} -left-[2px]`}>Search</p>
 				<NavBtn
 					name={'search'}
@@ -99,8 +101,8 @@ export default function Nav() {
 					onClick={() => push('/search')}
 					Value={BiSearch}
 				/>
-			</div>
-			<div className={classes.navBtnClasses}>
+			</section>
+			<section className={classes.navBtnClasses}>
 				<p className={`${classes.PClassess} ${loggedIn ? '-left-[2px]' : 'left-1'}`}>{loggedIn ? 'Logout' : 'Login'}</p>
 				<LogInOrOutBtn
 					name='log In-Or-Out'
@@ -108,7 +110,7 @@ export default function Nav() {
 					onClick={onClick}
 					// onClick={() => toast('onClick', { description: 'You Clicked OnClick' })}
 				/>
-			</div>
+			</section>
 		</nav>
 	);
 }

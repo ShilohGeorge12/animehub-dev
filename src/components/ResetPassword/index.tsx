@@ -62,10 +62,14 @@ export function ResetPasswordForm({ action }: ResetPasswordFormProps) {
 			<PasswordInput name='password' />
 
 			<PasswordInput name='confirm-password' />
-			<span className='font-medium tracking-wider text-white text-md w-[80%] text-center'>{error}</span>
+			<span
+				aria-errormessage='Reset Password Error'
+				className='font-medium tracking-wider text-white text-md w-[80%] text-center'>
+				{error}
+			</span>
 
 			<button
-				disabled={isSending === 'fetching'}
+				aria-disabled={isSending === 'fetching'}
 				type='submit'
 				className={`p-2 bg-pink-500 rounded-lg text-sm md:text-base font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}>
 				{isSending === 'fetching' && 'Resetting Password...'}

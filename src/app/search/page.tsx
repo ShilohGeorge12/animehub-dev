@@ -13,12 +13,7 @@ import { Animation } from '@/components/animation';
 
 export default function Search() {
 	const { push } = useRouter();
-	const {
-		dispatch,
-		state: {
-			user: { password },
-		},
-	} = useMyContext();
+	const { dispatch } = useMyContext();
 	const searchParams = useSearchParams();
 	const [searchQuery, setSearchQuery] = useState<string>(searchParams.get('q') ?? '');
 	const [query] = useDebounce(searchQuery, 600);
@@ -73,7 +68,9 @@ export default function Search() {
 				transition: { type: 'spring', damping: 10, stiffness: 100 },
 			}}>
 			<>
-				<form className={`w-4/5 md:w-2/4 flex flex-col items-center relative mx-auto h-fit text-white`}>
+				<form
+					aria-aria-label='Search Anime Form'
+					className={`w-4/5 md:w-2/4 flex flex-col items-center relative mx-auto h-fit text-white`}>
 					<input
 						type='text'
 						value={searchQuery}
@@ -95,7 +92,7 @@ export default function Search() {
 						</span>
 					)}
 				</form>
-				<div className='flex flex-col items-center justify-center w-full gap-2'>
+				<section className='flex flex-col items-center justify-center w-full gap-2'>
 					{fetchStatus === 'idle' && results.length > 0 && (
 						<Anime
 							animes={results}
@@ -103,14 +100,14 @@ export default function Search() {
 						/>
 					)}
 					{fetchStatus === 'fetching' && (
-						<div className='w-full min-h-[150px] flex flex-col items-center justify-end'>
+						<section className='w-full min-h-[150px] flex flex-col items-center justify-end'>
 							<span className='text-5xl text-white transition duration-500 animate-rotate'>
 								<ImSpinner9 />
 							</span>
-						</div>
+						</section>
 					)}
 					{fetchStatus === 'idle' && query !== '' && results.length === 0 && <p className='text-3xl'>&quot;{query}&quot; Was Not Found!</p>}
-				</div>
+				</section>
 			</>
 		</Animation>
 		// </section>

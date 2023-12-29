@@ -9,7 +9,7 @@ import { useLayoutEffect, useState } from 'react';
 function NotFound() {
 	const { push } = useRouter();
 	const [location, setLocation] = useState<{ origin: string; pathname: string }>({ origin: '', pathname: '' });
-	const { origin, pathname } = location;
+	const { pathname } = location;
 
 	useLayoutEffect(() => {
 		setLocation({ origin: window.location.origin, pathname: window.location.pathname });
@@ -37,13 +37,12 @@ function NotFound() {
 				height={1000}
 			/>
 			<section className='flex flex-col items-center gap-4'>
-				<section className='flex items-center gap-1 text-xl'>
+				<section className='flex flex-col items-center gap-1 text-xl md:flex-row'>
 					<p className='px-3 py-2 text-white transition duration-300 bg-red-500 rounded-lg hover:scale-105'>{pathname}</p>
 					<p>is Not Found</p>
 				</section>
 				<button
 					type='button'
-					aria-label='Back To Home Page'
 					className={`p-2 bg-pink-500 text-white rounded-lg transition duration-500 hover:shadow-md hover:scale-110`}
 					onClick={() => push('/')}>
 					Back To Home Page

@@ -107,7 +107,7 @@ export function LogInOrOutBtn({ name, Value, onClick }: Omit<ButtonProps, 'size'
 				'p-2 rounded-xl transform transition motion-safe:hover:scale-105 hover:-translate-y-1 duration-150 ease-in-out text-xl hover:bg-white hover:text-pink-600'
 			}
 			onClick={onClick}
-			disabled={editProfileModal ? true : false}>
+			aria-disabled={editProfileModal ? true : false}>
 			{typeof Value === 'string' ? Value : <Value />}
 		</button>
 	);
@@ -140,7 +140,7 @@ export function ProfilBtn({ name, onClick, Value, size }: Omit<ButtonProps, 'mor
 		<button
 			name={name}
 			onClick={onClick}
-			disabled={isDisabled()}
+			aria-disabled={isDisabled()}
 			className={`${padding} bg-pink-500 text-white rounded-xl font-semibold transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl`}>
 			{typeof Value === 'string' ? Value : <Value />}
 		</button>

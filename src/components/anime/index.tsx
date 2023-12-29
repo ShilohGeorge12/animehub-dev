@@ -15,7 +15,7 @@ export function Anime({ animes, status }: AnimeProps) {
 	// const [isImageLoading, setIsImageLoading] = useState<'loading' | 'idle'>('idle');
 
 	return (
-		<div className='grid w-full h-[80%] w-xsm:grid-cols-1 iphone_sm:h-[450px] iphone_md:h-[660px] iphone_lg:h-[660px] md:h-full grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-4 place-items-center'>
+		<section className='grid w-full h-[80%] w-xsm:grid-cols-1 iphone_sm:h-[450px] iphone_md:h-[660px] iphone_lg:h-[660px] md:h-full grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-4 place-items-center'>
 			{animes &&
 				Array.isArray(animes) &&
 				animes.map((anime) => (
@@ -45,6 +45,6 @@ export function Anime({ animes, status }: AnimeProps) {
 						{/* )} */}
 					</Fragment>
 				))}
-		</div>
+		</section>
 	);
 }

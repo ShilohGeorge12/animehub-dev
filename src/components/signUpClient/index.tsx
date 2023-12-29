@@ -132,7 +132,7 @@ export function SignUpClient() {
 
 	return (
 		<>
-			<div className='w-full md:w-[70%] lg:w-[60%] flex relative items-center justify-center'>
+			<section className='w-full md:w-[70%] lg:w-[60%] flex relative items-center justify-center'>
 				<Image
 					src={'/others/register-hime.webp'}
 					alt='signupHime'
@@ -240,7 +240,7 @@ export function SignUpClient() {
 						)}
 					</button>
 				</form>
-			</div>
+			</section>
 			<dialog
 				ref={dialogRef}
 				onClick={() => setIsErrorMsgModalOpen(false)}
@@ -248,7 +248,7 @@ export function SignUpClient() {
 				<section
 					onClick={(e) => e.stopPropagation()}
 					className='flex flex-col gap-4 md:gap-7'>
-					<div className='flex w-full p-2 text-white bg-pink-500'>
+					<section className='flex w-full p-2 text-white bg-pink-500'>
 						<button
 							type='button'
 							name={`close Modal`}
@@ -257,11 +257,12 @@ export function SignUpClient() {
 							<IoMdClose />
 						</button>
 						<h1 className='flex items-center justify-center flex-1 text-xl font-semibold'>{errorMessage.length > 1 ? 'Errors Encountered' : 'Error Encountered'}</h1>
-					</div>
+					</section>
 
 					<div className={`grid  grid-cols-1 ${errorMessage.length === 1 ? 'md:grid-cols-1' : 'md:grid-cols-2'} gap-4 justify-items-center text-xs min-h-[150px]`}>
 						{errorMessage.map((error) => (
 							<p
+								aria-errormessage='Displays Error Message For Sign Up Form'
 								className='text-base font-semibold tracking-wider'
 								key={error}>
 								{error}

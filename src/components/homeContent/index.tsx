@@ -59,7 +59,7 @@ export function HomeContent() {
 	return (
 		<>
 			{!loggedIn && (
-				<div className='flex flex-col h-[80%] items-center justify-center gap-4'>
+				<section className='flex flex-col h-[80%] items-center justify-center gap-4'>
 					<Image
 						src={'/others/lock.png'}
 						alt='Not LoggedIn'
@@ -69,7 +69,7 @@ export function HomeContent() {
 						height={1000}
 						priority
 					/>
-					<div className='flex items-center gap-4 text-3xl font-bold tracking-wider'>
+					<section className='flex items-center gap-4 text-3xl font-bold tracking-wider'>
 						<Link
 							href={'/login'}
 							className='p-2 transition duration-700 ease-in-out bg-pink-500 rounded-xl hover:scale-110'>
@@ -81,8 +81,8 @@ export function HomeContent() {
 							className='p-2 transition duration-700 ease-in-out bg-pink-500 rounded-xl hover:scale-110'>
 							Sign Up
 						</Link>
-					</div>
-				</div>
+					</section>
+				</section>
 			)}
 
 			<div className={`flex flex-col gap-3 items-center justify-center`}>

@@ -34,7 +34,7 @@ export default function SignUp() {
 				transition: { type: 'spring', damping: 10, stiffness: 100 },
 			}}>
 			<>
-				<p className='text-xl font-semibold tracking-wider text-center text-white md:text-3xl'>Create an Account</p>
+				<h2 className='text-xl font-semibold tracking-wider text-center text-white md:text-3xl'>Create an Account</h2>
 				<SignUpClient />
 			</>
 		</Animation>

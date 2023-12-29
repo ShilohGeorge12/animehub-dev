@@ -101,7 +101,7 @@ export default async function Home() {
 					transition: { type: 'spring', damping: 10, stiffness: 100 },
 				}}>
 				<>
-					<p className='text-2xl font-bold text-center text-white'>All Animes</p>
+					<h2 className='text-2xl font-bold text-center text-white'>All Animes</h2>
 					<HomeContent />
 				</>
 			</Animation>

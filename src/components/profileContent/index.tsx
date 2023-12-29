@@ -51,7 +51,7 @@ export function ProfileContent() {
 
 	return (
 		<>
-			<div className='flex flex-col items-center gap-4'>
+			<section className='flex flex-col items-center gap-4'>
 				<div className='flex items-center justify-center w-full'>
 					<Image
 						src={`/others/${image}`}
@@ -104,9 +104,9 @@ export function ProfileContent() {
 						/>
 					</div>
 				</div>
-			</div>
-			<div className='flex flex-col items-center md:col-span-3'>
-				<div className='w-[98%] border-2 border-pink-500 p-2 ml-[6px] md:ml-0 rounded-lg relative flex flex-col gap-3'>
+			</section>
+			<section className='flex flex-col items-center md:col-span-3'>
+				<section className='w-[98%] border-2 border-pink-500 p-2 ml-[6px] md:ml-0 rounded-lg relative flex flex-col gap-3'>
 					<p className='absolute px-1 text-white bg-black -top-3 left-1 filter backdrop-blur-sm'>Animes ({animes.length})</p>
 					<ul className='flex flex-col justify-center gap-1 p-1 no-underline list-none'>
 						<li>
@@ -118,14 +118,14 @@ export function ProfileContent() {
 						</li>
 					</ul>
 					<AnimeList animes={animes} />
-				</div>
-			</div>
+				</section>
+			</section>
 
 			<dialog
 				ref={dialogRef}
 				className='w-[95%] md:w-[55%] min-h-[60vh] text-red-500 text-sm bg-gray-100/90 rounded-xl backdrop-blur'>
 				<section className='flex flex-col gap-4 md:gap-7'>
-					<div className='relative flex w-full p-2 text-white bg-pink-500'>
+					<section className='relative flex w-full p-2 text-white bg-pink-500'>
 						<button
 							type='button'
 							name={`close edit profile Modal`}
@@ -143,7 +143,7 @@ export function ProfileContent() {
 							<IoMdRefresh />
 						</button>
 						<span className='absolute hidden text-sm text-pink-500 top-12 right-2 peer-hover/reset:flex'>Reset Profile to Default</span>
-					</div>
+					</section>
 					<EditProfile
 						user={user}
 						setDetails={setDetails}

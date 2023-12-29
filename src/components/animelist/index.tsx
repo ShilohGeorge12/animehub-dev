@@ -13,9 +13,10 @@ export function AnimeList(props: IAnimeListProps) {
 	const { push } = useRouter();
 
 	return (
-		<div className={`w-full flex items-center overflow-x-scroll p-2 gap-3 `}>
+		<section className={`w-full flex items-center overflow-x-scroll p-2 gap-3 `}>
 			{animes.map((anime) => (
 				<figure
+					aria-label={anime.title}
 					key={anime._id}
 					className={`flex items-center`}
 					onClick={() => push(`/anime/${anime._id}`)}>
@@ -30,7 +31,7 @@ export function AnimeList(props: IAnimeListProps) {
 					/>
 				</figure>
 			))}
-		</div>
+		</section>
 	);
 }
 

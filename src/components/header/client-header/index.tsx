@@ -26,7 +26,7 @@ export function ClientHeader() {
 	// };
 
 	return (
-		<div className='relative flex items-center justify-end gap-2'>
+		<section className='relative flex items-center justify-end gap-2'>
 			{username === 'animehub' && (
 				<>
 					<Link
@@ -56,6 +56,6 @@ export function ClientHeader() {
 				height={100}
 			/>
 			{loggedIn && <p className={`hidden md:flex capitalize text-sm w-xl:text-xl text-white justify-self-end`}>{username}</p>}
-		</div>
+		</section>
 	);
 }

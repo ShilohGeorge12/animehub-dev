@@ -120,8 +120,12 @@ export default function Login() {
 				transition: { type: 'spring', damping: 10, stiffness: 100 },
 			}}>
 			<>
-				<p className='text-4xl font-semibold text-center text-white uppercase'>Sign In</p>
-				<div className='w-full md:w-[70%] lg:w-[60%] flex relative items-center justify-center'>
+				<h2
+					id='SignUp'
+					className='text-4xl font-semibold text-center text-white uppercase'>
+					Sign In
+				</h2>
+				<section className='w-full md:w-[70%] lg:w-[60%] flex relative items-center justify-center'>
 					<Image
 						src={'/others/log-in-hime.webp'}
 						alt='loginHime'
@@ -133,6 +137,7 @@ export default function Login() {
 						className='hidden w-auto lg:-top-7 md:-top-6 lg:-left-9 md:-left-[41px] md:absolute md:flex lg:h-80 md:h-72 z-10'
 					/>
 					<form
+						aria-labelledby='SignUp'
 						className={`bg-black/80 dark:bg-zinc-900/80 backdrop-blur px-2 py-6 rounded-2xl md:top-6 lg:top-7 md:right-0 w-[95%] md:w-[84.4%] lg:w-[85.9%] flex flex-col items-center gap-6`}
 						autoComplete='off'
 						aria-autocomplete='none'>
@@ -146,7 +151,9 @@ export default function Login() {
 							value={details.username}
 							onChange={onChange}
 						/>
-						<div className='w-[90%] md:w-3/4 h-10 relative'>
+						<section
+							aria-label='Login Password Input'
+							className='w-[90%] md:w-3/4 h-10 relative'>
 							<input
 								type={viewPasword ? 'text' : 'password'}
 								placeholder={'Password'}
@@ -158,22 +165,25 @@ export default function Login() {
 								onChange={onChange}
 							/>
 							<button
+								type='button'
 								className={`absolute top-2 right-2 text-white`}
 								onClick={onViewPasword}>
 								{viewPasword ? <FaEyeSlash /> : <FaEye />}
 							</button>
-						</div>
+						</section>
 
-						<div className='flex items-center md:w-[90%] w-[95%] px-6'>
+						<section
+							aria-label='Forget Password Link'
+							className='flex items-center md:w-[90%] w-[95%] px-6'>
 							<Link
 								href={'/forget-password'}
 								className='flex items-center justify-center text-xs underline transition duration-500 ease-in-out hover:scale-105 w-fit'>
 								forget password
 							</Link>
-						</div>
+						</section>
 
 						<button
-							disabled={status === 'idle' ? false : true}
+							aria-disabled={status === 'idle' ? false : true}
 							className={`flex ${
 								status === 'fetching' ? 'items-center gap-2' : ''
 							} p-2 bg-pink-500 rounded-xl text-xl font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}
@@ -186,17 +196,19 @@ export default function Login() {
 							)}
 						</button>
 					</form>
-				</div>
+				</section>
 				{errorMessage.length > 0 && (
-					<div className='flex flex-col gap-2 w-[60%] h-40 rounded-lg mt-3 bg-black/70 text-white p-3 items-center'>
+					<ul
+						aria-errormessage='Login Error Message'
+						className='flex flex-col gap-2 w-[60%] h-40 rounded-lg mt-3 bg-black/70 text-white p-3 items-center'>
 						{errorMessage.map((error) => (
-							<p
+							<li
 								className='text-base font-semibold tracking-wider'
 								key={error}>
 								{error}
-							</p>
+							</li>
 						))}
-					</div>
+					</ul>
 				)}
 			</>
 		</Animation>

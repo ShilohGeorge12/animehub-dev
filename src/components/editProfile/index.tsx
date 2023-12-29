@@ -87,7 +87,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 
 	return (
 		<form className={`flex flex-col items-center gap-6 md:mb-6 mb-4`}>
-			<div className='flex flex-col items-center justify-center w-full gap-1'>
+			<section className='flex flex-col items-center justify-center w-full gap-1'>
 				<input
 					type='text'
 					placeholder={'Username'}
@@ -100,11 +100,20 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 				/>
 
 				{error.map((error) => (
-					<Fragment key={error.path + 'error message'}>{error.path === 'username' && <span className='w-[90%] text-sm text-center'> {error.message} </span>}</Fragment>
+					<Fragment key={error.path + 'error message'}>
+						{error.path === 'username' && (
+							<span
+								aria-errormessage='Edit Profile Error Message'
+								className='w-[90%] text-sm text-center'>
+								{' '}
+								{error.message}{' '}
+							</span>
+						)}
+					</Fragment>
 				))}
-			</div>
+			</section>
 
-			<div className='flex flex-col items-center justify-center w-full gap-1'>
+			<section className='flex flex-col items-center justify-center w-full gap-1'>
 				<input
 					type='email'
 					placeholder={'Email'}
@@ -119,9 +128,9 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 				{error.map((error) => (
 					<Fragment key={error.path + 'error message'}>{error.path === 'email' && <span className='w-[90%] text-sm text-center'>{error.message}</span>}</Fragment>
 				))}
-			</div>
+			</section>
 
-			<div className='w-[90%] md:w-3/4 min-h-10 relative flex flex-col items-center justify-center gap-1 '>
+			<section className='w-[90%] md:w-3/4 min-h-10 relative flex flex-col items-center justify-center gap-1 '>
 				<input
 					type={viewPasword ? 'text' : 'password'}
 					placeholder={'Password'}
@@ -143,6 +152,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 					<Fragment key={error.path + 'error message'}>
 						{error.path === 'password' && (
 							<span
+								aria-errormessage={`Edit Profile Error Message`}
 								key={error.path}
 								className='w-full text-sm text-center'>
 								{error.message}
@@ -150,7 +160,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 						)}
 					</Fragment>
 				))}
-			</div>
+			</section>
 
 			<select
 				name='gender'
@@ -173,7 +183,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 				// value={details.image}
 			/>
 
-			<div
+			<section
 				className={
 					'w-[90%] md:w-3/4 h-10 text-pink-500 text-sm md:text-base flex gap-2 items-center'
 					// 'w-[90%] md:w-3/4 h-10 px-8 outline-none rounded-lg p-1 bg-transparent placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base'
@@ -191,11 +201,11 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 					className='flex-1 h-full p-2 text-center align-middle transition duration-500 ease-in-out border-2 border-pink-500 rounded-md cursor-pointer hover:text-white hover:bg-pink-500 hover:border-pink-500'>
 					{selectedImage.name === 'default Image' ? 'Update Profile Image' : selectedImage.name}
 				</label>
-			</div>
+			</section>
 
 			<button
 				type='button'
-				disabled={status === 'idle' ? false : true}
+				aria-disabled={status === 'idle' ? false : true}
 				className={`flex ${
 					status === 'fetching' ? 'items-center gap-2 bg-pink-600' : 'bg-pink-500'
 				} w-1/2 h-10 flex justify-center items-center   rounded-xl text-base font-bold tracking-wider text-white transition duration-500 ease-in-out hover:scale-110 hover:shadow-xl disabled:bg-pink-700`}

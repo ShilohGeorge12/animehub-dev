@@ -9,6 +9,7 @@ import Header from '../header';
 import Nav from '../navBar';
 import { isError, isUser, responseTypes } from '@/types';
 import { usePathname } from 'next/navigation';
+import { HelmetProvider } from 'react-helmet-async';
 
 export default function Body({ children }: { children: ReactNode }) {
 	// const luffyFull = '/bg/luffy-sun-god.webp';
@@ -65,11 +66,12 @@ export default function Body({ children }: { children: ReactNode }) {
 	// };
 
 	return (
-		// <HelmetProvider>
-		<main className={`relative w-full h-full flex flex-col items-center font-semibold font-poppins text-white`}>
-			<Header key={'header-component'} />
-			{children}
-			<Nav key={'navBar-component'} />
-		</main>
+		<HelmetProvider>
+			<main className={`relative w-full h-full flex flex-col items-center font-semibold font-poppins text-white`}>
+				<Header key={'header-component'} />
+				{children}
+				<Nav key={'navBar-component'} />
+			</main>
+		</HelmetProvider>
 	);
 }

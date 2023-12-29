@@ -1,12 +1,13 @@
 'use client';
 import { VeiwAnimeBtn } from '@/components/button';
 import { useMyContext } from '@/context';
-import { AnimeType } from '@/types';
+import { AnimeType, isError, isUser, responseTypes } from '@/types';
 import { useEffect, useState } from 'react';
 import { GiAlliedStar } from 'react-icons/gi';
 import { RiDeleteBin2Line } from 'react-icons/ri';
 import { IoIosAddCircle } from 'react-icons/io';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface animeContentProp {
 	animeId: string;
@@ -18,38 +19,44 @@ export function AnimeContent({ animeId, anime }: animeContentProp) {
 		state: {
 			user: { _id, animes },
 		},
-		// dispatch,
+		dispatch,
 	} = useMyContext();
 	const [hasAnime, setHasAnime] = useState<boolean>(false);
+	const { push } = useRouter();
 
 	const onDelete = async () => {
 		if (!anime) return;
-		// const deleteAnime = await useFetch(`users/${_id}/${id}`, 'DELETE', 'no-store');
-		// if ('error' in deleteAnime) {
-		// 	const msg = typeof deleteAnime.error === 'string' ? deleteAnime.error : JSON.stringify(deleteAnime.error);
-		// 	toast.error(msg);
-		// 	return;
-		// }
-		// if (isUser(deleteAnime)) {
-		// 	dispatch({ type: 'user', payload: { user: deleteAnime } });
-		toast.success(`Removed ${anime.title} from your collection`);
-		// }
+		const req = await fetch(`/api/users/${_id}/${anime._id}`, {
+			method: 'DELETE',
+		});
+		const deletedAnime = (await req.json()) as responseTypes;
+		if (isError(deletedAnime)) {
+			const msg = typeof deletedAnime.error === 'string' ? deletedAnime.error : JSON.stringify(deletedAnime.error);
+			toast.error(msg, { duration: 7000 });
+			return;
+		}
+		if (isUser(deletedAnime)) {
+			dispatch({ type: 'user', payload: { user: deletedAnime } });
+			toast.success(`Removed ${anime.title} from your collection`, { duration: 6000 });
+		}
 	};
 
 	const onAdd = async () => {
 		if (!anime) return;
-		// const response = await useFetch(`users/${_id}/${id}`, 'GET', 'no-store');
-		// if ('error' in response) {
-		// 	const msg = typeof response.error === 'string' ? response.error : JSON.stringify(response.error);
-		// 	toast.error(msg);
-		// 	setTimeout(() => naviTo('/profile/upgrade-to-premuim'), 3000);
-		// 	return;
-		// }
-		// const User = await useFetch(`users/${_id}`, 'GET', 'no-store');
-		// if (isUser(User)) {
-		// 	dispatch({ type: 'user', payload: { user: User } });
-		toast.success(`Added ${anime.title} To your collection`);
-		// }
+		const req = await fetch(`/api/users/${_id}/${anime._id}`);
+		const response = (await req.json()) as responseTypes;
+		if (isError(response)) {
+			const msg = typeof response.error === 'string' ? response.error : JSON.stringify(response.error);
+			toast.error(msg, { duration: 15000 });
+			setTimeout(() => push('/profile/upgrade-to-premuim'), 3000);
+			return;
+		}
+		const ReqUser = await fetch(`/api/users/${_id}`);
+		const User = (await ReqUser.json()) as responseTypes;
+		if (isUser(User)) {
+			dispatch({ type: 'user', payload: { user: User } });
+			toast.success(`Added ${anime.title} To your collection`);
+		}
 	};
 
 	useEffect(() => {
@@ -71,7 +78,7 @@ export function AnimeContent({ animeId, anime }: animeContentProp) {
 			{/* </div> */}
 			<div className='grid items-center justify-start grid-cols-2 gap-4 md:grid-cols-3 md:gap-6'>
 				{hasAnime && (
-					<div className='flex flex-col justify-center gap-2'>
+					<section className='flex flex-col justify-center gap-2'>
 						<VeiwAnimeBtn
 							name='delete Anime'
 							onClick={onDelete}
@@ -79,10 +86,10 @@ export function AnimeContent({ animeId, anime }: animeContentProp) {
 						/>
 
 						<p className='invisible text-xs peer-hover:transition peer-hover:duration-1000 peer-hover:ease-in-out peer-hover:visible'>Remove From Collection</p>
-					</div>
+					</section>
 				)}
 				{!hasAnime && (
-					<div className='flex flex-col justify-center gap-2'>
+					<section className='flex flex-col justify-center gap-2'>
 						<VeiwAnimeBtn
 							name='Add Anime'
 							onClick={onAdd}
@@ -90,7 +97,7 @@ export function AnimeContent({ animeId, anime }: animeContentProp) {
 						/>
 
 						<p className='invisible text-xs peer-hover:transition peer-hover:duration-1000 peer-hover:ease-in-out peer-hover:visible'>Add To Collection</p>
-					</div>
+					</section>
 				)}
 			</div>
 		</>
