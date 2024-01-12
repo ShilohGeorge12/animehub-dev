@@ -1,10 +1,11 @@
 import { MongoDB } from '@/db';
 import { validateUsers } from '@/db/schema';
 import { NextResponse, NextRequest } from 'next/server';
-import { join } from 'path';
-import { writeFile } from 'fs/promises';
-import process from 'process';
+// import { join } from 'path';
+// import { writeFile } from 'fs/promises';
+// import process from 'process';
 import bcrypt from 'bcrypt';
+import { backendClient } from '../edgestore/[...edgestore]/route';
 
 export async function POST(req: NextRequest) {
 	try {
@@ -19,10 +20,17 @@ export async function POST(req: NextRequest) {
 			return NextResponse.json({ error: errArr }, { status: 400 });
 		}
 
-		const bytes = await value.image.arrayBuffer();
-		const buffer = Buffer.from(bytes);
-		const path = join(process.cwd() + '/public/users', value.image.name);
-		await writeFile(path, buffer);
+		// const bytes = await value.image.arrayBuffer();
+		// const buffer = Buffer.from(bytes);
+		// const path = join(process.cwd() + '/public/users', value.image.name);
+		// await writeFile(path, buffer);
+
+		const res = await backendClient.images.upload({
+			content: {
+				blob: new Blob([value.image], { type: value.image.type }),
+				extension: value.image.type.split('/')[1],
+			},
+		});
 
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(value.password, salt);
@@ -31,7 +39,7 @@ export async function POST(req: NextRequest) {
 			username: value.username,
 			email: value.email,
 			password: hashedPassword,
-			image: value.image.name,
+			image: res.url,
 			gender: value.gender,
 		});
 

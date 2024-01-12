@@ -2,8 +2,9 @@ import { MongoDB } from '@/db';
 import { validateUpdateUser } from '@/db/schema';
 import { NextResponse, NextRequest } from 'next/server';
 import bcrypt from 'bcrypt';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
+// import { writeFile } from 'fs/promises';
+// import { join } from 'path';
+import { backendClient } from '../../edgestore/[...edgestore]/route';
 
 export async function GET(_: NextRequest, { params }: { params: { _id: string } }) {
 	try {
@@ -85,11 +86,18 @@ export async function PATCH(req: NextRequest, { params }: { params: { _id: strin
 		}
 
 		if (value.image) {
-			const bytes = await value.image.arrayBuffer();
-			const buffer = Buffer.from(bytes);
-			const path = join(process.cwd() + '/public/users', value.image.name);
-			await writeFile(path, buffer);
-			user.image = value.image.name;
+			const res = await backendClient.images.upload({
+				content: {
+					blob: new Blob([value.image], { type: value.image.type }),
+					extension: value.image.type.split('/')[1],
+				},
+			});
+
+			// const bytes = await value.image.arrayBuffer();
+			// const buffer = Buffer.from(bytes);
+			// const path = join(process.cwd() + '/public/users', value.image.name);
+			// await writeFile(path, buffer);
+			user.image = res.url;
 		}
 
 		if (value.password) {

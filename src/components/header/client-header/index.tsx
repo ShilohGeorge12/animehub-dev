@@ -48,7 +48,7 @@ export function ClientHeader() {
       Value={IsTheme()}
     /> */}
 			<Image
-				src={loggedIn ? `/others/${image}` : '/others/user2.png'}
+				src={loggedIn ? image : '/others/user2.png'}
 				alt='profile'
 				title={`${username} Image` ?? 'profileImage'}
 				className='object-center w-9 w-xl:w-16 md:w-12 rounded-2xl'

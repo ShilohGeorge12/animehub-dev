@@ -7,7 +7,6 @@ import { ContextProvider } from '@/context';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Image from 'next/image';
 import { Toaster } from 'sonner';
-// import { EdgeStoreProvider } from '@/lib/edgestore';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -54,7 +53,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='en'>
 			<body className={`${inter.className} w-screen h-screen overflow-hidden `}>
-				{/* <EdgeStoreProvider> */}
 				<ContextProvider>
 					<Image
 						src={itachi1024}
@@ -77,7 +75,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				</ContextProvider>
 			</body>
 			{env.VERCEL_URL !== 'null' && <SpeedInsights />}
-			{/* </EdgeStoreProvider> */}
 		</html>
 	);
 }

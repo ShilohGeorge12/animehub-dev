@@ -54,11 +54,11 @@ export function ProfileContent() {
 			<section className='flex flex-col items-center gap-4'>
 				<div className='flex items-center justify-center w-full'>
 					<Image
-						src={`/others/${image}`}
+						src={image}
 						title={username}
 						alt={`${username}-profile-image`}
 						loading='lazy'
-						className='w-1/3 mx-auto rounded-md md:w-2/4'
+						className='w-1/3 mx-auto rounded-lg md:w-2/4'
 						width={100}
 						height={100}
 					/>
@@ -114,7 +114,7 @@ export function ProfileContent() {
 						</li>
 						<li className='flex items-center gap-4'>
 							<p className='flex justify-self-start'>Avg Rating: </p>
-							<p className='flex justify-self-end'>{average}</p>
+							<p className='flex justify-self-end'>{isNaN(average) ? 0 : average}</p>
 						</li>
 					</ul>
 					<AnimeList animes={animes} />

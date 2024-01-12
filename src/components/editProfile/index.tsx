@@ -189,7 +189,7 @@ export function EditProfile({ user, details, setDetails, dispatch, setIsDialogOp
 					// 'w-[90%] md:w-3/4 h-10 px-8 outline-none rounded-lg p-1 bg-transparent placeholder:text-white dark:placeholder:text-pink-500 placeholder:text-xl text-white text-base'
 				}>
 				<Image
-					src={selectedImage.name === 'default Image' ? `/users/${selectedImage.url}` : selectedImage.url}
+					src={selectedImage.url}
 					alt='profile image'
 					className='w-12 rounded-[50%] object-cover'
 					width={100}

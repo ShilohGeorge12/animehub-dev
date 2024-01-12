@@ -14,23 +14,24 @@ export function AnimeList(props: IAnimeListProps) {
 
 	return (
 		<section className={`w-full flex items-center overflow-x-scroll p-2 gap-3 `}>
-			{animes.map((anime) => (
-				<figure
-					aria-label={anime.title}
-					key={anime._id}
-					className={`flex items-center`}
-					onClick={() => push(`/anime/${anime._id}`)}>
-					<Image
-						src={`/cover/${anime.image}`}
-						title={anime.title}
-						alt={anime.title}
-						loading='eager'
-						className='w-20 text-white transition duration-300 ease-in-out bg-pink-500 rounded-md cursor-pointer hover:scale-110'
-						width={100}
-						height={100}
-					/>
-				</figure>
-			))}
+			{animes.length > 0 &&
+				animes.map((anime) => (
+					<figure
+						aria-label={anime.title}
+						key={anime._id}
+						className={`flex items-center`}
+						onClick={() => push(`/anime/${anime._id}`)}>
+						<Image
+							src={`/cover/${anime.image}`}
+							title={anime.title}
+							alt={anime.title}
+							loading='eager'
+							className='w-20 text-white transition duration-300 ease-in-out bg-pink-500 rounded-md cursor-pointer hover:scale-110'
+							width={100}
+							height={100}
+						/>
+					</figure>
+				))}
 		</section>
 	);
 }
