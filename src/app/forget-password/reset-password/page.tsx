@@ -6,7 +6,7 @@ import { ResetPasswordForm } from '@/components/ResetPassword';
 import { Animation } from '@/components/animation';
 
 export const metadata: Metadata = {
-	title: 'Reset Password | Experience anime like never before',
+	title: 'Reset Password',
 	description: 'Reset Your Password For Animehub Seamlessly Here and Continue To Experience Anime LIke Never Before',
 };
 

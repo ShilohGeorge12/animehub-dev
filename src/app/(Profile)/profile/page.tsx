@@ -1,5 +1,10 @@
 import { ProfileContent } from '@/components/profileContent';
 import { Animation } from '@/components/animation';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Profile',
+};
 
 export default function Profile() {
 	return (

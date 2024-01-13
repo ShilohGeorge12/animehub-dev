@@ -1,28 +1,13 @@
-'use client';
-
-// import { useMyContext } from '@/context';
-import Image from 'next/image';
-
 import { Animation } from '@/components/animation';
 import { SignUpClient } from '@/components/signUpClient';
+import { Metadata } from 'next';
 
-interface SignUpUser {
-	username: string;
-	email: string;
-	password: string;
-	gender: 'male' | 'female' | 'Specify Your Gender';
-	image: File | '';
-}
+export const metadata: Metadata = {
+	title: 'Signup',
+	description: 'Create an Account to explore to world of animes with us',
+};
 
 export default function SignUp() {
-	const initState: SignUpUser = {
-		username: '',
-		password: '',
-		email: '',
-		gender: 'Specify Your Gender',
-		image: '',
-	};
-
 	return (
 		<Animation
 			className='flex flex-col items-center w-full h-full gap-3 lg:gap-0'

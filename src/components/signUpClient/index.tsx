@@ -124,7 +124,7 @@ export function SignUpClient() {
 			setStatus('idle');
 			return;
 		}
-		console.log(res);
+		// console.log(res);
 		setdetails(initState);
 		setStatus('idle');
 		push('/');

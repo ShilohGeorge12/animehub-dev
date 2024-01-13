@@ -6,7 +6,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { Animation } from '@/components/animation';
 
 export const metadata: Metadata = {
-	title: 'Forget Password | Experience anime like never before',
+	title: 'Forget Password',
 	description: 'Forgotten Your Password For Animehub. You Can Recover Your Account Using Your Email Address',
 };
 

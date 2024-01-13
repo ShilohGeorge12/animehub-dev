@@ -10,7 +10,7 @@ import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const title = 'animehub-dev | Experience anime like never before';
+const title = { default: 'Animehub | Experience anime like never before', template: '%s | Experience anime like never before' };
 const description = 'animehub: Your go-to for renting, streaming, and enjoying top-notch anime content. Discover new releases, dive into captivating storytelling.';
 const vercelUrl = 'https://animehub-dev.vercel.app';
 const url = env.VERCEL_URL !== 'null' ? vercelUrl : `http://localhost:${process.env.PORT ?? 5053}`;

@@ -4,16 +4,36 @@ import { Fragment } from 'react';
 import Image from 'next/image';
 import { Rating } from '@/components/rating';
 import { AnimeContent } from './animeContent';
-import { AnimeType } from '@/types';
-import { Metadata } from 'next/types';
+import { AnimeType, isError } from '@/types';
+import { Metadata, ResolvingMetadata } from 'next';
 
-export const metadata: Metadata = {};
+type Props = {
+	params: { animeId: string };
+	searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+	const _id = params.animeId;
+
+	const anime = await getAnime(_id);
+
+	if (isError(anime)) return {};
+
+	// optionally access and extend (rather than replace) parent metadata
+	const previousImages = (await parent).openGraph?.images || [];
+
+	return {
+		title: anime.title,
+		description: anime.description,
+		openGraph: {
+			images: [`/cover/${anime.image}`, ...previousImages],
+		},
+	};
+}
 
 export default async function AnimePage({ params: { animeId } }: { params: { animeId: string } }) {
 	const anime = await getAnime(animeId);
-	if ('error' in anime) {
-		notFound();
-	}
+	if (isError(anime)) notFound();
 
 	const listItemClass = 'text-white font-bold';
 	const ParseDecription = () => {
