@@ -48,6 +48,7 @@ export interface Anime {
 	season: 'summer' | 'spring' | 'winter';
 	status: 'FinishedAiring' | 'onGoing';
 	image: string;
+	videos: string[];
 }
 
 export type Theme = 'light' | 'dark';
@@ -78,6 +79,7 @@ export interface AnimeType {
 	season: 'summer' | 'spring' | 'winter';
 	status: 'FinishedAiring' | 'onGoing';
 	image: string;
+	videos: string[];
 }
 
 // Http Response Type
@@ -157,7 +159,7 @@ interface PaginationOptions {
 	// isFetching:
 	// setIsFetching: Dispatch<SetStateAction<'fetching' | 'idle'>>;
 }
-export type PaginationType = (options: PaginationOptions) => [() => JSX.Element, AnimeType[], FetchingStatus];
+export type PaginationType = (options: PaginationOptions) => [() => JSX.Element, AnimeType[]];
 
 interface JwtPayload {
 	jti: string;
@@ -194,3 +196,7 @@ export const USERNAME_REGEX = /^[a-zA-Z\s_-]{2,}$/;
 export const EMAIL_REGEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/;
 export const PASSWORD_FORMAT_MESSAGE = `Password must be 6-24 characters long and can only contain letters, numbers, @, _, or -.`;
 export const INVALID_EMAIL_MESSAGE = 'Please Verify You Entered A Valid Email Address';
+
+export const wait = (ms: number) => {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+};

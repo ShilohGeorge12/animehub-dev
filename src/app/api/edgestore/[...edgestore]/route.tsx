@@ -6,6 +6,7 @@ const es = initEdgeStore.create();
 
 const edgeStoreRouter = es.router({
 	images: es.imageBucket(),
+	videos: es.fileBucket(),
 });
 
 const handler = createEdgeStoreNextHandler({

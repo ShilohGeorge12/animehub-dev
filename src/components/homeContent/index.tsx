@@ -2,7 +2,7 @@
 
 import { useMyContext } from '@/context';
 import { usePagination } from '@/hooks/usePagination';
-import { AnimeType, isAnimes, isError, responseTypes } from '@/types';
+import { AnimeType, isAnimes, isError, responseTypes, wait } from '@/types';
 import Image from 'next/image';
 import { useState, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
@@ -20,7 +20,7 @@ export function HomeContent() {
 	const [totalAnimes, setTotalAnimes] = useState<number>(0);
 	const limitPerPage = 8;
 
-	const [PaginationNav, paginatedAnimes, status] = usePagination({
+	const [PaginationNav, paginatedAnimes] = usePagination({
 		animes,
 		limitPerPage,
 		totalAnimes,
@@ -88,10 +88,7 @@ export function HomeContent() {
 			<div className={`flex flex-col gap-3 items-center justify-center`}>
 				{loggedIn && (
 					<>
-						<Anime
-							animes={paginatedAnimes}
-							status={status}
-						/>
+						<Anime animes={paginatedAnimes} />
 						<div className='absolute w-full bottom-3 left-1/6'>
 							<PaginationNav />
 						</div>

@@ -87,6 +87,10 @@ class Database {
 				default: 'null',
 				required: [true, 'Image is required'],
 			},
+			videos: {
+				type: [String],
+				default: [],
+			},
 		});
 
 		return this.connection.model<Anime>('animes', AnimeSchema);

@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useMyContext } from '@/context';
 import Link from 'next/link';
-import { useState } from 'react';
 import { BiUserPlus } from 'react-icons/bi';
 
 export function ClientHeader() {
@@ -15,8 +14,6 @@ export function ClientHeader() {
 		},
 		// updateTheme,
 	} = useMyContext();
-
-	const [viewProfile, setViewProfile] = useState<boolean>(false);
 
 	// const IsTheme = () => {
 	// 	if (loggedIn) {

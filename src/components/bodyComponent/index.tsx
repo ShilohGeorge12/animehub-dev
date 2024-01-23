@@ -20,7 +20,7 @@ export default function BodyComponent({ children }: { children: ReactNode }) {
 		dispatch,
 	} = useMyContext();
 	const path = usePathname();
-	const excludedPaths = ['/login', '/signup'];
+	const excludedPaths = ['/login', '/signup', '/test'];
 
 	useEffect(() => {
 		const promise = async () => {

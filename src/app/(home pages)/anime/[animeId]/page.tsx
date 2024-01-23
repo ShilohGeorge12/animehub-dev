@@ -6,6 +6,7 @@ import { Rating } from '@/components/rating';
 import { AnimeContent } from './animeContent';
 import { AnimeType, isError } from '@/types';
 import { Metadata, ResolvingMetadata } from 'next';
+import { VideoPlayer } from '@/components/videoPlayer';
 
 type Props = {
 	params: { animeId: string };
@@ -111,7 +112,7 @@ export default async function AnimePage({ params: { animeId } }: { params: { ani
 						</li>
 					</ul>
 				</section>
-				<div className='flex flex-col gap-3 p-2 md:gap-6 md:col-span-3'>
+				<section className='flex flex-col gap-3 p-2 border border-pink-500 md:gap-6 md:col-span-3'>
 					<h3 className='hidden font-bold tracking-wider md:flex md:text-3xl w-xl:text-4xl'>{anime.title}</h3>
 					<p className='hidden overflow-auto text-sm font-semibold tracking-wider rounded w-lg:flex w-lg:h-32 w-xl:h-auto w-xl:overflow-visible w-xl:pr-2 w-xl:text-xl bg-black/60'>
 						{<ParseDecription />}
@@ -124,7 +125,9 @@ export default async function AnimePage({ params: { animeId } }: { params: { ani
 						anime={anime}
 						animeId={animeId}
 					/>
-				</div>
+
+					<VideoPlayer />
+				</section>
 			</section>
 		</section>
 	);

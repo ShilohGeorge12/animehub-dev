@@ -1,19 +1,15 @@
-// 'use client';
-
+'use client';
 import Image from 'next/image';
-import { AnimeType, FetchingStatus } from '../../types';
+import { AnimeType } from '../../types';
 import { useRouter } from 'next/navigation';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 
 interface AnimeProps {
 	animes: AnimeType[];
-	status: FetchingStatus;
 }
 
-export function Anime({ animes, status }: AnimeProps) {
+export function Anime({ animes }: AnimeProps) {
 	const { push } = useRouter();
-	// const [isImageLoading, setIsImageLoading] = useState<'loading' | 'idle'>('idle');
-
 	return (
 		<section className='grid w-full h-[80%] w-xsm:grid-cols-1 iphone_sm:h-[450px] iphone_md:h-[660px] iphone_lg:h-[660px] md:h-full grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-4 place-items-center'>
 			{animes &&
@@ -23,8 +19,6 @@ export function Anime({ animes, status }: AnimeProps) {
 						{/* {isImageLoading === 'loading' && (
 							<span className='flex transition duration-1000 ease-in-out rounded-lg bg-gradient-to-br from-pink-500 via-purple-500 to-pink-500 w-36 h-52' />
 						)} */}
-
-						{/* {isImageLoading === 'idle' && ( */}
 						<figure
 							className='flex flex-col items-center justify-center gap-2 transition duration-1000 ease-in-out rounded-lg group w-36 h-52'
 							onClick={() => push(`/anime/${anime._id}`)}>
@@ -36,13 +30,12 @@ export function Anime({ animes, status }: AnimeProps) {
 								width={100}
 								height={100}
 								className={`w-4/5 rounded-lg mx-auto transition duration-700 ease-in-out group-hover:scale-125`}
-								placeholder={'empty'}
 							/>
+
 							<figcaption className='text-white text-sm font-bold text-ellipsis text-center group-hover:hidden group-hover:font-semibold overflow-hidden whitespace-nowrap w-[95%] mx-auto'>
 								{anime.title}
 							</figcaption>
 						</figure>
-						{/* )} */}
 					</Fragment>
 				))}
 		</section>
