@@ -5,7 +5,7 @@ import { NextResponse, NextRequest } from 'next/server';
 // import { writeFile } from 'fs/promises';
 // import process from 'process';
 import bcrypt from 'bcrypt';
-import { backendClient } from '../edgestore/[...edgestore]/route';
+import { backendClient } from '@/lib/edgestore/server';
 
 export async function POST(req: NextRequest) {
 	try {

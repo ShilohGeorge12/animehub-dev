@@ -4,7 +4,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import bcrypt from 'bcrypt';
 // import { writeFile } from 'fs/promises';
 // import { join } from 'path';
-import { backendClient } from '../../edgestore/[...edgestore]/route';
+import { backendClient } from '@/lib/edgestore/server';
 
 export async function GET(_: NextRequest, { params }: { params: { _id: string } }) {
 	try {
