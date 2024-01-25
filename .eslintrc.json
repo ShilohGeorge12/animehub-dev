@@ -1,5 +1,6 @@
 {
-	"extends": ["next/core-web-vitals", "plugin:react/recommended", "plugin:@next/next/recomended", "eslint:recomended"],
+	"extends": ["next/core-web-vitals", "next"],
 	"plugins": ["react", "@next/next", "@typescript-eslint"],
-	"rules": [""]
+	"parser": "@typescript-eslint/parser",
+	"rules": {}
 }

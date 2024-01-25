@@ -4,6 +4,10 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Profile',
+	robots: {
+		index: false,
+		follow: true,
+	},
 };
 
 export default function Profile() {
