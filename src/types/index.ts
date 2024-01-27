@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import { Dispatch, SetStateAction } from 'react';
-import { IconType } from 'react-icons';
+// import { IconType } from 'react-icons';
 import { ValidationResult } from 'joi';
 
 export const MAX_AGE = 30 * 60;
